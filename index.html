@@ -3007,10 +3007,9 @@ function gScore(){
  if(!it.abc){sh.className='sheet gk-sheet none';sh.innerHTML='';return;}
  sh.className='sheet gk-sheet'+(it.wide?' wide':'');
  if(hear){sh.innerHTML='<div class="listen"><b>？</b>音をよく聞きましょう</div>';return;}
- sh.innerHTML='<div id="gkScore"></div>';const el=$('#gkScore');if(!abcOk(el))return;
- if(it.wide){const w=Math.max(260,(sh.clientWidth||320)-20);
+ sh.innerHTML=it.wide&&it.P?`<div style="width:100%;max-width:${it.P.bars<=2?440:640}px;margin:0 auto"><div id="gkScore"></div></div>`:'<div id="gkScore"></div>';const el=$('#gkScore');if(!abcOk(el))return;
+ if(it.wide){/* 和音の流れの楽譜は、外側の箱で横幅を絞る（楽譜の部品は高さを「入れ物の横幅」から決めるため、楽譜そのものを絞ると下に空白ができた） */const w=Math.max(260,(sh.clientWidth||320)-20);
   ABCJS.renderAbc(el,it.abc,{responsive:'resize',staffwidth:Math.min(w,620),paddingtop:6,paddingbottom:8,paddingleft:4,paddingright:4,add_classes:true});
-  const svg=el.querySelector('svg');if(svg&&it.P){el.style.maxWidth=(it.P.bars<=2?440:640)+'px';el.style.margin='0 auto';}
   return;}
  ABCJS.renderAbc(el,it.abc,{staffwidth:200,paddingtop:8,paddingbottom:10,paddingleft:0,paddingright:0,add_classes:true,
   clickListener:()=>{if(it.picked&&it.play)gPlay();}});
