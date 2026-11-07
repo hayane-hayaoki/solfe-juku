@@ -495,12 +495,12 @@ const B3=[[4],[2,2],[2,2]],B4=[[4],[2,2],[2,2],[3,1],[1,1,2],[2,1,1]],B5=[[4],[2
 const LEVELS={
  1:{bars:4,meters:['4/4'],keys:['C'],beat:[[4]],two:[[8]],beat6:[[6]],two6:[[12]],maxLeap:2,amb:8,twoChord:0,inv:0,sev:0,chorale:5,bassSplit:0,cset:['I','IV','V']},
  2:{bars:4,meters:['4/4','3/4'],keys:['C','Am'],beat:[[4],[4],[2,2]],two:[[8]],beat6:[[6]],two6:[[12]],maxLeap:3,amb:10,twoChord:0,inv:0,sev:0,chorale:5,bassSplit:0},
- 3:{bars:4,meters:['4/4','3/4','6/8'],keys:K1,beat:[[4],[4],[2,2]],two:[[8]],beat6:[[6],[4,2]],two6:[[12]],maxLeap:4,amb:12,twoChord:0,inv:0,sev:0,chorale:5,bassSplit:0},
- 4:{bars:4,meters:['4/4','3/4','6/8'],keys:K1,beat:[[4],[2,2],[2,2]],two:[[8],[6,2]],beat6:R6a,two6:[[12]],maxLeap:4,amb:12,twoChord:.15,inv:0,sev:0,chorale:7,bassSplit:.2,chSev:1},
- 5:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:B3,two:[[8],[6,2]],beat6:R6b,two6:[[12]],maxLeap:5,amb:14,twoChord:.25,inv:1,sev:0,chorale:7,bassSplit:.35},
- 6:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:B3,two:[[8],[6,2]],beat6:R6b,two6:[[12]],maxLeap:5,amb:15,twoChord:.3,inv:1,sev:0,chorale:9,bassSplit:.4,chrom:.2,borrow:1,spSet:['V/V'],minSpecial:1,minAcc:1},
- 7:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:[...B4,T3],two:[[8],[6,2],[2,4,2]],beat6:R6c,two6:[[12]],maxLeap:7,amb:15,twoChord:.35,inv:1,sev:1,chorale:9,bassSplit:.5,chrom:.45,chrom2:.5,rep:1.2,borrow:1,exam:1,easy:4,tonic:1,walk:.4,rest:.5,minSpecial:1,spSet:['V/V','V/IV','V/vi','vii°7'],minAcc:3,chrom3:.4},
- 8:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:[...B4,T3,T3,[3,1]],two:[[8],[6,2],[2,4,2]],beat6:R6c,two6:[[12]],maxLeap:7,amb:16,twoChord:.45,inv:1,sev:1,chorale:11,bassSplit:.55,chrom:.6,chrom2:.7,rep:1.4,borrow:1,exam:1,easy:5,tonic:1,walk:.55,rest:.5,spSet:['V/V','V/IV','V/vi','vii°7','vii°7/V'],minAcc:5,minSpecial:3,chrom3:.85},
+ 3:{bars:4,meters:['4/4','3/4','6/8'],keys:K1,beat:[[4],[2,2],[2,2]],two:[[8]],beat6:[[6],[4,2]],two6:[[12]],maxLeap:4,amb:12,twoChord:0,inv:0,sev:0,chorale:5,bassSplit:0},
+ 4:{bars:4,meters:['4/4','3/4','6/8'],keys:K1,beat:[[4],[2,2],[2,2],[2,2]],two:[[8],[6,2]],beat6:R6a,two6:[[12]],maxLeap:4,amb:12,twoChord:.15,inv:0,sev:0,chorale:7,bassSplit:.2,chSev:1},
+ 5:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:[[4],[2,2],[2,2],[3,1]],two:[[8],[6,2],[2,4,2]],beat6:R6b,shortEnd:1,ties:1.3,two6:[[6,4,2],[4,2,6],[3,1,2,6]],maxLeap:5,amb:14,twoChord:.25,inv:1,sev:0,chorale:7,bassSplit:.35},
+ 6:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:[[4],[2,2],[2,2],[3,1],[1,1,2]],two:[[8],[6,2],[2,4,2]],beat6:R6c,shortEnd:1,ties:2.2,two6:[[6,4,2],[4,2,6],[3,1,2,6]],maxLeap:5,amb:15,twoChord:.3,inv:1,sev:0,chorale:9,bassSplit:.4,chrom:.2,borrow:1,spSet:['V/V'],minSpecial:1,minAcc:1},
+ 7:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:[...B4,[1,1,1,1],T3],two:[[6,2],[2,4,2],[8]],beat6:R6c,shortEnd:1,ties:3.2,two6:[[6,4,2],[4,2,6],[3,1,2,6]],maxLeap:7,amb:15,twoChord:.35,inv:1,sev:1,chorale:9,bassSplit:.5,chrom:.45,chrom2:.5,rep:1.2,borrow:1,exam:1,easy:6,tonic:1,walk:.4,rest:.5,minSpecial:1,spSet:['V/V','V/IV','V/vi','vii°7'],minAcc:3,chrom3:.4},
+ 8:{bars:8,meters:['4/4','3/4','6/8'],keys:K2,beat:[...B4,[1,1,1,1],[1,1,1,1],T3,T3,[3,1]],two:[[6,2],[2,4,2]],beat6:R6d,shortEnd:1,ties:4,two6:[[6,4,2],[4,2,6],[3,1,2,6]],maxLeap:7,amb:16,twoChord:.45,inv:1,sev:1,chorale:11,bassSplit:.55,chrom:.6,chrom2:.7,rep:1.4,borrow:1,exam:1,easy:7,tonic:1,walk:.55,rest:.5,spSet:['V/V','V/IV','V/vi','vii°7','vii°7/V'],minAcc:5,minSpecial:3,chrom3:.85},
  9:{bars:8,meters:['4/4','3/4','6/8'],keys:KG,beat:[...B5,T3,T3,T6],two:[[8],[6,2],[2,4,2],[6,1,1],TQ],beat6:R6d,two6:[[12]],maxLeap:7,leap7:1,amb:17,twoChord:.5,inv:1,sev:1,chorale:11,bassSplit:.6,chrom:.75,chrom2:.85,rep:1.5,borrow:2,exam:1,easy:6,tonic:2,walk:.7,rest:.5,anyChrom:1,minSpecial:3,splits:2,augReq:1},
  10:{bars:8,meters:['4/4','3/4','6/8'],keys:KG,beat:[...B5,[1,1,1,1],[1,1,2],T3,T3,T6,T6],two:[[8],[6,2],[2,4,2],[6,1,1],TQ,TQ],beat6:R6d,two6:[[12]],maxLeap:7,leap7:1,amb:19,twoChord:.55,inv:1,sev:1,chorale:11,bassSplit:.65,chrom:.9,chrom2:.95,rep:1.6,borrow:2,exam:1,easy:8,tonic:2,walk:.8,rest:.5,anyChrom:1,minSpecial:4,splits:4,augReq:2},
 };
@@ -565,11 +565,20 @@ function genPlanBars(R,n,L,minor,par){
  }
  return null;
 }
+// 最後の小節（最後から2番目の音は弱い位置に来る形だけ）
+const FINAL_R={'4/4':[[4,4,4,-4],[2,2,4,4,-4],[4,4,8],[6,2,8],[6,2,4,-4],[2,2,2,2,4,-4]],
+ '3/4':[[2,2,4,-4],[2,2,8],[3,1,4,-4],[4,4,4],[4,2,2,4],[3,1,8]],
+ '6/8':[[4,2,4,-2],[2,2,2,4,-2],[4,2,6],[2,2,2,6],[3,1,2,4,-2]]};
+// 前半の区切りの小節：[ふつうに動く長さ, 区切りの形]
+const HC_R={'4/4':[[8,[4,-4]],[8,[8]],[12,[4]],[8,[6,-2]]],'3/4':[[4,[4,-4]],[4,[8]],[8,[4]]],'6/8':[[6,[4,-2]],[6,[6]],[6,[2,-4]]]};
 function genRhythm(R,meter,L,kind){
  const U=METER[meter].units;const B=meter==='6/8'?6:4;if(kind==='easy'){L=LEVELS[L.easy]||L;kind='normal';}
  const one=B===6?(L.beat6||[[6]]):L.beat,two=B===6?(L.two6||[[12]]):L.two;
- if(kind==='final')return [U];
+ // 上級以上は過去問どおり、最後も前半の区切りも1小節のばさない（負の数＝休符）
+ if(kind==='final')return L.shortEnd?pick(R,FINAL_R[meter]).slice():[U];
  let target=U;
+ if(kind==='hc'&&L.shortEnd){const o=pick(R,HC_R[meter]);target=o[0];const tail=o[1];
+  const out=[];let p=0;while(p<target-1e-6){out.push(...pick(R,one));p+=B;p=Math.round(p*3000)/3000;}return out.concat(tail);}
  if(kind==='hc'){ if(meter==='4/4'||meter==='2/2')target=8; else if(meter==='3/4')target=R()<.5?0:4; else if(meter==='6/8')target=R()<.4?0:6; else target=0; if(target===0)return [U]; }
  const out=[];let p=0;
  while(p<target-1e-6){
@@ -580,7 +589,20 @@ function genRhythm(R,meter,L,kind){
  if(kind==='hc')out.push(U-target);
  return out;
 }
-const hasOnset=(r,pos)=>{let p=0;for(const d of r){if(Math.abs(p-pos)<1e-6)return true;p+=d;}return false;};
+const rdur=d=>d>500?d-1000:Math.abs(d); // 1000足し＝前の音とタイ、負＝休符
+const hasOnset=(r,pos)=>{let p=0;for(const d of r){if(d>0&&Math.abs(p-pos)<1e-6)return true;p+=rdur(d);}return false;};
+// タイを入れる（小節線をまたぐ／拍をまたぐ）。k個まで
+function addTies(R,rh,n,ph,meter,k,maxBar){
+ const B=meter==='6/8'?6:4;const isInt=d=>d>0&&d<500&&Number.isInteger(d);
+ for(let t=0;t<k;t++){
+  const cand=[];
+  for(let b=0;b<=maxBar;b++){const r=rh[b];
+   if(b<n-2&&b!==ph-1&&b+1<=maxBar+1&&b+1!==n-1){const a=r[r.length-1],c=rh[b+1]&&rh[b+1][0];if(isInt(a)&&isInt(c)&&c<=8)cand.push([b+1,0]);}
+   let p=0;for(let j=0;j<r.length;j++){const d=r[j];if(j>0&&p>0&&Math.abs(p%B)<1e-6&&isInt(d)&&d<=4&&isInt(r[j-1])&&!(b===ph-1&&j===r.length-1))cand.push([b,j]);p+=rdur(d);}
+  }
+  if(!cand.length)return;const [b,j]=pick(R,cand);rh[b][j]+=1000;
+ }
+}
 
 function makeKeyFns(key,T){
  const alt=(d,rz)=>sigAlter(mod(T+d,7),key.sig)+(rz||0);
@@ -595,11 +617,14 @@ function genMelody(R,slots,key,L,T){
  const n=slots.length;
  const W={0:L.rep||.5,1:6,2:3,3:1.5,4:1.1,5:.6,6:.35,7:.5};
  for(let att=0;att<700;att++){
-  const ds=[];let ok=true,lo=999,hi=-999,prevInt=0,rep=0,pend=false,mustNext=null;
+  const ds=[],tied=[];let ok=true,lo=999,hi=-999,prevInt=0,rep=0,pend=false,mustNext=null;
   for(let i=0;i<n;i++){
    const s=slots[i];
-   const cands=s.copyOf!=null?[ds[s.copyOf]]:Array.from({length:30},(_,k)=>k-10);
-   const valid=[],ws=[];
+   // タイの音：前と同じ高さが決まりに合えばタイ、合わなければタイなしで続ける
+   let tieTry=s.tie&&i>0&&s.copyOf==null,valid=[],ws=[];
+   for(let pass=tieTry?0:1;pass<2;pass++){
+   const cands=pass===0?[ds[i-1]]:s.copyOf!=null?[ds[s.copyOf]]:Array.from({length:30},(_,k)=>k-10);
+   valid=[];ws=[];
    for(const d of cands){
     const md=m(d);if(md<(L.loM||60)||md>(L.hiM||79))continue;
     if(Math.max(hi,md)-Math.min(lo,md)>L.amb)continue;
@@ -615,7 +640,7 @@ function genMelody(R,slots,key,L,T){
      if(pend&&(a!==1||!ct))continue;
      if(Math.abs(prevInt)>=3&&(a>2||iv===0||Math.sign(iv)===Math.sign(prevInt)))continue;
      if(Math.abs(prevInt)>=2&&a>=2&&Math.sign(iv)===Math.sign(prevInt)&&Math.abs(prevInt)+a>4)continue;
-     if(iv===0&&rep>=1)continue;
+     if(iv===0&&rep>=1&&!(s.tie&&cands.length===1))continue;
      if((s.strong||s.hcEnd||s.last)&&!ct)continue;
      if(!ct){
       if(a!==1||s.dur>4||i===n-1)continue;
@@ -634,6 +659,8 @@ function genMelody(R,slots,key,L,T){
     const center=66+4*Math.sin(Math.PI*i/Math.max(1,n-1));
     w*=Math.exp(-((md-center)**2)/(2*36));
     valid.push(d);ws.push(w);
+   }
+   if(valid.length){tied[i]=pass===0;break;}
    }
    if(!valid.length){ok=false;break;}
    const d=valid.length===1?valid[0]:wpick(R,valid,ws);
@@ -663,7 +690,7 @@ function genMelody(R,slots,key,L,T){
   // 下からの半音の飾り（刺繍音）
   if(L.chrom)for(let i=1;i<n-1;i++){if(chromOK(i)&&ds[i-1]===ds[i]+1&&ds[i+1]===ds[i]+1&&!tones(slots[i].chord).includes(mod(ds[i],7))&&raise[i]===0&&mid(ds[i]+1,raise[i-1])-mid(ds[i],0)===2&&altOK(i,1)&&R()<L.chrom)raise[i]=1;}
   // 半音でつなぐ経過音（ファ→ファ♯→ソ、ラ→ラ♭→ソ）
-  if(L.chrom2)for(let i=1;i<n-1;i++){if(!chromOK(i)||slots[i].strong||raise[i]!==0||ds[i]!==ds[i-1]||slots[i].copyOf!=null)continue;
+  if(L.chrom2)for(let i=1;i<n-1;i++){if(!chromOK(i)||slots[i].strong||raise[i]!==0||ds[i]!==ds[i-1]||slots[i].copyOf!=null||tied[i])continue;
    const step=mid(ds[i+1],raise[i+1])-mid(ds[i],raise[i-1]);
    if(ds[i+1]===ds[i]+1&&step===2&&altOK(i,1)&&R()<L.chrom2)raise[i]=1;
    else if(ds[i+1]===ds[i]-1&&step===-2&&altOK(i,-1)&&R()<L.chrom2)raise[i]=-1;}
@@ -672,7 +699,9 @@ function genMelody(R,slots,key,L,T){
    const a=ds[i-1],b=ds[i+1],m0=mid(ds[i],0);
    if(a===ds[i]-1&&b===ds[i]+1){if(mid(b,raise[i+1])-(m0+1)===1&&(m0+1)-mid(a,raise[i-1])<=2&&altOK(i,1)&&R()<L.chrom3)raise[i]=1;}
    else if(a===ds[i]+1&&b===ds[i]-1){if((m0-1)-mid(b,raise[i+1])===1&&mid(a,raise[i-1])-(m0-1)<=2&&altOK(i,-1)&&R()<L.chrom3)raise[i]=-1;}}
+  for(let i=1;i<n;i++)if(tied[i])raise[i]=raise[i-1]; // タイの音は同じ高さのまま
   const notes=ds.map((d,i)=>({onset:slots[i].onset,dur:slots[i].dur,dia:T+d,alter:alt(d,raise[i]),midi:mid(d,raise[i]),deg:mod(d,7)}));
+  for(let i=1;i<n;i++)if(tied[i]){notes[i-1].tie=true;notes[i].tied=true;}
   if(notes.some(x=>x.midi<(L.loM||60)||x.midi>(L.hiM||79)))continue; // 半音で上下しても範囲内に
   let good=true;
   for(let i=1;i<n;i++)if(!intervalOK(notes[i-1].dia,notes[i-1].midi,notes[i].dia,notes[i].midi)){good=false;break;}
@@ -686,10 +715,12 @@ function genMelody(R,slots,key,L,T){
 
 // 連続5度・8度か（前の2音と今の2音で、同じ完全音程のまま動いたら×）
 function parBad(sp,bp,sc,bc){const ip=mod(sp-bp,12),ic=mod(sc-bc,12);return (ip===0||ip===7)&&ip===ic&&!(sp===sc&&bp===bc);}
-function genBass(R,segs,mel,key,L,meter){
+function genBass(R,segs,mel0,key,L,meter){
  let Tb=14+key.tl;if(midiOf(Tb,sigAlter(key.tl,key.sig))<41)Tb+=7;
  const alt=(dia,nm)=>sigAlter(mod(dia,7),key.sig)+(nm?chordAlt(nm,mod(dia-Tb,7),key.minor):0);
- const sopAt=t=>mel.find(x=>x.onset<=t+1e-6&&t<x.onset+x.dur-1e-6);
+ const mel=mel0.filter(x=>!x.rest);const U=METER[meter].units;const lastBar=Math.floor(segs[segs.length-1].onset/U+1e-9);
+ // 休符のところは、その前に鳴っていた上の声と比べる
+ const sopAt=t=>{let r=mel[0];for(const x of mel){if(x.onset<=t+1e-6)r=x;else break;}return r;};
  for(let att=0;att<120;att++){
   const out=[];let ok=true;
   const tryPlace=(onset,dur,degs,ann,isLast,nm)=>{
@@ -711,28 +742,36 @@ function genBass(R,segs,mel,key,L,meter){
    if(!c.length)return false;
    const ch=wpick(R,c,w);out.push({onset,dur,dia:ch.dia,alter:alt(ch.dia,nm),midi:ch.md,ann});return true;
   };
+  let full=0;
   for(let si=0;si<segs.length&&ok;si++){
    const sg=segs[si];const last=si===segs.length-1;
-   const split=!last&&L.bassSplit&&sg.dur>=8&&R()<L.bassSplit;
+   // 上級以上：1小節のばす下の声は1問に1つまで（最後の小節は別）
+   const mustSplit=L.shortEnd&&!last&&sg.dur>=U&&full>=1;
+   const split=!last&&L.bassSplit&&sg.dur>=8&&(mustSplit||R()<L.bassSplit);
+   if(!split&&!last&&sg.dur>=U)full++;
    const d1=split?(sg.dur===12?(meter==='6/8'?6:8):sg.dur/2):sg.dur;
-   if(!tryPlace(sg.onset,d1,[bassDeg(sg.name)],roman(sg.name),last,sg.name)){ok=false;break;}
+   if(!tryPlace(sg.onset,d1,[bassDeg(sg.name)],roman(sg.name),last,sg.name)){
+    // 根音で連続5度・8度などになるときは、第3音（転回形）で支える（最後の2つの和音は除く）
+    const c=CH[sg.name];if(last||si>=segs.length-2||c.inv||c.bass!=null||!tryPlace(sg.onset,d1,[(c.r+2)%7],null,false,sg.name)){ok=false;break;}}
    if(split){
     const c=CH[sg.name];const g2=[bassDeg(sg.name)];
     if(!c.inv&&c.r!==4)g2.push((c.r+2)%7);
+    if(mustSplit){if(!g2.includes((c.r+2)%7)&&!c.inv)g2.push((c.r+2)%7);g2.push((c.r+4)%7);} // のばさないために和音の別の音へ
     const before=out.length;
-    if(!tryPlace(sg.onset+d1,sg.dur-d1,g2,null,false,sg.name)){ok=false;break;}
+    if(!tryPlace(sg.onset+d1,sg.dur-d1,g2,null,false,sg.name)){if(!mustSplit){ok=false;break;}out[before-1].dur=sg.dur;full++;continue;}
     const a=out[before-1],b=out[before];
-    if(a.midi===b.midi){out.pop();a.dur=sg.dur;}
+    if(a.midi===b.midi&&!mustSplit){out.pop();a.dur=sg.dur;}
    }
   }
   if(!ok)continue;
   if(L.walk)walkBass(R,out,mel,key,L,Tb,segs,meter);
+  if(L.shortEnd&&out.filter(x=>x.dur>=U&&Math.floor(x.onset/U+1e-9)<lastBar).length>1)continue;
   return out;
  }
  return null;
 }
 function walkBass(R,out,mel,key,L,Tb,segs,meter){
- const sopAt=t=>mel.find(x=>x.onset<=t+1e-6&&t<x.onset+x.dur-1e-6);
+ const sopAt=t=>{let r=mel[0];for(const x of mel){if(x.onset<=t+1e-6)r=x;else break;}return r;};
  const chordAt=t=>{let c=segs[0].name;for(const s of segs)if(s.onset<=t+1e-6)c=s.name;return c;};
  const res=[];
  for(let i=0;i<out.length;i++){
@@ -954,17 +993,20 @@ const patLen=s=>parsePat(s).reduce((a,x)=>a+x.d,0);
 const RP4L={1:['4','2 2','2 2','r4'],2:['3 1'],3:['1 1 2','2 1 1','1 1 1 1'],4:['t','r2 2'],5:['1 2 1'],6:['r1 1 2','r1 1 1 1','1 3','r2 1 1'],7:['1 1 r2','r1 1 1 1'],
  8:['0.5 0.5 1 2','1.5 0.5 2','2 0.5 0.5 1','r1 0.5 0.5 2'],9:['x','u 2','2 u','Q 2','r0.5 0.5 1 2','u u'],10:['v','x','Q Q','0.5 0.5 0.5 0.5 2','1 1 u']};
 const RP8L={1:['8'],2:['6 2'],5:['2 4 2'],8:['T'],9:['T','r2 4 2'],10:['T']};
-const RP6L={3:['6','4 2','2 2 2','r2 2 2'],4:['3 1 2','2 4'],5:['1 1 2 2','2 1 1 2','2 2 1 1'],6:['r2 1 1 2','1 1 1 1 2','3 1 1 1'],7:['r1 1 2 2','2 1 1 1 1','1 1 2 1 1'],
+const RP6L={3:['6','4 2','2 2 2','r2 2 2','2 1 1 2'],4:['3 1 2','2 4','1 1 2 2'],5:['2 2 1 1'],6:['r2 1 1 2','1 1 1 1 2','3 1 1 1'],7:['r1 1 2 2','2 1 1 1 1','1 1 2 1 1'],
  8:['0.5 0.5 1 2 2','1.5 0.5 2 2','2 0.5 0.5 1 2'],9:['d','u 2 2','1 1 1 1 1 1','q 2','r0.5 0.5 1 2 2'],10:['v 2','x 2','Q 2 2','u u 2']};
 function patPool(table,LV){const items=[],ws=[];for(const l in table){const L=+l;if(L>LV)continue;for(const p of table[l]){items.push(p);ws.push(L>=LV-1?2:(LV>=9&&L<=3?.4:1));}}return [items,ws];}
+// リズム課題の難しさの幅（下限, 上限）。藝大は過去問（2023〜2026年 ≒10〜15）に合わせた
+const RBAND={1:[0,5.5],2:[4,6.8],3:[5,8.5],4:[6.5,10],5:[8,11.5],6:[9.5,13],7:[10.5,14.5],8:[12,16.5],9:[16,99],10:[20,99]};
+function rScore(notes,n){const nn=notes.filter(x=>!x.rest&&!x.tied);const sh=nn.filter(x=>x.dur<2||x.tup).length;return (nn.length+2*sh+notes.filter(x=>x.tie).length+.5*notes.filter(x=>x.rest).length)/n;}
 function genReadRhythm(R,LV,seed,opts){
  const okM=metersFor(6,LV);const meter=opts.meter&&okM.includes(opts.meter)?opts.meter:pick(R,okM);
  const M=METER[meter],U=M.units,B=meter==='6/8'?6:4;
  const bl=barsOpts(6,LV);const n=bl.includes(opts.bars)?opts.bars:barsPick(R,6,LV,bl);
  const [pool,pw]=patPool(B===6?RP6L:RP4L,LV);const [pool2,pw2]=B===4?patPool(RP8L,LV):[[],[]];
  if(LV>=7&&LV<=8){pool.push(B===6?'q 2':'q');pw.push(LV===7?.3:.7);}
- const pickPat=()=>wpick(R,pool,pw);
- for(let att=0;att<80;att++){
+ const pickPat=()=>wpick(R,pool,pw);let rbest=null;
+ for(let att=0;att<120;att++){
   const pk=LV>=9&&R()<.35?(B===6?pick(R,[2,1]):pick(R,[4,2,1])):0;
   const nb=n+(pk?1:0);const notes=[];
   for(let b=0;b<nb;b++){
@@ -994,9 +1036,11 @@ function genReadRhythm(R,LV,seed,opts){
   if(LV>=3){const mid=notes.filter(x=>!x.rest&&!x.tied&&x.onset>=(Math.floor(n/2)+(pk?1:0))*U);if(mid.length)mid[0].dyn=pick(R,dyns.filter(x=>x!==d0));}
   if(LV>=3)notes.forEach(x=>{if(x.rest||x.tied||x.tie)return;const r=R();if(x.dur<=2&&r<.12)x.art='.';else if(r<.18&&LV>=6)x.art='accent';else if(r<.23&&LV>=6)x.art='tenuto';});
   const last=notes[notes.length-1];if(LV>=7&&R()<.4&&!last.tied)last.art='accent';
-  return {type:6,lv:LV,seed,key:KEYS.C,keyId:'C',meter,bars:nb,pickup:pk,count:n,unit:'小節',chords:[],voices:[{name:'リズム',notes}],staves:[{clef:'treble',voices:[0]}],rhythm:true};
+  const res={type:6,lv:LV,seed,key:KEYS.C,keyId:'C',meter,bars:nb,pickup:pk,count:n,unit:'小節',chords:[],voices:[{name:'リズム',notes}],staves:[{clef:'treble',voices:[0]}],rhythm:true};
+  const sc=rScore(notes,n),[lo,hi]=RBAND[LV];if(sc>=lo&&sc<=hi)return res;
+  const miss=sc<lo?lo-sc:sc-hi;if(!rbest||miss<rbest.miss)rbest={res,miss};
  }
- return null;
+ return rbest?rbest.res:null;
 }
 
 /* ===== 臨時記号の数（楽譜に書かれるもの） ===== */
@@ -1234,13 +1278,18 @@ function kamiMemory(R,meter,n,home,lv,o,pool){
 }
 
 /* ===== 問題をつくる ===== */
+// 難しさの点（1小節あたり）：音の数＋細かい音符×2＋臨時記号×1.5＋タイ
+function diffScore(P){const U=METER[P.meter].units;const ns=P.voices[0].notes;const nn=ns.filter(n=>!n.rest&&!n.tied);
+ const sh=nn.filter(n=>n.dur<2||n.tup).length;return (nn.length+2*sh+1.5*countAcc(ns,P.key,U)+ns.filter(n=>n.tie).length)/P.count;}
+// レベルごとの下限（これより易しい問題は作り直す）。藝大は過去問の点（藝大１≒8〜11、藝大２≒13〜14）に合わせた
+const FLOOR={1:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,16,24],2:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,16,24],3:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,11,15],5:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,13,18]};
 function generate(type,lv,seed,opts={}){
  if(typeof opts==='string')opts={key:opts};
  const L0=LEVELS[lv];
  const kIdx=opts.key?KEY_IDS.indexOf(opts.key)+1:0,mIdx=opts.meter?METER_IDS.indexOf(opts.meter)+1:0;
  const R=rngFrom(seed*7919+type*104729+lv*1299709+kIdx*31337+mIdx*7717+(opts.bars||0)*911+APP_VER*65537+7);
  if(type===6)return genReadRhythm(R,lv,seed,opts);
- if(lv>=9&&type!==4)return genKami(type,lv,seed,opts,R);
+ if(lv>=9&&type!==4){let best=null,bs=-1;for(let k=0;k<12;k++){const P=genKami(type,lv,seed,opts,R);if(!P)continue;const sc=diffScore(P);if(sc>=FLOOR[type][lv])return P;if(sc>bs){bs=sc;best=P;}}return best;}
  const autoId=pick(R,L0.keys);const kid=opts.key&&KEYS[opts.key]?opts.key:autoId;const key=KEYS[kid];
  const bl=barsOpts(type,lv);
  if(type===4){
@@ -1252,7 +1301,7 @@ function generate(type,lv,seed,opts={}){
  }
  const par=type===3;
  const intOnly=a=>a.filter(p=>p.every(x=>Number.isInteger(x)));
- let L=L0;if(type===3&&lv>6){const Lm=LEVELS[7];L={...L0,beat:intOnly(lv>=8?L0.beat:Lm.beat),two:intOnly(Lm.two),beat6:Lm.beat6,two6:Lm.two6,tonic:0,anyChrom:1,exam:0,chrom:lv>=8?.9:.75,chrom2:lv>=8?.95:.8,chrom3:lv>=8?.9:.5};}
+ let L=L0;if(type===3&&lv>6){const Lm=LEVELS[7];L={...L0,beat:intOnly(lv>=8?[...L0.beat,[1,1,2],[2,1,1],[3,1],[1,1,1,1]]:Lm.beat),two:intOnly(Lm.two),beat6:lv>=8?[...R6d,[2,1,1,2],[3,1,2],[1,1,2,2]]:Lm.beat6,two6:Lm.two6,tonic:0,anyChrom:1,exam:0,chrom:lv>=8?.9:.75,chrom2:lv>=8?.95:.8,chrom3:lv>=8?.9:.5};}
  // 音の高さの範囲（midi：60=ド4）。視唱は歌える高さ、初級・中級の聴音は五線から飛び出しにくく
  {const g=lv<=2?0:lv<=4?1:2;
   if(type===5)L={...L,hiM:[74,75,76][g],loM:g<2?60:59};
@@ -1279,13 +1328,19 @@ function generate(type,lv,seed,opts={}){
   let bad=false;
   if(par&&ph)for(let b=ph+1;b<n-2;b++){bars[b]=bars[b-ph].slice();if(bars[b].length>1&&!hasOnset(rh[b],M.half))bad=true;}
   if(bad)continue;
-  const segs=[],slots=[];
+  // タイ（上級以上。藝大は1問に1〜2個）
+  if(L0.ties){const k=Math.floor(L0.ties+R());
+   if(par&&ph){addTies(R,rh,n,ph,meter,k,ph-2);for(let b=ph;b<n-2;b++)rh[b]=rh[b-ph].slice();}
+   else addTies(R,rh,n,ph,meter,k,n-2);}
+  const segs=[],slots=[],rests=[];
   for(let b=0;b<n;b++){
    const base=b*M.units;
    bars[b].forEach((name,k)=>{const st=bars[b].length>1?(k?M.half:0):0;const du=bars[b].length>1?(k?M.units-M.half:M.half):M.units;segs.push({onset:base+st,dur:du,name});});
    let p=0;
-   rh[b].forEach(d=>{const ch=bars[b].length>1&&p>=M.half?bars[b][1]:bars[b][0];
-    slots.push({bar:b,pos:p,dur:d,onset:base+p,chord:ch,strong:M.strong.includes(p)||(bars[b].length>1&&p===M.half)});p=Math.round((p+d)*3000)/3000;});
+   rh[b].forEach(d0=>{const tie=d0>500,d=rdur(d0);
+    if(d0<0){rests.push({onset:base+p,dur:d,rest:true});p=Math.round((p+d)*3000)/3000;return;}
+    const ch=bars[b].length>1&&p>=M.half?bars[b][1]:bars[b][0];
+    slots.push({bar:b,pos:p,dur:d,onset:base+p,chord:ch,tie,strong:M.strong.includes(p)||(bars[b].length>1&&p===M.half)});p=Math.round((p+d)*3000)/3000;});
   }
   slots[slots.length-1].last=true;slots[slots.length-2].penult=true;
   if(ph){const hc=slots.filter(s=>s.bar===ph-1);hc[hc.length-1].hcEnd=true;}
@@ -1299,6 +1354,8 @@ function generate(type,lv,seed,opts={}){
   // 3連符のしるし
   for(let i=0;i<mel.length;i++){const d=mel[i].dur;if(Number.isInteger(Math.round(d*1000)/1000))continue;if(mel[i].tup)continue;
    const w=Math.abs(d-4/3)<1e-6?2:Math.abs(d-8/3)<1e-6?4:1;for(let k=0;k<3&&mel[i+k];k++)mel[i+k].tup={p:3,q:2,r:3,w,first:k===0};i+=2;}
+  // 区切りや最後の休符を入れる
+  if(rests.length){mel.push(...rests.map(x=>({...x})));mel.sort((a,b)=>a.onset-b.onset);}
   // 最後の音のあとに休符（藝大）
   if(L.rest&&type!==3&&R()<L.rest){const last=mel[mel.length-1];const B=M.beat===8?8:M.beat;if(last.dur>B&&!last.tup){last.dur-=B;mel.push({onset:last.onset+last.dur,dur:B,rest:true});}}
   // 視唱の強弱記号
@@ -1306,16 +1363,21 @@ function generate(type,lv,seed,opts={}){
   // 藝大２の視唱：ときどき弱起（2026年本番の形。最後の小節はその分短くなる）
   let pk=0;
   if(type===5&&lv===8&&R()<.25){
-   const U=M.units,six=meter==='6/8';const pp=six?6:4;
-   const pat=pick(R,six?['r2 2 2','r2 2 2','r4 2']:['4','2 2','r2 2']);const its=parsePat(pat);const c=its.filter(x=>!x.rest).length;
+   const U=M.units,six=meter==='6/8';
+   // 最後の小節から削れる長さ（休符か、最後の音を短くして）に合わせて弱起の長さを決める
+   const cutOK=pp=>{let c=pp;for(let i=mel.length-1;i>=0&&c>1e-6;i--){const x=mel[i];if(x.rest){if(x.dur<=c+1e-6){c-=x.dur;continue;}return true;}
+     const left=x.dur-c;return [2,3,4,6,8,12].includes(left)&&(!six||(x.onset%6)+left<=6||left===6||left===12);}return false;};
+   const pps=(six?[4,6,2]:[4,2]).filter(cutOK);
+   const pp=pps.length?pps[0]:0;
+   const PK={6:['r2 2 2','r4 2'],4:six?['r1 1 1 1','2 2','r2 2']:['4','2 2','r2 2'],2:['2','1 1']};
+   const pat=pp?pick(R,PK[pp]):'2';const its=parsePat(pat);const c=its.filter(x=>!x.rest).length;
    const f=mel.find(x=>!x.rest);const pre=[];let okp=true,on=U-pp,k=c;
    for(const it of its){if(it.rest){pre.push({onset:on,dur:it.d,rest:true});on+=it.d;continue;}
     const dia=f.dia-k;k--;const dg=mod(dia-T,7);let a=sigAlter(mod(dia,7),key.sig);if(key.minor&&(dg===6||dg===5))a+=1;
     const nt={onset:on,dur:it.d,dia,alter:a,midi:midiOf(dia,a),deg:dg};if(nt.midi<(L.loM||60))okp=false;pre.push(nt);on+=it.d;}
    const ns=pre.filter(x=>!x.rest);for(let q=0;q<ns.length;q++){const nx=ns[q+1]||f;if(!intervalOK(ns[q].dia,ns[q].midi,nx.dia,nx.midi))okp=false;}
-   const last=mel[mel.length-1];
-   if(okp&&(last.rest?last.dur===pp:last.dur===U)){
-    if(last.rest)mel.pop();else last.dur-=pp;
+   if(okp&&pp){
+    {let c=pp;while(c>1e-6){const x=mel[mel.length-1];if(x.rest&&x.dur<=c+1e-6){c-=x.dur;mel.pop();continue;}x.dur-=c;c=0;}}
     mel.forEach(x=>x.onset+=U);if(f.dyn){pre.find(x=>!x.rest).dyn=f.dyn;delete f.dyn;}
     mel.unshift(...pre);pk=pp;}
   }
@@ -1324,16 +1386,20 @@ function generate(type,lv,seed,opts={}){
   if(type!==2)res={...base,voices:[{name:'旋律',notes:mel}],staves:[{clef:'treble',voices:[0]}]};
   else{
    const bass=genBass(R,segs,mel,key,L,meter);if(!bass)continue;
+   // 上の声が休符で終わるときは、下の声も合わせて短くする
+   {const lm=mel.filter(x=>!x.rest).slice(-1)[0],end=lm.onset+lm.dur,fb=bass[bass.length-1],barEnd=n*M.units;
+    if(end<barEnd-1e-6&&fb.onset<end){const op=(meter==='6/8'?[12,6,4,2]:[16,12,8,6,4,2]).filter(d=>fb.onset+d<=end+1e-6&&d<=fb.dur&&(meter!=='6/8'||(fb.onset%6)+d<=6||d%6===0));
+     if(op.length){fb.dur=op[0];bass.push({onset:fb.onset+fb.dur,dur:barEnd-fb.onset-fb.dur,rest:true});}}}
    // 藝大：下の声がときどき休符から入る
    if(lv>=7&&R()<.3){const b0=bass[0];const okD=d=>[2,3,4,6,8,12,16].includes(d);
     const rl=meter==='6/8'?(b0.dur===6?2:b0.dur===12?6:0):okD(b0.dur-4)?4:okD(b0.dur-2)?2:0;
     if(rl){bass.unshift({onset:0,dur:rl,rest:true});b0.onset=rl;b0.dur-=rl;}}
    res={...base,voices:[{name:'上の声',notes:mel},{name:'下の声',notes:bass}],staves:[{clef:'treble',voices:[0]},{clef:'bass',voices:[1]}]};
   }
-  if(!minAcc)return res;
-  const acc=countAcc(mel,key,M.units);
-  if(acc>=minAcc)return res;
-  if(acc>bestAcc){best=res;bestAcc=acc;}
+  const acc=minAcc?countAcc(mel,key,M.units):0,sc=diffScore(res),fl=FLOOR[type][lv]*(meter==='6/8'?.88:1); // 6/8は1小節の拍が2つなので少し下げる
+  if(acc>=minAcc&&sc>=fl)return res;
+  const rank=(acc>=minAcc?1000:acc*50)+(sc>=fl?500:0)+sc;
+  if(rank>bestAcc){best=res;bestAcc=rank;}
  }
  return best;
 }
@@ -1379,10 +1445,14 @@ function toAbc(P,opt={}){
    if(multi)h+=`V:${vi+1}\n`;
    let line='',curBar=-1;const words=[];
    const sel=opt.firstOnly?notes.slice(0,1):notes.filter(n=>{const b=Math.floor(n.onset/U+1e-9);return b>=b0&&b<=b1;});
+   // 4/4拍子：1〜2拍目／3〜4拍目が8分音符4つだけなら、旗を1本につなぐ
+   const join=new Set();
+   if(P.meter==='4/4')for(let i=0;i+3<sel.length;i++){const q=sel.slice(i,i+4),o=q[0].onset;
+    if(Math.abs(o%8)<1e-6&&q.every((x,k)=>!x.rest&&!x.tup&&Math.abs(x.dur-2)<1e-6&&Math.abs(x.onset-(o+2*k))<1e-6))join.add(q[2]);}
    for(const n of sel){
     const b=Math.floor(n.onset/U+1e-9);
     if(b!==curBar){if(curBar>=0)line+=' |';curBar=b;line+=' ';}
-    else if(Math.abs((n.onset%B))<1e-6||Math.abs((n.onset%B)-B)<1e-6)line+=' ';
+    else if((Math.abs((n.onset%B))<1e-6||Math.abs((n.onset%B)-B)<1e-6)&&!join.has(n))line+=' ';
     let pre='';
     if(opt.ann&&n.ann)pre+=`"_${n.ann}"`;
     if(n.tup&&n.tup.first)pre+=`(${n.tup.p}:${n.tup.q}:${n.tup.r}`;
@@ -1722,7 +1792,8 @@ function cursorOff(c){if(!c)return;if(c.line){c.line.remove();c.line=null;}(c.hl
 /* ---------- 音 ---------- */
 let AC=null,warm=false,master=null,clock=null,steps=[],t0=0,total=0,wake=null,unlocked=false,playToken=null,quietPlay=false,onEnd=null;
 const BUF={},LOADING={};
-const INST_GAIN={piano:1.25,organ:.55,strings:.8,choir:.9};
+// 音量：録音の素材は音ごとに最大値をそろえ（NORM）、音色ごとの聞こえ方の差を INST_GAIN で合わせる。TONE は全体の大きさ
+const TONE=2,INST_GAIN={soft:1,piano:2.68,organ:1.41,strings:2.14,choir:2.21};
 function silentWav(){const n=800,b=new Uint8Array(44+n),dv=new DataView(b.buffer),w=(o,s)=>{for(let i=0;i<s.length;i++)b[o+i]=s.charCodeAt(i);};
  w(0,'RIFF');dv.setUint32(4,36+n,true);w(8,'WAVE');w(12,'fmt ');dv.setUint32(16,16,true);dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,8000,true);dv.setUint32(28,8000,true);dv.setUint16(32,1,true);dv.setUint16(34,8,true);w(36,'data');dv.setUint32(40,n,true);b.fill(128,44);
  let s='';b.forEach(x=>s+=String.fromCharCode(x));return 'data:audio/wav;base64,'+btoa(s);}
@@ -1741,13 +1812,15 @@ function loadInst(name){
  if(LOADING[name])return LOADING[name];
  const d=SF_DATA[name];
  const lead=b=>{const x=b.getChannelData(0);const n=Math.min(x.length,Math.floor(b.sampleRate*.25));let pk=0;for(let i=0;i<n;i++)pk=Math.max(pk,Math.abs(x[i]));const th=pk*.06;for(let i=0;i<n;i++)if(Math.abs(x[i])>th)return Math.max(0,i/b.sampleRate-.003);return 0;};
- LOADING[name]=Promise.all(Object.keys(d).map(k=>decode(d[k]).then(b=>[+k,b,lead(b)]).catch(()=>null))).then(list=>{
+ const peak=b=>{const x=b.getChannelData(0);const n=Math.min(x.length,Math.floor(b.sampleRate*1.5));let pk=0;for(let i=0;i<n;i++)pk=Math.max(pk,Math.abs(x[i]));return pk||1;};
+ LOADING[name]=Promise.all(Object.keys(d).map(k=>decode(d[k]).then(b=>[+k,b,lead(b),peak(b)]).catch(()=>null))).then(list=>{
   const ok=list.filter(Boolean);if(!ok.length)throw new Error('decode');BUF[name]=ok.sort((a,b)=>a[0]-b[0]);});
  return LOADING[name].catch(()=>{delete LOADING[name];S.timbre='soft';$('#timbre').value='soft';toast('この端末ではその音色が使えないため、電子音にしました');});
 }
 const ratio=()=>(+S.a4)/440;
 function synthTone(dest,midi,t,dur,vel){
  const f=440*ratio()*Math.pow(2,(midi-69)/12);
+ vel*=TONE*INST_GAIN.soft;
  const g=AC.createGain();g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(vel,t+0.012);
  g.gain.setTargetAtTime(vel*0.32,t+0.02,0.4);g.gain.setTargetAtTime(0.0001,t+Math.max(0.05,dur-0.03),0.07);
  const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(Math.min(f*9,9000),t);lp.frequency.setTargetAtTime(Math.min(f*3.5,6000),t,0.45);
@@ -1764,7 +1837,7 @@ function tone(dest,midi,t,dur,vel){
  const sustain=name!=='piano';
  const off=best[2]||0;
  if(sustain){src.loop=true;src.loopStart=0.7+off;src.loopEnd=Math.min(2.6+off,best[1].duration-0.2);}
- const g=AC.createGain();const v=vel*1.7*INST_GAIN[name];
+ const g=AC.createGain();const v=vel*TONE*INST_GAIN[name]/(best[3]||1);
  g.gain.setValueAtTime(sustain?0.0001:v,t);if(sustain)g.gain.linearRampToValueAtTime(v,t+0.03);
  const end=t+Math.max(0.08,dur-0.02);g.gain.setTargetAtTime(0.0001,end,sustain?0.09:0.06);
  src.connect(g);g.connect(dest);src.start(t,off);src.stop(end+0.6);
@@ -1772,7 +1845,7 @@ function tone(dest,midi,t,dur,vel){
 function click(dest,t,lvl){
  const lv=(+S.mvol)/100;if(lv<=0)return;
  const o=AC.createOscillator();o.type='square';o.frequency.value=lvl===2?1760:lvl===1?1320:1040;
- const g=AC.createGain();g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime([.07,.12,.2][lvl]*lv,t+0.002);g.gain.setTargetAtTime(0.0001,t+0.01,0.018);
+ const g=AC.createGain();g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime([.07,.12,.2][lvl]*lv*1.8,t+0.002);g.gain.setTargetAtTime(0.0001,t+0.01,0.018);
  o.connect(g);g.connect(dest);o.start(t);o.stop(t+0.12);
 }
 const latSec=()=>S.lat!=null?S.lat/1000:(AC.outputLatency||AC.baseLatency||0);
