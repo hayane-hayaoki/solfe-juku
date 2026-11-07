@@ -876,8 +876,17 @@ const APP_VER=3; // 問題番号の8けた目（作り方を変えたら数を�
 function barsOpts(type,lv){
  if(type===1||type===2||type===4)return lv<=4?[4,8]:[8];
  if(type===3)return lv<=4?[6]:[6,8];
- if(type===5)return lv<=4?[4]:lv<=8?[6,8]:[8];
- return lv<=4?[4]:lv<=8?[5,6]:[6];
+ if(type===5)return lv<=2?[4]:lv<=4?[6]:lv<=8?[6,8]:[8];
+ return lv<=2?[4]:lv<=4?[5]:lv<=8?[5,6]:[6];
+}
+// 「ランダム」のときの小節数（過去問：視唱は８小節が7回中6回、リズムは６小節が7回中4回）
+function barsPick(R,type,lv,bl){
+ if(bl.length===1)return bl[0];
+ let w=bl.map(()=>1);
+ if(type===5&&lv===7)w=bl.map(b=>b===8?.8:.2);
+ if(type===5&&lv===8)w=bl.map(b=>b===8?1:0);
+ if(type===6&&lv>=7&&lv<=8)w=bl.map(b=>b===6?.6:.4);
+ return wpick(R,bl,w);
 }
 function metersFor(type,lv){
  if(type===4)return ['2/2'];
@@ -914,11 +923,11 @@ const DESC={
  4:['','ハ長調・４小節。I・IV・Vだけ','イ短調と、II・VIの和音が加わる','調号１つまで','属七の和音（V7）が加わる','８小節・調号２つまで。和音の転回形','ドッペルドミナント（V/V）が入る',
   '声楽科本番の形。借用和音（V/V・V7/IV・V/VI）と減七','借用和音・減七が３つ以上。Vへ向かう減七（VII°7/V）も',
   '指揮科ならこう出す（想像）。ナポリ・増六（3種類）・九の和音・I⁶₄、4分音符で和音が変わる所あり。調号４つまで','さらに多く、和音の変わり目が細かい'],
- 5:['','ハ長調・4/4拍子・４小節。4分音符と2分音符','イ短調と3/4拍子が加わる','調号１つまで・6/8拍子。8分音符と強弱記号','8分音符が増え、跳躍が大きくなる','６・８小節・調号２つまで。強弱の変化','半音の飾りの音が入る',
-  '声楽科本番の形。後半に半音と転調、16分音符・3連符。臨時記号３つ以上（６小節は２つ以上）','臨時記号５つ以上（６小節は４つ以上）、細かいリズムが増える',
+ 5:['','ハ長調・4/4拍子・４小節。4分音符と2分音符','イ短調と3/4拍子が加わる','６小節（３＋３）・調号１つまで・6/8拍子。8分音符と強弱記号','8分音符が増え、跳躍が大きくなる','８小節も出る・調号２つまで。強弱の変化','半音の飾りの音が入る',
+  '声楽科本番の形。８小節が中心。後半に半音と転調、16分音符・3連符。臨時記号３つ以上（６小節は２つ以上）','８小節。臨時記号５つ以上（６小節は４つ以上）、細かいリズムが増え、ときどき弱起',
   '指揮科の視唱の形。半音の多い旋律、ときどき弱起。臨時記号６つ以上','さらに跳躍と臨時記号が増える（９つ以上）'],
- 6:['','4/4拍子・４小節。4分音符・8分音符・4分休符','3/4拍子と、付点8分音符＋16分音符が加わる','6/8拍子と16分音符が加わる','3連符が加わる','５・６小節。タイとシンコペーション','16分休符、アクセント・テヌート',
-  '声楽科本番の形。裏拍の休符、ときどき休符から始まる・5連符','2026年本番なみ。32分音符・付点16分音符・5連符・2分音符の3連符',
+ 6:['','4/4拍子・４小節。4分音符・8分音符・4分休符','3/4拍子と、付点8分音符＋16分音符が加わる','５小節。6/8拍子と16分音符が加わる','3連符が加わる','６小節も出る。タイとシンコペーション','16分休符、アクセント・テヌート',
+  '声楽科本番の形。６小節が多め。裏拍の休符、ときどき休符から始まる・5連符','2026年本番なみ。32分音符・付点16分音符・5連符・2分音符の3連符',
   '指揮科ならこう出す（想像）。6連符・32分音符の連符・2連符、ときどき弱起','さらに細かく、7連符も。連符とタイが入り組む'],
  Q:['','ハ長調。２つの音が大きく違う','イ短調・3/4拍子も。２つの音が違う','１つの音が2〜3度違う。6/8拍子も','１つの音が違う、または2つの音の入れ替え','１つの音が2度違う、付点の有無','上と同じで、旋律に半音の飾りの音',
   '臨時記号１つの違い。ときどき調ちがい問題','旋律が2026年本番なみに。調ちがい問題も','指揮科風の旋律。調ちがい問題が半分','さらに複雑。別の調に移して1音変えたものも混ざる'],
@@ -951,7 +960,7 @@ function patPool(table,LV){const items=[],ws=[];for(const l in table){const L=+l
 function genReadRhythm(R,LV,seed,opts){
  const okM=metersFor(6,LV);const meter=opts.meter&&okM.includes(opts.meter)?opts.meter:pick(R,okM);
  const M=METER[meter],U=M.units,B=meter==='6/8'?6:4;
- const bl=barsOpts(6,LV);const n=bl.includes(opts.bars)?opts.bars:pick(R,bl);
+ const bl=barsOpts(6,LV);const n=bl.includes(opts.bars)?opts.bars:barsPick(R,6,LV,bl);
  const [pool,pw]=patPool(B===6?RP6L:RP4L,LV);const [pool2,pw2]=B===4?patPool(RP8L,LV):[[],[]];
  if(LV>=7&&LV<=8){pool.push(B===6?'q 2':'q');pw.push(LV===7?.3:.7);}
  const pickPat=()=>wpick(R,pool,pw);
@@ -1142,7 +1151,7 @@ function genKami(type,lv,seed,opts,R){
  const mts=metersFor(type,lv);let meter=opts.meter&&mts.includes(opts.meter)?opts.meter:pick(R,mts);
  if(type===3&&!opts.meter&&R()<.35)meter='6/8';
  const M=METER[meter],U=M.units,B=meter==='6/8'?6:4,bpb=meter==='6/8'?2:U/4;
- const bl=barsOpts(type,lv);const n=bl.includes(opts.bars)?opts.bars:(opts.bars||pick(R,bl));
+ const bl=barsOpts(type,lv);const n=bl.includes(opts.bars)?opts.bars:(opts.bars||barsPick(R,type,lv,bl));
  const o=kamiParams(type,lv,key);o.B=B;
  const pool=type===5?lvPool(meter==='6/8'?SNG6:SNG4,lv):type===3?lvPool(meter==='6/8'?MEM6:MEM4,lv):lvPool(meter==='6/8'?K6:K4,lv);
  const minAcc=Math.round((type===5?(lv>=10?9:6):type===3?(lv>=10?10:8):(lv>=10?18:12))*(type===3?1:Math.min(1,n/8)));
@@ -1251,7 +1260,7 @@ function generate(type,lv,seed,opts={}){
  const mts=metersFor(type,lv);let meter=opts.meter&&mts.includes(opts.meter)?opts.meter:pick(R,mts);
  if(type===3&&!opts.meter&&lv>=4&&R()<.35)meter='6/8';
  const M=METER[meter];
- const n=bl.includes(opts.bars)?opts.bars:opts.bars?opts.bars:(bl.length===2&&bl[0]===4?4:pick(R,bl));const ph=n>=6?n/2:0;
+ const n=bl.includes(opts.bars)?opts.bars:opts.bars?opts.bars:(bl.length===2&&bl[0]===4?4:barsPick(R,type,lv,bl));const ph=n>=6?n/2:0;
  const minAcc=(type===4||type===6)?0:Math.round((L0.minAcc||0)*(n<8&&type!==3?n/8:1));
  let T=28+key.tl;if(midiOf(T,sigAlter(key.tl,key.sig))>66)T-=7;
  let best=null,bestAcc=-1;
@@ -1925,7 +1934,7 @@ function qTranspose(base,K2){
  const K=base.key;const tonic=k=>midiOf(28+k.tl,sigAlter(k.tl,k.sig));
  let st=mod(tonic(K2)-tonic(K),12);if(st>6)st-=12;let dl=mod(K2.tl-K.tl,7);if(dl>3)dl-=7;
  if(st===0)return null;
- const ns=[];for(const n of base.voices[0].notes){if(n.rest){ns.push({...n});continue;}const dia=n.dia+dl,midi=n.midi+st,alter=midi-midiOf(dia,0);if(alter<-2||alter>2||midi<55||midi>86)return null;ns.push({...n,dia,midi,alter});}
+ const ns=[];for(const n of base.voices[0].notes){if(n.rest){ns.push({...n});continue;}const dia=n.dia+dl,midi=n.midi+st,alter=midi-midiOf(dia,0);if(alter<-1||alter>1||midi<55||midi>86)return null;/* ダブル♯♭になる調には移さない */ns.push({...n,dia,midi,alter});}
  return {...base,key:K2,voices:[{name:'旋律',notes:ns}]};
 }
 function qNew(){
@@ -1959,7 +1968,7 @@ function qNew(){
  $('#qStreak').textContent=FW(QZ.streak);$('#qMsg').textContent='';$('#qMsg').className='qmsg';$('#qNext').hidden=true;
  const one=S.qbars>=3||(S.qlv>=9&&S.qbars>=2);const box=$('#qOpts');box.className='qopts'+(one?' one':'');
  box.innerHTML=QZ.cur.opts.map((_,i)=>`<button type="button" class="qopt" data-i="${i}" aria-label="${'ABCD'[i]}"><span class="tag">${'ABCD'[i]}</span><div id="qo${i}"></div></button>`).join('');
- QZ.cur.opts.forEach((p,i)=>{const el=$('#qo'+i);if(!abcOk(el))return;const {abc}=toAbc(p,{perLine:p.bars});
+ QZ.cur.opts.forEach((p,i)=>{const el=$('#qo'+i);if(!abcOk(el))return;let {abc}=toAbc(p,{perLine:p.bars});abc=abc.replace('X:1\n','X:1\n%%stretchlast true\n');/* 4つの楽譜をどれも横いっぱいに */
   const w=Math.max(160,el.clientWidth||160);ABCJS.renderAbc(el,abc,{responsive:'resize',staffwidth:Math.max(150,w-10)*(one?1:1.25),paddingtop:2,paddingbottom:6,paddingleft:2,paddingright:2});});
  qPlay();
 }
