@@ -42,9 +42,9 @@ button,select,input{font:inherit;color:inherit}
 button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}select,.qopt,.sheet{touch-action:manipulation}
 /* 画面の大きさ：スマホはそのまま。iPad縦は横幅いっぱい近くまで広げて拡大、iPad横・Macは横に広く（楽譜の枠だけ拡大を打ち消す） */
 :root{--w:720px}
-@media (min-width:700px) and (orientation:portrait){body{zoom:1.12}#ansScore,#readScore,#startScore,#intSheet{zoom:.8929}:root{--w:100%}}
-@media (min-width:900px) and (orientation:portrait){body{zoom:1.25}#ansScore,#readScore,#startScore,#intSheet{zoom:.8}}
-@media (min-width:900px) and (orientation:landscape){body{zoom:1.2}#ansScore,#readScore,#startScore,#intSheet{zoom:.8333}:root{--w:1060px}
+@media (min-width:700px) and (orientation:portrait){body{zoom:1.12}#ansScore,#readScore,#startScore,#gkSheet{zoom:.8929}:root{--w:100%}}
+@media (min-width:900px) and (orientation:portrait){body{zoom:1.25}#ansScore,#readScore,#startScore,#gkSheet{zoom:.8}}
+@media (min-width:900px) and (orientation:landscape){body{zoom:1.2}#ansScore,#readScore,#startScore,#gkSheet{zoom:.8333}:root{--w:1060px}
  #sels{display:flex;flex-direction:row;gap:6px}#sels .sels{flex:var(--n,4) 1 0;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
  .bar{padding-top:5px;padding-bottom:calc(5px + env(safe-area-inset-bottom,0px))}.play{width:54px;height:54px}}
 :focus-visible{outline:2px solid var(--navy);outline-offset:2px}
@@ -88,12 +88,11 @@ h2{font-size:12px;letter-spacing:.12em;color:var(--muted);margin:0;font-weight:7
 .ansrow{display:flex;gap:10px;align-items:stretch}
 #scoreBox .btnrow.fill>*{flex:1 1 40%;white-space:nowrap}
 .ansrow #ansBtn{flex:1}
-#qP,#quickP,#intP{position:relative}
+#qP,#quickP,#gakP{position:relative}
 .pnav2{display:flex;align-items:center;gap:8px;margin-left:auto}
 .pnav2 .pcode{margin-right:4px;margin-left:0}
 .pnav2 .btn{white-space:nowrap}
-.pnav2 .sm{display:none}
-@media (max-width:600px){.infoRow .chips{flex-basis:100%}.pnav2{width:100%}.pnav2 .pcode{margin-right:auto}.pnav2 .lg{display:none}.pnav2 .sm{display:inline}}
+@media (max-width:600px){.infoRow .chips{flex-basis:100%}.pnav2{width:100%}.pnav2 .pcode{margin-right:auto}.pnav2 .btn{padding-left:12px;padding-right:12px}}
 .bubble{position:absolute;z-index:15;left:16px;max-width:min(360px,calc(100% - 32px));background:var(--navy);color:var(--on-navy);font-size:13px;line-height:1.55;padding:9px 13px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.2);margin:0;cursor:pointer}
 .bubble::before{content:'';position:absolute;top:-5px;left:var(--ax,24px);width:11px;height:11px;background:inherit;transform:rotate(45deg);border-radius:2px}
 .lvhelp details{border-top:1px solid var(--line);padding:6px 0}
@@ -140,6 +139,33 @@ input[type=range]{width:100%;accent-color:var(--navy)}
 .nums{display:flex;flex-wrap:wrap;gap:6px}
 .nums button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--red);background:transparent;color:var(--red);font-family:var(--f-m);font-size:17px}
 .nums button[aria-pressed="true"]{background:var(--red);color:var(--on-red)}
+/* 楽典 */
+.vh{visibility:hidden}
+.btn.nextbig{width:100%;min-height:56px;font-size:17px;border-radius:12px;justify-content:center}
+#qNext{margin-top:10px}
+.gtop{display:flex;justify-content:flex-end;min-height:18px;margin-bottom:-6px}
+.gtop .session{font-size:13px;color:var(--muted)}
+.gexp .why{display:block;margin-top:6px;color:var(--muted)}
+.ggame{display:flex;flex-direction:column;gap:12px}
+.gq{font-size:16.5px;font-weight:700;line-height:1.65;letter-spacing:.01em}
+.gfield:empty{display:none}
+.gfield{display:inline-block;font-size:11.5px;font-weight:700;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:0 8px;margin-right:8px;vertical-align:2px;line-height:1.7}
+.gk-sheet{display:flex;justify-content:center;align-items:center;min-height:150px}
+.gk-sheet.none{display:none}
+#gkScore{width:100%;display:flex;justify-content:center;align-items:center}
+#gkScore svg{display:block}
+#gkSheet.wide #gkScore{display:block}
+.opts.long button{font-size:15px;min-height:52px;padding:6px 8px;line-height:1.35}
+.opts.one{grid-template-columns:1fr}
+.opts.many button{min-height:46px;font-size:16px;font-family:var(--f-m)}
+.opts.ox button{min-height:72px;font-size:34px;font-weight:400}
+.opts button.sel{border-color:var(--red);box-shadow:inset 0 0 0 1.5px var(--red);color:var(--red)}
+.opts button.miss{background:var(--surface);border-color:var(--red);border-style:dashed;color:var(--red)}
+.opts button.miss::after{content:"◯";position:absolute;top:6px;right:8px;font-size:18px;line-height:1;font-weight:400;color:var(--red)}
+#gOpts.qopts{display:grid}
+.gres{margin:0;font-weight:700;font-size:15px}
+.gres.ok{color:var(--red)}.gres.ng{color:var(--muted)}
+.gexp{white-space:pre-line;margin:0;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14.5px;line-height:1.7}
 /* 度数 */
 .int-sheet{display:flex;justify-content:center;align-items:center}
 .int-sheet>div{width:100%;max-width:300px}
@@ -244,7 +270,8 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 .sels label{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.02em;white-space:nowrap;overflow:hidden}
 .sels select{min-height:38px;padding:4px 12px 4px 6px;font-size:12.5px;letter-spacing:-.01em;border-radius:8px;width:100%;min-width:0;text-overflow:ellipsis;-webkit-appearance:none;appearance:none;
  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:right 6px top 50%,right 2px top 50%;background-size:4px 4px,4px 4px;background-repeat:no-repeat}
-#iSels,#qSels{grid-template-columns:repeat(4,minmax(0,1fr))}
+#gSels,#qSels{grid-template-columns:repeat(4,minmax(0,1fr))}
+#gSels{grid-template-columns:1fr 1.5fr 1fr}
 .rangerow .rlabel{font-size:12px;font-weight:700;white-space:nowrap}
 .rangerow select{min-height:36px;font-size:13px}
 .startbox{height:150px}
@@ -294,22 +321,41 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 .quiz .msg{font-weight:700;width:100%}
 .rowcheck{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){.pop{animation:none}}
+.docp{position:fixed;inset:0;z-index:60;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.dochead{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:12px;background:var(--surface);border-bottom:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+.dochead h2{flex:1;font-size:16px;margin:0;color:var(--ink)}.dochead h2 small{font-size:12px;font-weight:500;color:var(--muted)}
+.docbody{max-width:760px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.docbody>details{border-bottom:1px solid var(--line);padding:4px 0}
+.docbody>details>summary{font-size:16px;font-weight:700;color:var(--ink);padding:12px 2px;min-height:44px;display:flex;align-items:center}
+.docbody summary{list-style:none}.docbody summary::-webkit-details-marker{display:none}
+.docbody summary::after{content:'＋';margin-left:auto;padding-left:12px;color:var(--navy);font-weight:700}
+.docbody details[open]>summary::after{content:'－'}
+.dc{padding:0 2px 14px;font-size:14px;line-height:1.7}
+.dc ul{margin:4px 0 8px;padding-left:1.2em}.dc li{margin:3px 0}
+.dc ul li b:first-child{color:var(--navy)}
+.dc h4{font-size:14px;margin:12px 0 2px;color:var(--navy)}
+.dc ol.songs{margin:2px 0 6px;padding-left:2.2em}.dc ol.songs li{margin:1px 0}
+.dc ol.songs.plain{padding-left:1.4em;list-style:disc}
+.dc details.inner{margin-top:12px;border:1px solid var(--line);border-radius:11px;padding:4px 12px;background:var(--surface)}
+.dc details.inner>summary{padding:8px 0;font-size:14px}
+.docsrc{margin:18px 0 0;line-height:1.6}
+
 </style>
 
 </head>
 <body>
 <header class="top"><div class="top-in">
  <div class="brand"><div class="eyebrow">府中西高校 合唱部 ・ 藝大声楽科 受験対策</div><h1>ソルフェー<span class="red">塾</span></h1></div>
- <button type="button" class="iconbtn" id="menuBtn" aria-label="設定・記録・使い方" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M19.34 10.03 L22.47 10.34 L22.47 13.66 L19.34 13.97 L18.58 15.80 L20.58 18.23 L18.23 20.58 L15.80 18.58 L13.97 19.34 L13.66 22.47 L10.34 22.47 L10.03 19.34 L8.20 18.58 L5.77 20.58 L3.42 18.23 L5.42 15.80 L4.66 13.97 L1.53 13.66 L1.53 10.34 L4.66 10.03 L5.42 8.20 L3.42 5.77 L5.77 3.42 L8.20 5.42 L10.03 4.66 L10.34 1.53 L13.66 1.53 L13.97 4.66 L15.80 5.42 L18.23 3.42 L20.58 5.77 L18.58 8.20Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.3"/></svg></button>
+ <button type="button" class="iconbtn" id="menuBtn" aria-label="設定・記録・使い方・資料" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M19.34 10.03 L22.47 10.34 L22.47 13.66 L19.34 13.97 L18.58 15.80 L20.58 18.23 L18.23 20.58 L15.80 18.58 L13.97 19.34 L13.66 22.47 L10.34 22.47 L10.03 19.34 L8.20 18.58 L5.77 20.58 L3.42 18.23 L5.42 15.80 L4.66 13.97 L1.53 13.66 L1.53 10.34 L4.66 10.03 L5.42 8.20 L3.42 5.77 L5.77 3.42 L8.20 5.42 L10.03 4.66 L10.34 1.53 L13.66 1.53 L13.97 4.66 L15.80 5.42 L18.23 3.42 L20.58 5.77 L18.58 8.20Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.3"/></svg></button>
 </div></header>
 
 <main class="wrap" id="wrap">
  <nav class="tabs" id="tabs" aria-label="練習の種類">
   <button type="button" data-v="dict"><b>聴音</b></button>
   <button type="button" data-v="quick"><b>譜選</b></button>
-  <button type="button" data-v="int"><b>度数</b></button>
   <button type="button" data-v="sing"><b>視唱</b></button>
   <button type="button" data-v="rhythm"><b>リズム</b></button>
+  <button type="button" data-v="gaku"><b>楽典</b></button>
  </nav>
 
  <!-- 書き取り・視唱・リズム -->
@@ -319,8 +365,8 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
   <p class="bubble" id="lvDesc" hidden></p>
   <div class="infoRow"><div class="chips" id="chips"></div>
    <div class="pnav2"><span class="pcode">番号 <output id="code">------</output><span id="nth"></span></span>
-    <button type="button" class="btn small" id="prevBtn"><span class="lg">前の問題</span><span class="sm">前へ</span></button>
-    <button type="button" class="btn small primary" id="nextBtn"><span class="lg">次の問題</span><span class="sm">次へ</span></button></div></div>
+    <button type="button" class="btn small" id="prevBtn">前の問題</button>
+    <button type="button" class="btn small primary" id="nextBtn">次の問題</button></div></div>
   <div class="sheet startbox" id="startBox"><div class="sheet-label">はじめの音</div><div id="startScore"></div></div>
   <div id="scoreBox" hidden>
    <div class="sheet"><div id="readScore"></div></div>
@@ -353,8 +399,8 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
    <div class="qstat"><span class="big" id="qCount">1</span><small>問目</small><span class="sp"></span><small>連続正解</small><span class="big" id="qStreak">0</span></div>
    <button type="button" class="qplay" id="qPlay" style="margin:10px 0"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg><span id="qPlayL">スタート</span></button>
    <div class="qopts" id="qOpts"></div>
+   <button type="button" class="btn primary nextbig vh" id="qNext">次の問題</button>
    <p class="qmsg" id="qMsg"></p>
-   <button type="button" class="btn primary wide" id="qNext" hidden>次へ</button>
   </div>
   <div class="qend" id="qEnd" hidden>
    <span class="hint">１０問チャレンジ</span>
@@ -364,20 +410,25 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
   </div>
  </section>
 
- <!-- 度数 -->
- <section class="panel" id="intP" hidden>
-  <div class="sels" id="iSels"></div>
-  <p class="bubble" id="iDesc" hidden></p>
-  <div id="iGame" style="display:flex;flex-direction:column;gap:12px">
-   <div class="sheet int-sheet" id="intSheet"></div>
-   <div class="opts" id="opts"></div>
-   <div class="iplays" id="iPlays"><button type="button" class="btn small" id="iPlay">もう一度聞く</button><button type="button" class="btn small" id="iPlayH">同時に</button><button type="button" class="btn small" id="iPlayM">順番に</button></div>
-   <div class="foot"><span class="session" id="iSession"></span><button type="button" class="btn primary" id="iNext">次の問題</button></div>
+ <!-- 楽典 -->
+ <section class="panel" id="gakP" hidden>
+  <div class="sels" id="gSels"></div>
+  <p class="bubble" id="gDesc" hidden></p>
+  <div id="gGame" class="ggame">
+   <div class="gtop"><span class="session" id="gSession"></span></div>
+   <div class="gq" id="gQ"><span class="gfield" id="gField"></span><span id="gQt"></span></div>
+   <div class="sheet gk-sheet" id="gkSheet"></div>
+   <div class="iplays" id="gPlays"><button type="button" class="btn small" id="gPlay">音を聞く</button><button type="button" class="btn small" id="gPlayH">同時に</button><button type="button" class="btn small" id="gPlayM">順番に</button></div>
+   <div class="opts" id="gOpts"></div>
+   <div class="nextslot"><button type="button" class="btn redline nextbig" id="gOk" hidden>答える</button><button type="button" class="btn primary nextbig vh" id="gNext">次の問題</button></div>
+   <p class="gres" id="gRes" hidden></p>
+   <p class="gexp" id="gExp" hidden></p>
   </div>
-  <div class="qend" id="iEnd" hidden>
+  <div class="qend" id="gEnd" hidden>
    <span class="hint">１０問チャレンジ</span>
-   <b id="iEndScore"></b>
-   <button type="button" class="btn primary" id="iAgain" style="margin-top:8px">もう一回</button>
+   <b id="gEndScore"></b>
+   <span id="gEndSub" class="hint"></span>
+   <button type="button" class="btn primary" id="gAgain" style="margin-top:8px">もう一回</button>
   </div>
  </section>
 </main>
@@ -386,7 +437,7 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 <div class="popscrim" id="popScrim" hidden></div>
 <div class="pop" id="menuD" hidden role="dialog" aria-modal="true" aria-labelledby="menuH">
  <div class="drawer-head"><h2 id="menuH">メニュー</h2><button type="button" class="btn small" id="menuClose">閉じる</button></div>
- <div style="padding:10px 16px 0"><div class="seg" id="menuSeg"><button type="button" data-v="set">設定</button><button type="button" data-v="log">記録</button><button type="button" data-v="help">使い方</button></div></div>
+ <div style="padding:10px 16px 0"><div class="seg" id="menuSeg"><button type="button" data-v="set">設定</button><button type="button" data-v="log">記録</button><button type="button" data-v="help">使い方</button><button type="button" data-v="docs">資料</button></div></div>
  <div class="drawer-body" id="mSet">
   <div class="grid2" style="grid-template-columns:1.4fr 1fr">
    <div class="field"><label class="label" for="timbre">音色</label><select id="timbre">
@@ -420,13 +471,13 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
   <span class="label">番号で問題を出す</span>
   <div class="codein" style="margin-top:0"><input id="codeIn" inputmode="numeric" maxlength="14" placeholder="例 108-4898" aria-label="問題番号"><button type="button" class="btn small" id="codeGo">この番号で出す</button></div>
   <p class="err" id="codeErr" hidden></p>
-  <p class="hint">先生が番号を伝えると、部員みんなが同じ問題で練習できます。番号は［次へ］ボタンの横に小さく出ています。</p>
+  <p class="hint">先生が番号を伝えると、部員みんなが同じ問題で練習できます。番号は［次の問題］ボタンの横に小さく出ています。</p>
  </div>
  <div class="drawer-body" id="mLog" hidden>
   <div class="stats">
    <div class="stat"><b id="stStreak">0</b><span>連続日数</span></div>
    <div class="stat"><b id="stToday">0</b><span>今日の問題</span></div>
-   <div class="stat"><b id="stTodayQ">0</b><span>今日の譜選・度数</span></div>
+   <div class="stat"><b id="stTodayQ">0</b><span>今日の譜選・楽典</span></div>
    <div class="stat"><b id="stRate">–</b><span>最近２０問の出来</span></div>
   </div>
   <div><div class="days" id="days" aria-label="この2週間の練習の数"></div><div class="daylabels"><span>２週間前</span><span>今日</span></div></div>
@@ -443,19 +494,146 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
   <h3>記憶聴音</h3>
   <p>主和音のあと、曲が最初から最後まで決めた回数だけ流れます。流れている間はえんぴつを置いて覚え、合図が鳴ったら書き始めます。</p>
   <h3>譜選</h3>
-  <p>「スタート」を押すと始まります。短いメロディーを聞いて、4つの楽譜から正しいものを選びます。答えたあとに楽譜を押すと聞き比べられます。</p>
-  <h3>度数</h3>
-  <p>2つの音の幅を4つの中から答えます。「音だけ」は楽譜なしなので移動中にも向いています。</p>
+  <p>「スタート」を押すと始まります。短いメロディーを聞いて、4つの楽譜から正しいものを選びます。答えたあとに楽譜を押すと聞き比べられます。自動では次に進まないので、聞き比べてから「次の問題」を押してください。</p>
   <h3>視唱</h3>
   <p>「はじめの音」をもらってから楽譜を見て歌います。「メトロノームで歌う」は拍だけが流れ、今の音符が赤くなります。▶ でお手本を聞けます。</p>
   <h3>リズム</h3>
   <p>本番と同じく、手で拍を振りながら、音程をつけずに音名で読みます（「ド・レ・ミ」を同じ高さで、リズムどおりに）。「メトロノームで読む」で拍と赤くなる音符に合わせて読み、▶ でお手本のリズムを確かめます。</p>
+  <h3>楽典</h3>
+  <p>「スタート」を押すと始まります。分野をえらぶと、その分野だけが出ます（「ランダム」はいろいろな分野がまざって出ます）。答えは押すだけ。「すべて選びなさい」の問題は、当てはまるものを全部押してから「答える」を押します。和音や音程の問題は、答えたあと「音を聞く」で音を確かめられます。「音程（耳で）」は楽譜なしで音だけ聞いて答えます。答えたあとには、なぜその答えになるのかの解説が出ます。</p>
+  <h3>キーボードで操作する（Macなど）</h3>
+  <p>譜選と楽典では、数字の 1〜8 キーで選択肢を押せます（左上から順に 1・2・3…）。Enter キーかスペースキーで「スタート」「答える」「次の問題」を押せます。</p>
   <h3>難易度の一覧</h3>
   <p>難易度を変えると、「前の段階から何が変わったか」が吹き出しで出ます（吹き出しを押すか ▶ を押すと消えます）。全部をまとめて見るときはここを開いてください。</p>
   <div class="lvhelp" id="lvHelp"></div>
   <h3>音が出ないとき</h3>
   <p>iPhone・iPadはマナーモードを切って、音量を上げてください。はじめて「ピアノ」などの音色を使うときは、準備に数秒かかります。</p>
   <p class="credit">ピアノ・オルガン・弦楽器・合唱の音：FluidR3_GM（Frank Wen 制作、CC BY 3.0）。楽譜の表示：abcjs。</p>
+ </div>
+</div>
+
+<!-- 資料（歯車 → 資料 で画面いっぱいに開く） -->
+<div class="docp" id="docP" hidden role="dialog" aria-modal="true" aria-labelledby="docH">
+ <div class="dochead"><button type="button" class="btn small" id="docBack">戻る</button><h2 id="docH">資料　<small>藝大 声楽科（2027年度入試）</small></h2></div>
+ <div class="docbody">
+ <details><summary>試験の流れと日程</summary><div class="dc">
+  <ul>
+   <li><b>出願</b>：2027年1月25日〜2月3日（インターネットのみ）</li>
+   <li><b>共通テスト</b>：国語と外国語（英語・ドイツ語・フランス語から1つ）。英語の資格・検定試験の成績で、共通テストの英語を満点とみなす制度あり（共通テストの受験は必要）</li>
+   <li><b>第１次</b>：2月25日〜27日：第１回 課題選択曲</li>
+   <li><b>第２次</b>：3月2日・3日：第２回 自由曲</li>
+   <li><b>第３次</b>：3月6日・8日：第３回 コールユーブンゲン・新曲視唱・リズム課題</li>
+   <li><b>そのほかの科目</b>：聴音書き取り・楽典・副科ピアノ（2026年度は聴音・楽典が3月8日）</li>
+   <li><b>合格発表</b>：3月13日</li>
+  </ul>
+  <p class="hint">第１次・第２次は、人によって試験の日がちがいます。くわしい学生募集要項は2026年12月上旬に公開予定。</p>
+ </div></details>
+
+ <details><summary>第１回　課題選択曲</summary><div class="dc">
+  <ul>
+   <li>出願のときに、下のリストから <b>日本歌曲４曲＋外国曲４曲＝８曲</b> を選ぶ。外国曲はイタリア・ドイツ・フランスに関係なく自由に選んでよい（４曲ともイタリアでもOK）。</li>
+   <li>試験の日に、大学が８曲の中から４曲（日本２・外国２）を指定。その中から自分で２曲（日本１・外国１）を選び、<b>暗譜</b>で歌う。</li>
+   <li>２曲合わせて<b>４分以内</b>。どの調で歌ってもよい。外国曲は原語で。</li>
+   <li>途中で切られることがあるが、評価に不利にはならない。</li>
+  </ul>
+  <h4>Ａ．日本歌曲</h4>
+  <ol class="songs">
+   <li>小松耕輔　母</li><li>瀧廉太郎　秋の月［山田耕筰編曲］</li><li>瀧廉太郎　荒城の月（第１節，第２節のみ）［山田耕筰編曲］</li>
+   <li>團伊玖磨　秋の野「六つの子供のうた」より</li><li>團伊玖磨　からりこ「六つの子供のうた」より</li><li>中田喜直　風の子供「六つの子供の歌」より</li>
+   <li>成田為三　浜辺の歌（第１節，第２節のみ）</li><li>信時潔　北秋の「沙羅」より</li><li>信時潔　行々子「沙羅」より</li>
+   <li>平井康三郎　平城山</li><li>平井康三郎　ゆりかご</li><li>弘田龍太郎　浜千鳥（第１節，第２節とも）</li>
+   <li>山田耕筰　鐘が鳴ります</li><li>山田耕筰　かやの木山の</li><li>山田耕筰　この道（第１節，第２節のみ）</li>
+  </ol>
+  <h4>Ｂ．外国曲・イタリア</h4>
+  <ol class="songs">
+   <li>Bellini　Il fervido desiderio</li><li>Bellini　Ma rendi pur contento</li><li>Bononcini　Per la gloria d'adorarvi</li>
+   <li>Caldara　Sebben crudele</li><li>Caldara　Selve amiche</li><li>Gasparini　Lasciar d'amarti</li>
+   <li>Giordani　Caro mio ben</li><li>Monteverdi　Lasciatemi morire !</li><li>Paisiello　Nel cor più non mi sento</li>
+   <li>A. Scarlatti　Già il sole dal Gange</li><li>A. Scarlatti　Le violette</li><li>A. Scarlatti　Sento nel core</li>
+   <li>A. Scarlatti　Se tu della mia morte</li><li>Tosti　L'ultimo bacio</li><li>Tosti　Sogno</li>
+  </ol>
+  <details class="inner"><summary>ドイツ語・フランス語の曲（２０曲）</summary>
+   <h4>外国曲・ドイツ</h4>
+   <ol class="songs" start="16">
+    <li>Beethoven　Ich liebe dich so wie du mich（WoO 123）</li><li>Brahms　Dein blaues Auge（Op.59-8）</li><li>Mendelssohn　Auf Flügeln des Gesanges（Op.34-2）</li>
+    <li>Mozart　An Chloe（KV 524）</li><li>Mozart　Das Veilchen（KV 476）</li><li>Schubert　An die Musik（Op.88-4）</li>
+    <li>Schubert　Frühlingsglaube（Op.20-2）</li><li>Schumann　Die Lotosblume（Op.25-7）</li><li>Schumann　Du bist wie eine Blume（Op.25-24）</li>
+    <li>Wolf　Verborgenheit（Mörike-Lieder 12）</li>
+   </ol>
+   <h4>外国曲・フランス</h4>
+   <ol class="songs" start="26">
+    <li>Berlioz　Villanelle</li><li>Debussy　Beau soir</li><li>Debussy　Nuit d'étoiles</li>
+    <li>Fauré　Clair de lune</li><li>Fauré　Ici-bas !</li><li>Fauré　Lydia</li><li>Fauré　Mai</li><li>Fauré　Notre amour</li>
+    <li>Gounod　Chanson de printemps（第１節，第３節のみ）</li><li>Hahn　Si mes vers avaient des ailes</li>
+   </ol>
+  </details>
+ </div></details>
+
+ <details><summary>第２回　自由曲</summary><div class="dc">
+  <ul>
+   <li>好きな声楽曲を１曲、<b>暗譜</b>で歌う。<b>４分以内</b>。</li>
+   <li>第１回で選んだ８曲は使えない（リストの曲でも、第１回で選ばなかった曲ならOK）。</li>
+   <li>歌曲（歌曲として扱われる古典アリアも）はどの調でもよい。オペラ・オラトリオなどのアリアは<b>原調</b>（オペラのアリアで、慣習として移調が認められているものは除く）。</li>
+  </ul>
+ </div></details>
+
+ <details><summary>第３回　コールユーブンゲン・新曲視唱・リズム課題</summary><div class="dc">
+  <ul>
+   <li><b>コールユーブンゲン</b>：F. Wüllner『Chorübungen』第Ⅰ巻（全訳）の中から、試験のときに指定される曲を歌う。抜粋版・省略版は使えない。</li>
+   <li><b>新曲視唱</b>：歌詞のない初見の歌、１題。</li>
+   <li><b>リズム課題</b>：手で拍を振りながら、音程をつけずに音名で読む、１題。</li>
+  </ul>
+  <p class="hint">新曲視唱とリズム課題は「音楽に関する基礎能力検査」という位置づけです。</p>
+ </div></details>
+
+ <details><summary>聴音書き取り・楽典</summary><div class="dc">
+  <ul>
+   <li><b>聴音書き取り</b>（約30分）：単旋律（記憶聴音）１題・複旋律１題・四声体和声１題。作曲科・声楽科・器楽科・楽理科で同じ問題。</li>
+   <li><b>楽典</b>（１時間）：和声・楽式など、作曲法の内容は出ない。</li>
+   <li>記憶聴音の演奏の回数・書く時間は、発表されていません。</li>
+  </ul>
+  <p class="hint">2027年度の例題は、このアプリの「藝大２」くらいの難しさです（複旋律は「神１」に近い）。</p>
+ </div></details>
+
+ <details><summary>副科ピアノ</summary><div class="dc">
+  <p>⑴・⑵とも<b>暗譜</b>、くり返しなし。</p>
+  <ul>
+   <li><b>⑴ 音階</b>：ハノン No.39 の中から当日指定。同じ調号の長調と短調、調号は３つまで。速さは ♩=100 くらい以上。長調はくり返しなし。短調は和声的短音階を１回 → 続けて旋律的短音階を１回 → 終止形をつけて終わる。</li>
+   <li><b>⑵ ソナチネ・ソナタ</b>：次から１曲を選び、その第１楽章。
+    <ol class="songs plain">
+     <li>Kuhlau　Op.20 No.1・2・3／Op.55 No.1・2・3</li><li>Clementi　Op.36 No.2・3・4・5・6</li><li>Haydn　Hob.XVI/35（ハ長調）</li>
+     <li>Mozart　KV 545（ハ長調）</li><li>Beethoven　Op.49 No.1（ト短調）・No.2（ト長調）</li><li>Dussek　Op.20 No.1</li>
+    </ol></li>
+  </ul>
+  <p class="hint">楽譜の版によって番号がちがうことがあるので注意。</p>
+ </div></details>
+
+ <details><summary>出願のときの注意（伴奏楽譜）</summary><div class="dc">
+  <ul>
+   <li>第１回の課題選択曲と第２回の自由曲の<b>ピアノ伴奏の楽譜を、出願のときに提出</b>する。提出したあとは、曲・調の変更は一切できない。</li>
+   <li>伴奏者とピアノは大学が用意する（自分の伴奏者は連れて行けない）。</li>
+   <li>楽譜は Ａ４縦。歌のパート・ピアノ伴奏・歌詞が書いてあること。手書きなら黒のペンかボールペンで清書。</li>
+   <li>１曲ごとに製本し、１ページ目の裏に画用紙くらいの厚さの表紙をつけ、「提出楽譜表紙貼付票」（入試情報サイトからダウンロード）を表紙の上の端に貼る。</li>
+   <li>伴奏者が見やすく・めくりやすいように、全部のページを広げられる<b>折本（じゃばら）</b>にする。</li>
+   <li>原則として出版されている楽譜を使い、曲名の横に出版社名を書く。移調するときは、元の楽譜の出版社名を書く。</li>
+   <li>不鮮明な所・コピーの影・書き込み・五線のゆがみ・切れがないように。</li>
+   <li>封筒に「音楽学部声楽科伴奏楽譜在中」と書き、出願と同時に<b>書留速達</b>で送る。封筒の裏に、氏名・声種・５けたの整理番号。伴奏楽譜以外の書類は絶対に入れない。</li>
+   <li>試験の日は「受験曲目提出用紙」のコピーを持っていく。</li>
+   <li>男性で、ソプラノまたはアルトの音域で歌う人は、その声種で出願する。</li>
+  </ul>
+ </div></details>
+
+ <details><summary>課題曲の入れ替わり（2025〜2027年度）</summary><div class="dc">
+  <ul>
+   <li><b>2025 → 2026</b>：イタリアの曲が入れ替わり。Bellini「Vaga luna, che inargenti」と Gasparini「Caro laccio」がなくなり、Bellini「Ma rendi pur contento」と Monteverdi「Lasciatemi morire !」が入った。</li>
+   <li><b>2026 → 2027</b>：日本歌曲の中田喜直「おやすみ」が「風の子供」に入れ替わり。</li>
+   <li>浜千鳥の書き方：2025年度は「第１節，第２節のみ」、2026年度からは「第１節，第２節とも」。</li>
+   <li>ドイツ語・フランス語の曲は、この３年間まったく同じ。</li>
+  </ul>
+  <p class="hint">毎年ほとんど同じで、１〜３曲だけ入れ替わる傾向です。</p>
+ </div></details>
+
+ <p class="credit docsrc">2027年度 入学者選抜要項（2026年7月）・声楽科課題曲（2026年9月11日発表）・試験内容及び課題曲（2026年9月30日発表、10月15日訂正）より。最新の情報は、必ず藝大の入試情報サイト（admissions.geidai.ac.jp）で確かめてください。</p>
  </div>
 </div>
 
@@ -490,7 +668,7 @@ const KEYS={
 const LV_NAMES=['','初級','初級','中級','中級','上級','上級','藝大','藝大','神','神'];
 const K1=['C','G','F','Am','Em','Dm'],K2=['C','G','F','D','Bb','Am','Em','Dm','Bm','Gm'],KG=['D','Bb','Bm','Gm','A','Eb','F#m','Cm','E','Ab','C#m','Fm'];
 const R6a=[[6],[4,2],[2,2,2]],R6b=[[6],[4,2],[2,2,2],[3,1,2]],R6c=[[6],[4,2],[2,2,2],[3,1,2],[2,1,1,2],[1,1,2,2]],R6d=[[6],[4,2],[2,2,2],[3,1,2],[2,1,1,2],[1,1,2,2],[2,1,1,1,1]];
-const T3=[4/3,4/3,4/3],T6=[2/3,2/3,2/3,2],TQ=[8/3,8/3,8/3];
+const T3=[4/3,4/3,4/3],T6=[2/3,2/3,2/3,2],TQ=[8/3,8/3,8/3],X6=[2/3,2/3,2/3,2/3,2/3,2/3];
 const B3=[[4],[2,2],[2,2]],B4=[[4],[2,2],[2,2],[3,1],[1,1,2],[2,1,1]],B5=[[4],[2,2],[2,2],[3,1],[1,1,2],[2,1,1],[1,1,1,1]];
 const LEVELS={
  1:{bars:4,meters:['4/4'],keys:['C'],beat:[[4]],two:[[8]],beat6:[[6]],two6:[[12]],maxLeap:2,amb:8,twoChord:0,inv:0,sev:0,chorale:5,bassSplit:0,cset:['I','IV','V']},
@@ -568,9 +746,10 @@ function genPlanBars(R,n,L,minor,par){
 // 最後の小節（最後から2番目の音は弱い位置に来る形だけ）
 const FINAL_R={'4/4':[[4,4,4,-4],[2,2,4,4,-4],[4,4,8],[6,2,8],[6,2,4,-4],[2,2,2,2,4,-4]],
  '3/4':[[2,2,4,-4],[2,2,8],[3,1,4,-4],[4,4,4],[4,2,2,4],[3,1,8]],
- '6/8':[[4,2,4,-2],[2,2,2,4,-2],[4,2,6],[2,2,2,6],[3,1,2,4,-2]]};
+ '6/8':[[4,2,4,-2],[2,2,2,4,-2],[4,2,6],[2,2,2,6],[3,1,2,4,-2]],
+ '2/4':[[4,-4],[2,2,4],[3,1,4],[2,2,2,-2]]};
 // 前半の区切りの小節：[ふつうに動く長さ, 区切りの形]
-const HC_R={'4/4':[[8,[4,-4]],[8,[8]],[12,[4]],[8,[6,-2]]],'3/4':[[4,[4,-4]],[4,[8]],[8,[4]]],'6/8':[[6,[4,-2]],[6,[6]],[6,[2,-4]]]};
+const HC_R={'4/4':[[8,[4,-4]],[8,[8]],[12,[4]],[8,[6,-2]]],'3/4':[[4,[4,-4]],[4,[8]],[8,[4]]],'6/8':[[6,[4,-2]],[6,[6]],[6,[2,-4]]],'2/4':[[0,[4,-4]],[4,[4]],[0,[6,-2]]]};
 function genRhythm(R,meter,L,kind){
  const U=METER[meter].units;const B=meter==='6/8'?6:4;if(kind==='easy'){L=LEVELS[L.easy]||L;kind='normal';}
  const one=B===6?(L.beat6||[[6]]):L.beat,two=B===6?(L.two6||[[12]]):L.two;
@@ -800,27 +979,9 @@ function walkBass(R,out,mel,key,L,Tb,segs,meter){
  out.splice(0,out.length,...res);
 }
 
-function genChorale(R,L,key,N){
- N=N||L.chorale;let T=21+key.tl;KEYMINOR=!!key.minor; // 和音の基準
- // 神：ところどころ4分音符で和音が変わる（2分音符1つ分を4分音符2つに分ける）
- const N0=N,splitAt=new Set();
- if(L.splits){const c=[];for(let i=1;i<N0-2;i++)c.push(i);for(let k=0;k<L.splits&&c.length;k++)splitAt.add(c.splice(Math.floor(R()*c.length),1)[0]);}
- const durs=[];for(let i=0;i<N0;i++){if(i===N0-1)durs.push(16);else if(splitAt.has(i))durs.push(4,4);else durs.push(8);}
- N=durs.length;
- const alt=(dia,deg,name)=>{const c=CH[name];return sigAlter(mod(dia,7),key.sig)+((key.minor&&deg===6&&c.r===4&&!chordAlt(name,deg,true))?1:0)+chordAlt(name,deg,key.minor);};
- CHORALE_MODE=true;try{
- const RANGE=[[60,79],[55,74],[48,67],[40,60]];
- for(let outer=0;outer<120;outer++){
-  const seq=['I'];let ok=true;
-  for(let i=1;i<=N-3;i++){const f0=i===N-3?(c=>PRE_V.has(c)):(()=>true);const x=nextOf(R,seq[i-1],L,key.minor,c=>f0(c)&&c!==seq[i-2])||nextOf(R,seq[i-1],L,key.minor,i===N-3?(c=>PRE_V.has(c)):null);if(!x){ok=false;break;}seq.push(x);}
-  if(!ok)continue;
-  const sv=L.chSev||L.sev;let endV=(L.borrow>=2&&R()<.35&&SUCC[seq[N-3]].includes('V9'))?'V9':(sv&&R()<.5?'V7':'V');
-  if(seq[N-3]==='Ger6'){ok=false;}
-  if(!ok)continue;
-  seq.push(endV);seq.push('I');
-  if(L.borrow){const sp=seq.filter(x=>SPECIAL[x]&&x!=='I64').length;const need=Math.min(L.minSpecial||1,Math.floor(N0/4));if(sp<need&&outer<90)continue;
-   const aug=seq.filter(x=>AUG.has(x)).length;if(L.augReq&&aug<L.augReq&&outer<80)continue;}
-  if(!SUCC[seq[N-3]].includes(seq[N-2])&&seq[N-2]==='V7'&&!SUCC[seq[N-3]].includes('V7'))seq[N-2]='V';
+// 和音の並び（seq）に4声の配置をつける（４声の聴音と楽典で共用）。opt.endSop: 'other'＝最後のソプラノを主音以外に
+function voiceChords(R,key,seq,durs,T,alt,opt={}){
+ const N=seq.length;const RANGE=[[60,79],[55,74],[48,67],[40,60]];KEYMINOR=!!key.minor;
   // 和音ごとの配置候補
   const cand=seq.map((name,ci)=>{
    const tn=tones(name),bd=bassDeg(name),c=CH[name];
@@ -841,13 +1002,13 @@ function genChorale(R,L,key,N){
      else if(c.inv){if(dbl===bd)pen+=3;else if(dbl===fifth)pen+=1;}
      else{if(dbl===fifth)pen+=1.5;else if(dbl===(c.r+2)%7)pen+=name==='vi'?1.2:4;}
     }
-    if(ci===N-1&&s.deg!==0)pen+=4;
+    if(ci===N-1&&(opt.endSop==='other'?s.deg===0:s.deg!==0))pen+=4;
     if(ci===0)pen+=Math.abs(s.md-70)*.25;
     out.push({p:[s,a,t,b],pen:pen+R()*1.2});
    }}}
    return out;
   });
-  if(cand.some(c=>!c.length))continue;
+  if(cand.some(c=>!c.length))return null;
   // つながりの良さを計算して一番自然な流れを選ぶ
   let cost=cand[0].map(c=>c.pen),par=[];
   for(let ci=1;ci<N;ci++){
@@ -864,16 +1025,14 @@ function genChorale(R,L,key,N){
    cost=nc;par.push(np);
   }
   let bi=-1,bv=Infinity;cost.forEach((v,i)=>{if(v<bv){bv=v;bi=i;}});
-  if(bi<0)continue;
+  if(bi<0)return null;
   const path=[bi];for(let ci=N-1;ci>0;ci--){path.unshift(par[ci-1][path[0]]);}
   const voices=[[],[],[],[]];
   let on=0;path.forEach((pi,ci)=>{const p=cand[ci][pi].p;const onset=on,dur=durs[ci];on+=dur;
    p.forEach((x,v)=>voices[v].push({onset,dur,dia:x.dia,alter:x.md-midiOf(x.dia,0),midi:x.md,deg:x.deg,ann:v===3?roman(seq[ci]):null}));});
-  return {seq,voices};
- }
- return null;
- }finally{CHORALE_MODE=false;}
- function trans(P,C,pn,cn){
+  return voices;
+}
+function trans(P,C,pn,cn){
   let c=0;
   for(let v=0;v<4;v++){
    const mv=Math.abs(C[v].md-P[v].md);if(mv>12)return Infinity;
@@ -903,6 +1062,33 @@ function genChorale(R,L,key,N){
   if(ds!==0&&db!==0&&Math.sign(ds)!==Math.sign(db))c-=.8;
   return c;
  }
+function genChorale(R,L,key,N){
+ N=N||L.chorale;let T=21+key.tl;KEYMINOR=!!key.minor; // 和音の基準
+ // 神：ところどころ4分音符で和音が変わる（2分音符1つ分を4分音符2つに分ける）
+ const N0=N,splitAt=new Set();
+ if(L.splits){const c=[];for(let i=1;i<N0-2;i++)c.push(i);for(let k=0;k<L.splits&&c.length;k++)splitAt.add(c.splice(Math.floor(R()*c.length),1)[0]);}
+ const durs=[];for(let i=0;i<N0;i++){if(i===N0-1)durs.push(16);else if(splitAt.has(i))durs.push(4,4);else durs.push(8);}
+ N=durs.length;
+ const alt=(dia,deg,name)=>{const c=CH[name];return sigAlter(mod(dia,7),key.sig)+((key.minor&&deg===6&&c.r===4&&!chordAlt(name,deg,true))?1:0)+chordAlt(name,deg,key.minor);};
+ CHORALE_MODE=true;try{
+ const RANGE=[[60,79],[55,74],[48,67],[40,60]];
+ for(let outer=0;outer<120;outer++){
+  const seq=['I'];let ok=true;
+  for(let i=1;i<=N-3;i++){const f0=i===N-3?(c=>PRE_V.has(c)):(()=>true);const x=nextOf(R,seq[i-1],L,key.minor,c=>f0(c)&&c!==seq[i-2])||nextOf(R,seq[i-1],L,key.minor,i===N-3?(c=>PRE_V.has(c)):null);if(!x){ok=false;break;}seq.push(x);}
+  if(!ok)continue;
+  const sv=L.chSev||L.sev;let endV=(L.borrow>=2&&R()<.35&&SUCC[seq[N-3]].includes('V9'))?'V9':(sv&&R()<.5?'V7':'V');
+  if(seq[N-3]==='Ger6'){ok=false;}
+  if(!ok)continue;
+  seq.push(endV);seq.push('I');
+  if(L.borrow){const sp=seq.filter(x=>SPECIAL[x]&&x!=='I64').length;const need=Math.min(L.minSpecial||1,Math.floor(N0/4));if(sp<need&&outer<90)continue;
+   const aug=seq.filter(x=>AUG.has(x)).length;if(L.augReq&&aug<L.augReq&&outer<80)continue;}
+  if(!SUCC[seq[N-3]].includes(seq[N-2])&&seq[N-2]==='V7'&&!SUCC[seq[N-3]].includes('V7'))seq[N-2]='V';
+  const voices=voiceChords(R,key,seq,durs,T,alt);if(!voices)continue;
+  return {seq,voices};
+ }
+ return null;
+ }finally{CHORALE_MODE=false;}
+
 }
 
 
@@ -916,7 +1102,7 @@ function barsOpts(type,lv){
  if(type===1||type===2||type===4)return lv<=4?[4,8]:[8];
  if(type===3)return lv<=4?[6]:[6,8];
  if(type===5)return lv<=2?[4]:lv<=4?[6]:lv<=8?[6,8]:[8];
- return lv<=2?[4]:lv<=4?[5]:lv<=8?[5,6]:[6];
+ return lv<=2?[4]:lv<=4?[5]:lv<=6?[5,6]:lv<=8?[4,5,6]:[6];
 }
 // 「ランダム」のときの小節数（過去問：視唱は８小節が7回中6回、リズムは６小節が7回中4回）
 function barsPick(R,type,lv,bl){
@@ -924,21 +1110,22 @@ function barsPick(R,type,lv,bl){
  let w=bl.map(()=>1);
  if(type===5&&lv===7)w=bl.map(b=>b===8?.8:.2);
  if(type===5&&lv===8)w=bl.map(b=>b===8?1:0);
- if(type===6&&lv>=7&&lv<=8)w=bl.map(b=>b===6?.6:.4);
+ if(type===6&&lv>=7&&lv<=8)w=bl.map(b=>b===6?.45:b===5?.3:.25); // 2027年の例題は４小節
  return wpick(R,bl,w);
 }
 function metersFor(type,lv){
  if(type===4)return ['2/2'];
+ if(lv===8&&type===2)return ['4/4','3/4','2/4','6/8']; // 2027年の複旋律の例題は 2/4
  if(lv>=9&&(type===1||type===2))return ['4/4','3/4','2/4','6/8'];
  return lv===1?['4/4']:lv===2?['4/4','3/4']:['4/4','3/4','6/8'];
 }
 function tempoFor(type,lv,meter){ // 4分音符の速さ（6/8は8分音符がこの2倍、2/2は2分音符がこの半分）
  const k=lv>=9,e=meter==='6/8';
  if(type===1)return k?(e?52:60):(e?60:meter==='4/4'?66:60);
- if(type===2)return k?(e?52:54):(e?56:60);
- if(type===3)return 60;
+ if(type===2)return k?(e?52:54):meter==='2/4'?54:(e?56:60);
+ if(type===3)return lv===8?(e?78:66):60; // 藝大２の記憶聴音：2027年の例題は 付点4分=52
  if(type===4)return 100;
- if(type===5)return k?(e?56:80):(e?63:72);
+ if(type===5)return k?(e?56:80):(lv===8&&e)?72:(e?63:72); // 藝大２の視唱 6/8：2027年の例題は 付点4分=48
  return k?(e?58:69):66;
 }
 function lineBars(bars,pickup,narrow,dense){ // 1段に何小節ならべるか
@@ -954,19 +1141,19 @@ const DESC={
   '声楽科本番の形。前半は素直、後半に半音と一時的な転調。16分音符・3連符。臨時記号３つ以上','2026年本番なみ。臨時記号５つ以上、細かいリズムが増える',
   '指揮科本番の形。半音だらけ、16分・32分音符、5連符・6連符、大きな跳躍、2/4拍子も。臨時記号１２個以上','指揮科の最難関。7連符、2オクターブを超える音域、転調だらけ。臨時記号１８個以上'],
  2:['','ハ長調・４小節。上は4分音符と2分音符、下は小節ごとに1つの音','イ短調と3/4拍子が加わる','調号１つまで・6/8拍子。上に8分音符','下の声が小節の途中でも動く','８小節・調号２つまで。和音の転回形','上の声に半音の飾りの音',
-  '声楽科本番の形。下の声が経過音で歩き、ときどき休符から入る。後半に転調。臨時記号３つ以上','下の声がさらによく動く。臨時記号５つ以上',
+  '声楽科本番の形。下の声が経過音で歩き、ときどき休符から入る。後半に転調。臨時記号３つ以上','2027年の例題なみ。2/4拍子も出て、ときどき6連符。臨時記号５つ以上',
   '指揮科本番の形。上は16分・32分音符と連符、下の声も半音で動く','指揮科の最難関。下の声も細かく動き、転調だらけ'],
  3:['','ハ長調・６小節（３＋３）。後半は前半と同じリズムで、どこかの音が変わる','イ短調と3/4拍子が加わる','調号１つまで・6/8拍子。8分音符','8分音符が増え、跳躍が大きくなる','８小節（４＋４）も出る・調号２つまで','半音の飾りの音が入る',
-  '声楽科本番の形。前半から臨時記号、16分音符。臨時記号３つ以上','2026年本番なみ。臨時記号５つ以上',
+  '声楽科本番の形。前半から臨時記号、16分音符。臨時記号３つ以上','2027年の例題なみ。6/8は付点4分=52と速め、ラ5まで。臨時記号５つ以上',
   '指揮科ならこう出す（想像）。後半は前半を別の調に移した形。跳躍と16分音符、臨時記号８つ以上','さらに細かく、臨時記号１０個以上'],
  4:['','ハ長調・４小節。I・IV・Vだけ','イ短調と、II・VIの和音が加わる','調号１つまで','属七の和音（V7）が加わる','８小節・調号２つまで。和音の転回形','ドッペルドミナント（V/V）が入る',
   '声楽科本番の形。借用和音（V/V・V7/IV・V/VI）と減七','借用和音・減七が３つ以上。Vへ向かう減七（VII°7/V）も',
   '指揮科ならこう出す（想像）。ナポリ・増六（3種類）・九の和音・I⁶₄、4分音符で和音が変わる所あり。調号４つまで','さらに多く、和音の変わり目が細かい'],
  5:['','ハ長調・4/4拍子・４小節。4分音符と2分音符','イ短調と3/4拍子が加わる','６小節（３＋３）・調号１つまで・6/8拍子。8分音符と強弱記号','8分音符が増え、跳躍が大きくなる','８小節も出る・調号２つまで。強弱の変化','半音の飾りの音が入る',
-  '声楽科本番の形。８小節が中心。後半に半音と転調、16分音符・3連符。臨時記号３つ以上（６小節は２つ以上）','８小節。臨時記号５つ以上（６小節は４つ以上）、細かいリズムが増え、ときどき弱起',
+  '声楽科本番の形。８小節が中心。後半に半音と転調、16分音符・3連符。臨時記号３つ以上（６小節は２つ以上）','2027年の例題なみ。8分休符から入るフレーズ、音域はシ♭3〜ファ5、6/8は付点4分=48。臨時記号５つ以上（６小節は４つ以上）、ときどき弱起',
   '指揮科の視唱の形。半音の多い旋律、ときどき弱起。臨時記号６つ以上','さらに跳躍と臨時記号が増える（９つ以上）'],
  6:['','4/4拍子・４小節。4分音符・8分音符・4分休符','3/4拍子と、付点8分音符＋16分音符が加わる','５小節。6/8拍子と16分音符が加わる','3連符が加わる','６小節も出る。タイとシンコペーション','16分休符、アクセント・テヌート',
-  '声楽科本番の形。６小節が多め。裏拍の休符、ときどき休符から始まる・5連符','2026年本番なみ。32分音符・付点16分音符・5連符・2分音符の3連符',
+  '声楽科本番の形。６小節が多め（４小節も）。裏拍の休符、ときどき休符から始まる・5連符','2026年本番・2027年の例題なみ。32分音符・5連符、3連符の中の休符、裏拍の8分音符で終わる形',
   '指揮科ならこう出す（想像）。6連符・32分音符の連符・2連符、ときどき弱起','さらに細かく、7連符も。連符とタイが入り組む'],
  Q:['','ハ長調。２つの音が大きく違う','イ短調・3/4拍子も。２つの音が違う','１つの音が2〜3度違う。6/8拍子も','１つの音が違う、または2つの音の入れ替え','１つの音が2度違う、付点の有無','上と同じで、旋律に半音の飾りの音',
   '臨時記号１つの違い。ときどき調ちがい問題','旋律が2026年本番なみに。調ちがい問題も','指揮科風の旋律。調ちがい問題が半分','さらに複雑。別の調に移して1音変えたものも混ざる'],
@@ -979,7 +1166,8 @@ const DESC={
 function parsePat(s){
  const out=[];const tup=(n,d,p,q,w)=>{for(let k=0;k<n;k++)out.push({d,tup:{p,q,r:p,w,first:k===0}});};
  for(const tk of s.split(' ')){
-  if(tk==='t')tup(3,4/3,3,2,2);else if(tk==='T')tup(3,8/3,3,2,4);else if(tk==='u')tup(3,2/3,3,2,1);
+  if(tk==='y'||tk==='z'){const rs=tk==='y'?[0,1,0]:[1,0,0];rs.forEach((r,k)=>out.push({d:4/3,rest:!!r,tup:{p:3,q:2,r:3,w:2,first:k===0}}));} // 8分の3連符の中に休符
+  else if(tk==='t')tup(3,4/3,3,2,2);else if(tk==='T')tup(3,8/3,3,2,4);else if(tk==='u')tup(3,2/3,3,2,1);
   else if(tk==='x')tup(6,2/3,6,4,1);else if(tk==='q')tup(5,4/5,5,4,1);else if(tk==='Q')tup(5,2/5,5,4,.5);
   else if(tk==='v')tup(7,4/7,7,4,1);else if(tk==='d')tup(2,3,2,3,2);
   else if(tk[0]==='r')out.push({d:+tk.slice(1),rest:true});
@@ -991,7 +1179,7 @@ const patLen=s=>parsePat(s).reduce((a,x)=>a+x.d,0);
 
 /* ===== リズム課題（楽譜を見て、拍を振りながら音名で読む） ===== */
 const RP4L={1:['4','2 2','2 2','r4'],2:['3 1'],3:['1 1 2','2 1 1','1 1 1 1'],4:['t','r2 2'],5:['1 2 1'],6:['r1 1 2','r1 1 1 1','1 3','r2 1 1'],7:['1 1 r2','r1 1 1 1'],
- 8:['0.5 0.5 1 2','1.5 0.5 2','2 0.5 0.5 1','r1 0.5 0.5 2'],9:['x','u 2','2 u','Q 2','r0.5 0.5 1 2','u u'],10:['v','x','Q Q','0.5 0.5 0.5 0.5 2','1 1 u']};
+ 8:['0.5 0.5 1 2','1.5 0.5 2','2 0.5 0.5 1','r1 0.5 0.5 2','y','z'],9:['x','u 2','2 u','Q 2','r0.5 0.5 1 2','u u'],10:['v','x','Q Q','0.5 0.5 0.5 0.5 2','1 1 u']};
 const RP8L={1:['8'],2:['6 2'],5:['2 4 2'],8:['T'],9:['T','r2 4 2'],10:['T']};
 const RP6L={3:['6','4 2','2 2 2','r2 2 2','2 1 1 2'],4:['3 1 2','2 4','1 1 2 2'],5:['2 2 1 1'],6:['r2 1 1 2','1 1 1 1 2','3 1 1 1'],7:['r1 1 2 2','2 1 1 1 1','1 1 2 1 1'],
  8:['0.5 0.5 1 2 2','1.5 0.5 2 2','2 0.5 0.5 1 2'],9:['d','u 2 2','1 1 1 1 1 1','q 2','r0.5 0.5 1 2 2'],10:['v 2','x 2','Q 2 2','u u 2']};
@@ -1014,7 +1202,7 @@ function genReadRhythm(R,LV,seed,opts){
    while(p<U-1e-6){
     let pat;
     if(pk&&b===0)pat=pk===B?pickPat():pk===2?pick(R,['2','1 1']):'1';
-    else if(last&&p+B>=U-1e-6)pat=LV<=2?String(B):pick(R,B===6?['6','4 r2','2 4']:['4','2 r2','4']);
+    else if(last&&p+B>=U-1e-6)pat=LV<=2?String(B):pick(R,B===6?(LV>=8?['6','4 r2','2 4','r4 2']:['6','4 r2','2 4']):(LV>=8?['4','2 r2','4','r2 2','r2 2']:['4','2 r2','4'])); // 藝大２：裏拍の8分で終わる形（2027年の例題）
     else if(B===4&&p%8===0&&p+8<=U&&!(last&&p+8>=U)&&pool2.length&&R()<.22)pat=wpick(R,pool2,pw2);
     else pat=pickPat();
     for(const it of parsePat(pat)){notes.push({onset:Math.round((b*U+p)*1e4)/1e4,dur:it.d,rest:!!it.rest,tup:it.tup?{...it.tup}:null});p+=it.d;}
@@ -1133,7 +1321,9 @@ function kamiLine(R,slots,chordAt,o){
  // つづり（どの音名で書くか）：和音の音・音階の音はその名前、それ以外は上がるとき♯・下がるとき♭
  const spellL=(m,pc,ch,prev)=>{const t=ch.tones.find(x=>x.pc===pc);if(t)return t.L;
   const d=[0,1,2,3,4,5,6].find(d=>lkDeg(ch.lk,d).pc===pc);if(d!=null)return lkDeg(ch.lk,d).L;
-  const up=!prev||m>prev.midi;let best=null;for(let k=0;k<7;k++){const a=altFor(k,pc);if(Math.abs(a)>o.maxA)continue;if(best===null||(up?a>altFor(best,pc):a<altFor(best,pc)))best=k;}
+  const up=!prev||m>prev.midi;// 白鍵の音はそのまま。変な音程（ファ♯→ファ♭など）にならない書き方を先に選ぶ
+  const odd=k=>{if(!prev)return 0;const sp=spellAs(m,k),st=Math.abs(sp.dia-prev.dia),sm=Math.abs(m-prev.midi),b=[0,2,4,5,7,9,11][st%7]+12*Math.floor(st/7),d=sm-b;return ([0,3,4].includes(st%7)?Math.abs(d)>=2:(d>=2||d<=-3))?1:0;};
+  let best=null,bk=null;for(let k=0;k<7;k++){const a=altFor(k,pc);if(Math.abs(a)>o.maxA)continue;const key=[odd(k),Math.abs(a),up?-a:a];if(best===null||key[0]<bk[0]||(key[0]===bk[0]&&(key[1]<bk[1]||(key[1]===bk[1]&&key[2]<bk[2])))){best=k;bk=key;}}
   if(best===null)for(let k=0;k<7;k++){if(Math.abs(altFor(k,pc))<=2){best=k;break;}}
   return best;};
  const W=d=>d===0?.12:d===1?2:d===2?2.3:d<=4?2:d<=7?1.6:d<=9?1.1:d<=12?.8:.45;
@@ -1306,6 +1496,12 @@ function generate(type,lv,seed,opts={}){
  {const g=lv<=2?0:lv<=4?1:2;
   if(type===5)L={...L,hiM:[74,75,76][g],loM:g<2?60:59};
   else if(g<2)L={...L,hiM:[76,77][g]};}
+ // 藝大２：2027年の例題に合わせる
+ if(lv===8){
+  if(type===5)L={...L,hiM:77,loM:58,beat:[...L.beat,[-2,2],[-2,1,1]],beat6:[...L.beat6,[-2,2,2],[-2,1,1,2]]}; // 視唱：シ♭3〜ファ5、8分休符から入るフレーズ
+  if(type===3)L={...L,hiM:81}; // 記憶聴音：ラ5まで
+  if(type===2)L={...L,beat:[...L.beat,X6]}; // 複旋律：ときどき6連符
+ }
  const mts=metersFor(type,lv);let meter=opts.meter&&mts.includes(opts.meter)?opts.meter:pick(R,mts);
  if(type===3&&!opts.meter&&lv>=4&&R()<.35)meter='6/8';
  const M=METER[meter];
@@ -1353,6 +1549,7 @@ function generate(type,lv,seed,opts={}){
   const mel=genMelody(R,slots,key,L,T);if(!mel)continue;
   // 3連符のしるし
   for(let i=0;i<mel.length;i++){const d=mel[i].dur;if(Number.isInteger(Math.round(d*1000)/1000))continue;if(mel[i].tup)continue;
+   if(Math.abs(d-2/3)<1e-6&&Math.abs(mel[i].onset%4)<1e-6&&[0,1,2,3,4,5].every(k=>mel[i+k]&&!mel[i+k].rest&&Math.abs(mel[i+k].dur-2/3)<1e-6)){for(let k=0;k<6;k++)mel[i+k].tup={p:6,q:4,r:6,w:1,first:k===0};i+=5;continue;}
    const w=Math.abs(d-4/3)<1e-6?2:Math.abs(d-8/3)<1e-6?4:1;for(let k=0;k<3&&mel[i+k];k++)mel[i+k].tup={p:3,q:2,r:3,w,first:k===0};i+=2;}
   // 区切りや最後の休符を入れる
   if(rests.length){mel.push(...rests.map(x=>({...x})));mel.sort((a,b)=>a.onset-b.onset);}
@@ -1396,7 +1593,7 @@ function generate(type,lv,seed,opts={}){
     if(rl){bass.unshift({onset:0,dur:rl,rest:true});b0.onset=rl;b0.dur-=rl;}}
    res={...base,voices:[{name:'上の声',notes:mel},{name:'下の声',notes:bass}],staves:[{clef:'treble',voices:[0]},{clef:'bass',voices:[1]}]};
   }
-  const acc=minAcc?countAcc(mel,key,M.units):0,sc=diffScore(res),fl=FLOOR[type][lv]*(meter==='6/8'?.88:1); // 6/8は1小節の拍が2つなので少し下げる
+  const acc=minAcc?countAcc(mel,key,M.units):0,sc=diffScore(res),fl=FLOOR[type][lv]*(meter==='6/8'?.88:meter==='2/4'?.55:1); // 6/8は1小節の拍が2つなので少し下げる
   if(acc>=minAcc&&sc>=fl)return res;
   const rank=(acc>=minAcc?1000:acc*50)+(sc>=fl?500:0)+sc;
   if(rank>bestAcc){best=res;bestAcc=rank;}
@@ -1455,6 +1652,7 @@ function toAbc(P,opt={}){
     else if((Math.abs((n.onset%B))<1e-6||Math.abs((n.onset%B)-B)<1e-6)&&!join.has(n))line+=' ';
     let pre='';
     if(opt.ann&&n.ann)pre+=`"_${n.ann}"`;
+    if(n.mark)pre+=`"^${n.mark}"`;
     if(n.tup&&n.tup.first)pre+=`(${n.tup.p}:${n.tup.q}:${n.tup.r}`;
     if(opt.marks!==false&&n.dyn)pre+=`!${n.dyn}!`;
     if(opt.marks!==false&&n.art)pre+=n.art==='.'?'.':`!${n.art}!`;
@@ -1475,7 +1673,7 @@ function toAbc(P,opt={}){
 
 /* ===== 度数（音程）===== */
 const JP_LET=['ハ','ニ','ホ','ヘ','ト','イ','ロ'],EN_LET='CDEFGAB';
-const ACC_JP={'-2':'重変','-1':'変','0':'','1':'嬰','2':'重嬰'},ACC_SYM={'-2':'𝄫','-1':'♭','0':'','1':'♯','2':'𝄪'};
+const ACC_JP={'-2':'重変','-1':'変','0':'','1':'嬰','2':'重嬰'},ACC_SYM={'-2':'♭♭','-1':'♭','0':'','1':'♯','2':'×'};
 const noteLabel=(dia,alt)=>`${ACC_JP[alt]}${JP_LET[mod(dia,7)]}（${EN_LET[mod(dia,7)]}${ACC_SYM[alt]}）`;
 const BASE_SEMI=[0,2,4,5,7,9,11];
 const QP={'-2':'重減','-1':'減','0':'完全','1':'増','2':'重増'},QM={'-3':'重減','-2':'減','-1':'短','0':'長','1':'増','2':'重増'};
@@ -1573,7 +1771,661 @@ function intAbc(it){
  const body=it.harm?`[${a}${b}]4`:it.down?`${b}4 ${a}4`:`${a}4 ${b}4`;
  return `X:1\nM:none\nL:1/4\nK:C clef=${C.abc}\n${body} |]\n`;
 }
-if(false&&typeof module!=='undefined')module.exports={generate,toAbc,LEVELS,METER,intervalOK,genInterval,intAbc,ILV,KEYS,rngFrom};
+/* ===== 楽典（ここから） ===== */
+// 難易度は5段階（1初級・2中級・3上級・4藝大・5神）
+const GK_LV=['','初級','中級','上級','藝大','神'];
+const GK_FIELDS=[['rand','ランダム'],['key','調と音階'],['int','音程'],['hear','音程（耳で）'],['chord','和音'],['cad','終止形・非和声音'],['trans','移調・音部記号'],['time','リズムと時間'],['term','楽語'],['quiz','知識○×']];
+const MAJ_ABC={'-7':'Cb','-6':'Gb','-5':'Db','-4':'Ab','-3':'Eb','-2':'Bb','-1':'F','0':'C','1':'G','2':'D','3':'A','4':'E','5':'B','6':'F#','7':'C#'};
+const MAJ_S=[0,2,4,5,7,9,11],HARM_S=[0,2,3,5,7,8,11],NAT_S=[0,2,3,5,7,8,10],MEL_S=[0,2,3,5,7,9,11];
+const DEG=['主音','上主音','上中音','下属音','属音','下中音','導音'];
+const pcOf=p=>mod(LETTER_SEMI[p.L]+p.a,12);
+// 音pから、音名をsteps個・半音をsemis個ずらした音（つづり付き）
+function addInt(p,steps,semis){const L=mod(p.L+steps,7);const a=mod(pcOf(p)+semis-LETTER_SEMI[L]+6,12)-6;return {L,a};}
+function tonicOf(sig,minor){const L=mod(4*sig+(minor?5:0),7);return {L,a:sigAlter(L,sig)};}
+const ALLK=[];for(let s=-7;s<=7;s++)for(const mi of [0,1])ALLK.push({sig:s,minor:mi,t:tonicOf(s,mi)});
+const keyOf=(t,minor)=>ALLK.find(k=>k.minor===(minor?1:0)&&k.t.L===t.L&&k.t.a===t.a)||null;
+const pjp=p=>ACC_JP[p.a]+JP_LET[p.L];
+function pde(p){if(p.L===6&&p.a===-1)return 'B';if(p.L===6&&p.a===-2)return 'Heses';const b='CDEFGAH'[p.L],v=p.L===2||p.L===5;
+ return b+({1:'is',2:'isis','-1':v?'s':'es','-2':v?'ses':'eses',0:''}[p.a]);}
+const kjp=k=>pjp(k.t)+(k.minor?'短調':'長調');
+const kde=k=>{const n=pde(k.t);return k.minor?n.toLowerCase()+'-moll':n+'-dur';};
+const keyScale=(k,mel)=>(k.minor?(mel?MEL_S:HARM_S):MAJ_S).map((s,d)=>addInt(k.t,d,s));
+const samePitch=(a,b)=>a.L===b.L&&a.a===b.a;
+function relKey(k,op){if(!k)return null;
+ if(op==='平行調')return ALLK.find(x=>x.sig===k.sig&&x.minor!==k.minor);
+ if(op==='同主調')return keyOf(k.t,!k.minor);
+ if(op==='属調')return keyOf(addInt(k.t,4,7),k.minor);
+ if(op==='下属調')return keyOf(addInt(k.t,3,5),k.minor);return null;}
+// 音pを第d音（0=主音…6=導音）とする調
+function keyWithDeg(p,d,minor,mel){const s=(minor?(mel?MEL_S:HARM_S):MAJ_S)[d];return keyOf(addInt(p,-d,-s),minor);}
+// 異名同音（臨時記号1つまでの別のつづり）
+function enhOf(p){for(const st of [1,-1]){const q=addInt(p,st,0);if(Math.abs(q.a)<=1&&!samePitch(q,p))return q;}return null;}
+const GK_CLEF=[[],['treble'],['treble','bass'],['treble','bass','alto','tenor'],['treble','bass','alto','tenor','soprano','mezzo','baritone'],['soprano','mezzo','alto','tenor','baritone','bass','treble']];
+// 音を譜表の真ん中あたりに置く（音名pの高さを決める）
+function placeNear(p,center){let best=null;for(let o=1;o<8;o++){const dia=p.L+7*o;if(best===null||Math.abs(dia-center)<Math.abs(best-center))best=dia;}return best;}
+const nAbc=(dia,a)=>(a?SYM[a]:'')+abcPitch(dia);
+const freeAbc=(clef,body,key)=>`X:1\nM:none\nL:1/4\nK:${key||'C'} clef=${CLEFS[clef].abc}\n${body} |]\n`;
+function uniq(a){return [...new Set(a)];}
+function fillOpts(R,ans,cands,n,pool){const o=[];for(const c of shuffle(R,uniq(cands)))if(c&&c!==ans&&!o.includes(c)&&o.length<n)o.push(c);
+ if(pool)for(const c of shuffle(R,pool))if(o.length<n&&c!==ans&&!o.includes(c))o.push(c);return shuffle(R,[ans,...o]);}
+function octVar(R,ns,clef){ // 初級〜上級：同じ和音を1オクターブ上・下にも置く（加線1本まで）
+ const m=CLEFS[clef].mid;const alts=[ns,...[-7,7].map(s=>ns.map(n=>({...n,dia:n.dia+s,midi:n.midi+(s>0?12:-12)})))].filter(a=>a.every(n=>n.dia>=m-6&&n.dia<=m+6));
+ return pick(R,alts.length?alts:[ns]);}
+function chordAbcNotes(ps,clef){ // 下から積み上げる
+ let dia=placeNear(ps[0],CLEFS[clef].mid-3);const out=[];
+ ps.forEach((p,i)=>{if(i){let d=dia+mod(p.L-mod(dia,7),7);if(d===dia)d+=7;dia=d;}out.push({dia,a:p.a,midi:midiOf(dia,p.a)});});return out;}
+
+/* --- 調と音階 --- */
+/* --- 解説づくりの道具 --- */
+const SHARP_ORD=[3,0,4,1,5,2,6],FLAT_ORD=[6,2,5,1,4,0,3];
+const DEG_NO=['第1音','第2音','第3音','第4音','第5音','第6音','第7音'];
+function sigExp(sig){if(!sig)return '調号なし';const n=Math.abs(sig);return `${sig>0?'♯':'♭'}${n}つ（${(sig>0?SHARP_ORD:FLAT_ORD).slice(0,n).map(L=>pjp({L,a:sig>0?1:-1})).join('・')}）`;}
+function keyFromSigExp(k){const maj=ALLK.find(x=>x.sig===k.sig&&!x.minor);let s=k.sig?`調号は${sigExp(k.sig)}。`:'';
+ if(k.sig>0)s+=`最後の♯（${pjp({L:SHARP_ORD[k.sig-1],a:1})}）の半音上の「${pjp(maj.t)}」が長調の主音。`;
+ else if(k.sig<-1)s+=`最後から2つめの♭（${pjp({L:FLAT_ORD[-k.sig-2],a:-1})}）が長調の主音。`;
+ else if(k.sig===-1)s+='♭1つはヘ長調。';else s+='調号なしはハ長調。';
+ if(!k.sig&&!k.minor)return s;
+ s+=k.minor?`\n短調は、同じ調号の長調（${kjp(maj)}）の主音から短3度下 → ${kjp(k)}。`:`\n→ ${kjp(k)}。`;return s;}
+const scTxt=(k,mel)=>keyScale(k,mel).map(pjp).join('・');
+const REL_DEF={'属調':'主音が完全5度上の、同じ種類（長調なら長調）の調','下属調':'主音が完全5度下（完全4度上）の、同じ種類の調','平行調':'調号が同じで、長調と短調が入れかわった調','同主調':'主音が同じで、長調と短調が入れかわった調'};
+const DE_RULE='ドイツ語の音名：ハ＝C・ニ＝D・ホ＝E・ヘ＝F・ト＝G・イ＝A・ロ＝H。♯は「-is」、♭は「-es」（変ホ＝Es、変イ＝As、変ロだけは「B」）。長調は大文字＋「-dur」、短調は小文字＋「-moll」。';
+const SC_DEF={'長音階':'全・全・半・全・全・全・半 の並び（ドレミファソラシド）','自然短音階':'全・半・全・全・半・全・全 の並び（ラシドレミファソラ）','和声短音階':'自然短音階の第7音を半音上げた形。第6音と第7音の間が増2度になる',
+ '旋律短音階':'自然短音階の第6音と第7音を半音上げた形（上行形）','全音音階':'すべて全音でできた6つの音の音階','五音音階':'5つの音の音階（ド・レ・ミ・ソ・ラ の形）',
+ 'ドリア旋法':'白鍵だけで「レ」から並べた形（短音階の第6音が半音高い）','フリギア旋法':'白鍵だけで「ミ」から並べた形（第2音が半音低い）','リディア旋法':'白鍵だけで「ファ」から並べた形（長音階の第4音が半音高い）','ミクソリディア旋法':'白鍵だけで「ソ」から並べた形（長音階の第7音が半音低い）'};
+const CHD={'長三和音':'下から 長3度＋短3度（根音と第5音は完全5度）','短三和音':'下から 短3度＋長3度（根音と第5音は完全5度）','減三和音':'下から 短3度＋短3度（根音と第5音は減5度）','増三和音':'下から 長3度＋長3度（根音と第5音は増5度）',
+ '属七の和音':'長三和音の上に、根音から短7度の音（長3度＋短3度＋短3度）','短七の和音':'短三和音の上に、根音から短7度の音（短3度＋長3度＋短3度）','長七の和音':'長三和音の上に、根音から長7度の音（長3度＋短3度＋長3度）',
+ '減七の和音':'短3度を3つ重ねた形（根音から減7度）','減五短七の和音':'減三和音の上に、根音から短7度の音（短3度＋短3度＋長3度）',
+ '長九の和音':'属七の和音の上に、根音から長9度の音','短九の和音':'属七の和音の上に、根音から短9度の音',
+ 'イタリアの増六の和音':'短調の第6音・主音・半音上げた第4音の3つの音。第6音と第4音の間が増6度','フランスの増六の和音':'イタリアの増六の和音に、第2音を足した形','ドイツの増六の和音':'イタリアの増六の和音に、第3音を足した形（響きは属七の和音と同じ）',
+ 'ナポリの六の和音':'第2音を半音下げた音を根音とする長三和音。ふつう第3音を一番下にする（第1転回形）'};
+const CAD_DEF={'完全終止':'Ⅴ（Ⅴ7）→Ⅰ。どちらも基本形で、ソプラノが主音で終わる、いちばん終わった感じの強い終止','不完全終止':'Ⅴ→Ⅰだが、ソプラノが主音以外（第3音・第5音）で終わる終止',
+ '半終止':'Ⅴで止まる終止。文の「、」のように、まだ続く感じ','偽終止':'Ⅴのあと、Ⅰではなく Ⅵ へ行く終止（Ⅰだと思わせて裏切る）','変格終止':'Ⅳ→Ⅰ の終止（「アーメン」の終止）'};
+const NCT_DEF={'経過音':'和音の音から次の和音の音へ、2度ずつ同じ向きに進むときの「間をつなぐ」音','刺繍音':'和音の音から2度上（下）へ行き、また元の音に戻る音',
+ '掛留音':'前の和音の音を次の和音まで残し（タイなど）、あとから2度下がって和音の音に落ち着く音','先取音':'次の和音の音を、ひと足先に鳴らしてしまう音',
+ '倚音':'拍の頭で、跳躍して入ってきて、2度進んで和音の音に落ち着く音','逸音':'和音の音から2度進み、反対の向きに跳躍して離れていく音'};
+const ROMAN={I:'Ⅰ',ii:'Ⅱ',IV:'Ⅳ',V:'Ⅴ',V7:'Ⅴ7',vi:'Ⅵ',I6:'Ⅰ（第1転回形）',ii6:'Ⅱ（第1転回形）'};
+const CLEF_REF={treble:'第2線がト（1点ト）',bass:'第4線がヘ（小字ヘ）',alto:'第3線が1点ハ（真ん中のド）',tenor:'第4線が1点ハ（真ん中のド）',soprano:'第1線が1点ハ（真ん中のド）',mezzo:'第2線が1点ハ（真ん中のド）',baritone:'第3線がヘ（小字ヘ）'};
+function staffPos(dia,clef){const p=dia-(CLEFS[clef].mid-4);if(p>=0&&p<=8)return p%2===0?`第${p/2+1}線`:`第${(p+1)/2}間`;
+ if(p<0){const k=-p;return k%2===0?`下第${k/2}加線`:(k===1?'第1線のすぐ下':`下第${(k-1)/2}加線のすぐ下`);}
+ const k=p-8;return k%2===0?`上第${k/2}加線`:(k===1?'第5線のすぐ上':`上第${(k-1)/2}加線のすぐ上`);}
+const intLabel=(st,sm)=>intName(Math.abs(st)+1,Math.abs(sm)-baseSemis(Math.abs(st)+1));
+const nName=n=>ACC_JP[n.alter||0]+JP_LET[mod(n.dia,7)];
+
+function gkKey(R,lv){
+ const lim=lv===1?2:lv===2?4:7;const clefs=GK_CLEF[lv];const okK=k=>k&&Math.abs(k.sig)<=lim;
+ const rk=(m)=>{const c=ALLK.filter(k=>Math.abs(k.sig)<=lim&&(m==null||k.minor===m));return pick(R,c);};
+ const de=lv>=4&&R()<.4;const nm=k=>de?kde(k):kjp(k);
+ const same=(k,arr)=>arr.filter(x=>x&&x.minor===k.minor);
+ const distr=k=>[relKey(k,'平行調'),relKey(k,'同主調'),relKey(k,'属調'),relKey(k,'下属調'),relKey(relKey(k,'属調'),'平行調'),relKey(relKey(k,'下属調'),'平行調'),relKey(relKey(k,'属調'),'属調')].filter(okK).map(nm);
+ const W={sig:[.5,.15,0,0,0],chord:[.5,.3,.2,.15,.1],rel:[0,.35,.25,.1,.15],deg:[0,0,.2,.3,.35],all:[0,0,0,.2,.2],scale:[0,0,.2,.2,.2],de:[0,.2,.15,.05,0]};
+ const types=Object.keys(W),t=wpick(R,types,types.map(x=>W[x][lv-1]));
+ for(let att=0;att<200;att++){
+  if(t==='sig'){const k=rk(lv===1&&R()<.6?0:null);const clef=pick(R,clefs);
+   return {f:'key',q:`この調号の${k.minor?'短調':'長調'}は？`,exp:keyFromSigExp(k)+(de?`\n${DE_RULE}`:''),abc:freeAbc(clef,'x4',MAJ_ABC[k.sig]),opts:fillOpts(R,nm(k),ALLK.filter(x=>x.minor===k.minor&&Math.abs(x.sig-k.sig)<=2&&okK(x)).map(nm),3,ALLK.filter(x=>x.minor===k.minor&&okK(x)).map(nm)),ans:nm(k)};}
+  if(t==='chord'){
+   const fn=lv===1?0:pick(R,[0,3,4,4]);const minor=lv>=4?R()<.5:lv===1?0:R()<.3;const k=rk(minor?1:0);
+   const sc=keyScale(k);const ps=[0,2,4].map(i=>sc[(fn+i)%7]);if(ps.some(p=>Math.abs(p.a)>1))continue;
+   const clef=pick(R,clefs);const ns=lv<=3?octVar(R,chordAbcNotes(ps,clef),clef):chordAbcNotes(ps,clef);const fname=['主和音','','','下属和音','属和音'][fn];
+   const others=[];for(const k2 of ALLK){if(!okK(k2)||k2===k||k2.minor!==k.minor)continue;const s2=keyScale(k2);for(const f2 of [0,3,4]){const q=[0,2,4].map(i=>s2[(f2+i)%7]);if(q.every((p,i)=>samePitch(p,ps[i])))others.push(nm(k2));}}
+   const kx=`この和音は ${ps.map(pjp).join('・')}。${fname}は${DEG_NO[fn]}（${DEG[fn]}）の上にできる和音なので、${pjp(ps[0])}を${DEG[fn]}とする${minor?'短調':'長調'}を探す → ${kjp(k)}${de?'（'+kde(k)+'）':''}。\n${kjp(k)}${minor?'（和声短音階）':''}：${scTxt(k)}`;
+   return {f:'key',q:`この和音を${fname}とする${minor?'短調':'長調'}は？`,exp:kx,abc:freeAbc(clef,`[${ns.map(n=>nAbc(n.dia,n.a)).join('')}]4`),play:{notes:ns.map(n=>n.midi),how:'chord'},
+    opts:fillOpts(R,nm(k),[...others,...ALLK.filter(x=>x.minor===k.minor&&Math.abs(x.sig-k.sig)<=2&&okK(x)).map(nm)],3,ALLK.filter(x=>x.minor===k.minor&&okK(x)).map(nm)),ans:nm(k)};}
+  if(t==='rel'){
+   const nOp=lv<=2?1:lv===3?2:lv===4?2:3;let k=rk();const k0=k;const ops=[],chain=[kjp(k0)];
+   for(let i=0;i<nOp;i++){const op=pick(R,['属調','下属調','平行調','同主調'].filter(o=>!(ops.length&&ops[ops.length-1]===o&&(o==='平行調'||o==='同主調'))));ops.push(op);k=relKey(k,op);if(!k)break;chain.push(`（${op}）${kjp(k)}`);}
+   if(!okK(k)||k===k0)continue;
+   const rx=`${chain.join(' → ')}${de?'（'+kde(k)+'）':''}\n`+uniq(ops).map(o=>`${o}：${REL_DEF[o]}`).join('\n');
+   return {f:'key',q:`${kjp(k0)}の${ops.join('の')}は？`,exp:rx,opts:fillOpts(R,nm(k),distr(k),3,ALLK.filter(okK).map(nm)),ans:nm(k)};}
+  if(t==='deg'){
+   // 例：「変ロ長調の下属音を上中音とする短調の平行調は？」
+   const k0=rk();const sc=keyScale(k0);const dA=Math.floor(R()*7);let p=sc[dA];let txt=`${kjp(k0)}の${DEG[dA]}`;const st=[`${kjp(k0)}の${DEG[dA]}（${DEG_NO[dA]}）は ${pjp(p)}`];
+   if(lv===3&&R()<.6){p=pick(R,keyScale(rk()));txt=`${pjp(p)}音`;st.length=0;}
+   if(lv===5&&R()<.6){const e=enhOf(p);if(!e)continue;st.push(`${pjp(p)}の異名同音は ${pjp(e)}`);p=e;txt+='の異名同音';}
+   const minor=R()<.5;const mel=lv===5&&minor&&R()<.4;const dB=mel?5:Math.floor(R()*7);
+   let k=keyWithDeg(p,dB,minor,mel);if(!okK(k))continue;
+   txt+=`を${mel?'旋律短音階上行形の第6音':DEG[dB]}とする${minor?'短調':'長調'}`;
+   st.push(`${pjp(p)}を${mel?'旋律短音階上行形の第6音':DEG[dB]+'（'+DEG_NO[dB]+'）'}とする${minor?'短調':'長調'}は ${kjp(k)}（${scTxt(k,mel)}）`);
+   const ops=[];if(lv>=4&&R()<.6){const op=pick(R,['平行調','同主調','属調','下属調']);k=relKey(k,op);if(!okK(k))continue;txt+='の'+op;ops.push(op);st.push(`その${op}は ${kjp(k)}`);}
+   const dx=st.join('\n→ ')+(de?`（${kde(k)}）`:'')+(ops.length?`\n${ops[0]}：${REL_DEF[ops[0]]}`:'')+`\n音度の名前：主音・上主音・上中音・下属音・属音・下中音・導音（第1音〜第7音）`;
+   return {f:'key',q:txt+'は？',exp:dx,opts:fillOpts(R,nm(k),distr(k).filter(x=>x),3,ALLK.filter(okK).map(nm)),ans:nm(k)};}
+  if(t==='all'){
+   const kb=rk();const sc=keyScale(kb);const n=pick(R,[2,3,3]);const idx=shuffle(R,[0,1,2,3,4,5,6]).slice(0,n).sort((a,b)=>a-b);const ps=idx.map(i=>sc[i]);
+   const has=(k,p)=>keyScale(k).some(q=>samePitch(q,p));const keys=ALLK.filter(k=>ps.every(p=>has(k,p)));
+   if(keys.length<2||keys.length>5)continue;
+   const near=ALLK.filter(k=>!keys.includes(k)&&ps.filter(p=>has(k,p)).length===ps.length-1);
+   const opts=uniq([...keys,...shuffle(R,near)]).slice(0,8);if(opts.length<6)continue;
+   const clef=pick(R,clefs);const body=ps.map(p=>{const d=placeNear(p,CLEFS[clef].mid);return nAbc(d,p.a,true)+'2';}).join(' ');
+   const ax=`書かれた音：${ps.map(pjp).join('・')}\nこれを全部含むのは：\n`+keys.map(k=>`${kde(k)}（${kjp(k)}${k.minor?'・和声短音階':''}）：${scTxt(k)}`).join('\n');
+   return {f:'key',q:'この音をすべて含む調を、すべて選びなさい（短調は和声短音階で考える）',exp:ax,abc:freeAbc(clef,body),multi:true,
+    opts:shuffle(R,opts.map(kde)),ans:keys.map(kde),play:{notes:ps.map(p=>midiOf(placeNear(p,CLEFS[clef].mid),p.a)),how:'seq'}};}
+  if(t==='scale'){
+   const SC={'長音階':[MAJ_S,[0,1,2,3,4,5,6]],'自然短音階':[NAT_S,[0,1,2,3,4,5,6]],'和声短音階':[HARM_S,[0,1,2,3,4,5,6]],'旋律短音階':[MEL_S,[0,1,2,3,4,5,6]],
+    '全音音階':[[0,2,4,6,8,10],[0,1,2,3,4,5]],'五音音階':[[0,2,4,7,9],[0,1,2,4,5]],'ドリア旋法':[[0,2,3,5,7,9,10],[0,1,2,3,4,5,6]],'フリギア旋法':[[0,1,3,5,7,8,10],[0,1,2,3,4,5,6]],
+    'リディア旋法':[[0,2,4,6,7,9,11],[0,1,2,3,4,5,6]],'ミクソリディア旋法':[[0,2,4,5,7,9,10],[0,1,2,3,4,5,6]]};
+   const pool=Object.keys(SC).slice(0,lv===3?4:10);const name=pick(R,pool);const [ss,ls]=SC[name];
+   const t0={L:Math.floor(R()*7),a:lv>=4?pick(R,[0,0,1,-1]):pick(R,[0,0,0,1,-1])};const ps=ss.map((s,i)=>addInt(t0,ls[i],s));ps.push(t0);
+   if(ps.some(p=>Math.abs(p.a)>1))continue;
+   const clef=pick(R,clefs);let d=placeNear(t0,CLEFS[clef].mid-3);const ds=ls.map(l=>d+l);ds.push(d+7);
+   const body=ps.map((p,i)=>nAbc(ds[i],p.a,true)).join(' ');
+   return {f:'key',q:'この音階の名前は？',exp:`${name}：${SC_DEF[name]}`,why:Object.fromEntries(pool.map(n=>[n,SC_DEF[n]])),abc:freeAbc(clef,body).replace('L:1/4','L:1/4'),wide:true,opts:fillOpts(R,name,[],3,pool),ans:name,play:{notes:ps.map((p,i)=>midiOf(ds[i],p.a)),how:'seq'}};}
+  if(t==='de'){
+   if(lv>=3&&R()<.5){// 音名のドイツ語
+    const p={L:Math.floor(R()*7),a:pick(R,[1,-1,-1,1,0])};if(p.a===0&&p.L!==6)continue;const ans=pde(p);
+    const b='CDEFGAH'[p.L];const wr=[b+'is',b+'es',b+'s',b,p.L===6?'Hes':b+'es',p.L===6?'Bis':null].filter(x=>x&&x!==ans);
+    return {f:'key',q:`${pjp(p)}音をドイツ語で書くと？`,exp:`${pjp(p)} ＝ ${ans}\n${DE_RULE}`,opts:fillOpts(R,ans,wr,3),ans};}
+   const k=rk();const rev=lv>=3&&R()<.5;
+   if(rev)return {f:'key',q:`${kde(k)} を日本語で書くと？`,exp:`${kde(k)} ＝ ${kjp(k)}\n${DE_RULE}`,opts:fillOpts(R,kjp(k),distr(k).map(()=>null).concat([relKey(k,'同主調'),relKey(k,'平行調'),relKey(k,'属調'),keyOf(enhOf(k.t)||k.t,k.minor)].filter(okK).map(kjp)),3,ALLK.filter(okK).map(kjp)),ans:kjp(k)};
+   const e=enhOf(k.t);const wr=[relKey(k,'同主調'),relKey(k,'平行調'),e?{t:e,minor:k.minor}:null,relKey(k,'属調')].filter(Boolean).map(kde);
+   return {f:'key',q:`${kjp(k)}をドイツ語で書くと？`,exp:`${kjp(k)} ＝ ${kde(k)}\n${DE_RULE}`,opts:fillOpts(R,kde(k),wr,3,ALLK.filter(okK).map(kde)),ans:kde(k)};}
+ }
+ return gkKey(R,1);
+}
+
+/* --- 音程（今までの度数を5段階に） --- */
+function gkInt(R,lv,hear){
+ const il=lv*2-(R()<.5?1:0);const it=genInterval(R,il,hear?'hear':'see');
+ const play={notes:[it.lower.midi,it.upper.midi],how:it.harm?'chord':'seq',down:it.down};
+ if(!hear&&lv>=3&&R()<.3){ // 転回音程を答える
+  const inv=s=>{const m=s.match(/^(.+?)(\d+)度$/);if(!m)return null;let n=+m[2];if(n>8)n=((n-1)%7)+1;const q=INV_Q[m[1]];return q?q+(9-n)+'度':null;};
+  const ans=inv(it.answer);if(ans){const o=uniq(it.options.map(inv).filter(Boolean));if(!o.includes(ans))o.push(ans);
+   return {f:'int',q:'この音程の転回音程は？',exp:intExplain(it).slice(0,-1).join('\n')+`\n転回すると（上下を入れかえる）：9から度数を引き、長⇔短・増⇔減が入れかわる（完全は完全のまま）→ ${ans}`,abc:intAbc(it),opts:fillOpts(R,ans,o,3),ans,play};}}
+ return {f:hear?'hear':'int',q:hear?'聞こえた音程は？':'この音程は？',exp:intExplain(it).join('\n'),abc:intAbc(it),opts:it.options,ans:it.answer,play,hideScore:hear};
+}
+
+/* --- 和音の種類 --- */
+const CHT={'長三和音':[[0,2,4],[0,4,7]],'短三和音':[[0,2,4],[0,3,7]],'減三和音':[[0,2,4],[0,3,6]],'増三和音':[[0,2,4],[0,4,8]],
+ '属七の和音':[[0,2,4,6],[0,4,7,10]],'短七の和音':[[0,2,4,6],[0,3,7,10]],'長七の和音':[[0,2,4,6],[0,4,7,11]],'減七の和音':[[0,2,4,6],[0,3,6,9]],'減五短七の和音':[[0,2,4,6],[0,3,6,10]],
+ '長九の和音':[[0,2,4,6,8],[0,4,7,10,14]],'短九の和音':[[0,2,4,6,8],[0,4,7,10,13]],
+ 'イタリアの増六の和音':[[0,2,5],[0,4,10]],'フランスの増六の和音':[[0,2,3,5],[0,4,6,10]],'ドイツの増六の和音':[[0,2,4,5],[0,4,7,10]]};
+const CH_POOL=[[],['長三和音','短三和音'],['長三和音','短三和音','減三和音','増三和音'],['長三和音','短三和音','減三和音','増三和音','属七の和音','短七の和音','長七の和音'],
+ ['長三和音','短三和音','減三和音','増三和音','属七の和音','短七の和音','長七の和音','減七の和音','減五短七の和音'],
+ ['減三和音','増三和音','属七の和音','短七の和音','長七の和音','減七の和音','減五短七の和音','長九の和音','短九の和音','イタリアの増六の和音','フランスの増六の和音','ドイツの増六の和音','ナポリの六の和音']];
+function gkChord(R,lv){
+ const pool=CH_POOL[lv];
+ for(let att=0;att<300;att++){
+  const name=lv===5?wpick(R,pool,pool.map(n=>/増六|ナポリ|九/.test(n)?2:1)):pick(R,pool);const clef=pick(R,GK_CLEF[lv]);
+  let ps,keyTxt='';
+  if(name==='ナポリの六の和音'){const k=pick(R,ALLK.filter(k=>k.minor&&Math.abs(k.sig)<=4));const r=addInt(k.t,1,1);ps=[addInt(r,2,4),addInt(r,4,7),r];keyTxt=`（${kjp(k)}）`;}
+  else{const [ls,ss]=CHT[name];const root={L:Math.floor(R()*7),a:lv===1?0:pick(R,[0,0,0,1,-1])};ps=ls.map((l,i)=>addInt(root,l,ss[i]));
+   if(/増六/.test(name)){const k=keyOf(addInt(root,2,4),1);if(!k||Math.abs(k.sig)>6)continue;keyTxt=`（${kjp(k)}）`;}}
+  const maxA=lv===1?0:lv===5?2:1;if(ps.some(p=>Math.abs(p.a)>maxA))continue;
+  const root0=name==='ナポリの六の和音'?ps[2]:ps[0];let invd=false;
+  if(lv>=4&&!/増六|ナポリ|九/.test(name)&&R()<.45){const r=1+Math.floor(R()*(ps.length-1));ps=[...ps.slice(r),...ps.slice(0,r)];invd=true;}
+  let ns=chordAbcNotes(ps,clef);if(ns[ns.length-1].dia-CLEFS[clef].mid>9)continue;if(lv<=3)ns=octVar(R,ns,clef);
+  const sim={'長三和音':['短三和音','増三和音'],'短三和音':['長三和音','減三和音'],'減三和音':['短三和音','減七の和音'],'増三和音':['長三和音','短三和音'],'属七の和音':['短七の和音','長七の和音','ドイツの増六の和音'],
+   '短七の和音':['属七の和音','減五短七の和音'],'長七の和音':['属七の和音','短七の和音'],'減七の和音':['減五短七の和音','減三和音'],'減五短七の和音':['減七の和音','短七の和音'],
+   'ドイツの増六の和音':['属七の和音','フランスの増六の和音'],'フランスの増六の和音':['ドイツの増六の和音','イタリアの増六の和音'],'イタリアの増六の和音':['フランスの増六の和音','ドイツの増六の和音'],
+   '長九の和音':['短九の和音','属七の和音'],'短九の和音':['長九の和音','減七の和音'],'ナポリの六の和音':['長三和音','ドイツの増六の和音']}[name]||[];
+  const cx=`${/増六/.test(name)?`いちばん下の音は、この調の第6音 ${pjp(root0)}`:`根音は ${pjp(root0)}`}${invd?'（いちばん下の音は根音ではない転回形。3度ずつ積み直して根音を見つける）':''}。\n${name}：${CHD[name]}`;
+  return {f:'chord',q:`この和音の種類は？${keyTxt}`,exp:cx,why:CHD,abc:freeAbc(clef,`[${ns.map(n=>nAbc(n.dia,n.a)).join('')}]4`),opts:fillOpts(R,name,sim.filter(x=>lv===5||CH_POOL[Math.max(lv,2)].includes(x)),3,CH_POOL[Math.max(lv,2)]),ans:name,
+   play:{notes:ns.map(n=>n.midi),how:'chord'}};
+ }
+}
+
+/* --- 終止形・非和声音（４声の配置のしくみを使う） --- */
+function gkKeyObj(k){const t=k.t;return {sig:k.sig,tl:t.L,minor:k.minor,abc:'CDEFGAB'[t.L]+(t.a===1?'#':t.a===-1?'b':'')+(k.minor?'m':''),name:kjp(k)};}
+function gkVoice(R,k,seq,opt){
+ const key=gkKeyObj(k);const T=21+key.tl;
+ const alt=(dia,deg,name)=>{const c=CH[name];return sigAlter(mod(dia,7),key.sig)+((key.minor&&deg===6&&c.r===4&&!chordAlt(name,deg,true))?1:0)+chordAlt(name,deg,key.minor);};
+ const durs=seq.map((x,i)=>i===seq.length-1?16:8);
+ const v=voiceChords(R,key,seq,durs,T,alt,opt||{});if(!v)return null;
+ const bars=Math.round(durs.reduce((a,b)=>a+b,0)/16);
+ return {key,T,P:{type:4,lv:4,meter:'2/2',key,bars,count:seq.length,voices:v.map((n,i)=>({name:'',notes:n})),staves:[{clef:'treble',voices:[0,1]},{clef:'bass',voices:[2,3]}]}};
+}
+const CAD_POOL=[[],['完全終止','半終止'],['完全終止','半終止','偽終止'],['完全終止','不完全終止','半終止','偽終止','変格終止'],['完全終止','不完全終止','半終止','偽終止','変格終止'],['完全終止','不完全終止','半終止','偽終止','変格終止']];
+const NCT_POOL=[[],['経過音','刺繍音'],['経過音','刺繍音'],['経過音','刺繍音','掛留音','先取音'],['経過音','刺繍音','掛留音','先取音','倚音','逸音'],['経過音','刺繍音','掛留音','先取音','倚音','逸音']];
+const NCT_ALL=['経過音','刺繍音','掛留音','先取音','倚音','逸音'];
+function gkPre(R,minor,len){ // 主和音から始まる前半
+ const P=minor?[['I'],['I','IV'],['I','vi'],['I','IV','I'],['I','vi','IV'],['I','I6','IV'],['I','IV','I6']]:[['I'],['I','IV'],['I','ii'],['I','vi'],['I','IV','ii'],['I','vi','IV'],['I','vi','ii'],['I','I6','IV'],['I','ii6','I6']];
+ const c=P.filter(p=>p.length===len);return pick(R,c.length?c:P).slice();}
+function gkCad(R,lv){
+ for(let att=0;att<120;att++){
+  const minor=lv>=4?R()<.5:lv>=2?R()<.25:0;const k=pick(R,ALLK.filter(x=>x.minor===(minor?1:0)&&Math.abs(x.sig)<=(lv<=2?2:4)));
+  if(R()<.5){ // 終止形
+   const type=pick(R,CAD_POOL[lv]);const V=lv>=3&&R()<.5?'V7':'V';const len=lv>=4?3:1;let seq,opt={};
+   if(type==='完全終止'){seq=[...gkPre(R,minor,len),V,'I'];}
+   else if(type==='不完全終止'){seq=[...gkPre(R,minor,len),V,'I'];opt.endSop='other';}
+   else if(type==='半終止'){seq=[...gkPre(R,minor,len),'V'];if(seq.length%2===0)seq.unshift('I');}
+   else if(type==='偽終止'){seq=[...gkPre(R,minor,len),V,'vi'];}
+   else{seq=[...gkPre(R,minor,len).filter(x=>x!=='IV'),'IV','I'];if(seq[seq.length-3]==='IV')continue;}
+   if(seq.length%2===0)seq.unshift('I');
+   const g=gkVoice(R,k,seq,opt);if(!g)continue;
+   if(type==='完全終止'||type==='不完全終止'){const s=g.P.voices[0].notes.slice(-1)[0];const top=mod(s.dia-g.T,7)===0;if((type==='完全終止')!==top)continue;}
+   const sl=g.P.voices[0].notes.slice(-1)[0];const sd=mod(sl.dia-g.T,7);
+   const qx=`和音の流れ：${seq.map(x=>ROMAN[x]||x).join(' → ')}${minor?'（短調）':''}\n${['完全終止','不完全終止'].includes(type)?`ソプラノの最後の音は${DEG[sd]}（${DEG_NO[sd]}）。\n`:''}${type}：${CAD_DEF[type]}`;
+   return {f:'cad',q:'最後の終止の形は？',exp:qx,why:CAD_DEF,P:g.P,opts:fillOpts(R,type,[],3,CAD_POOL[Math.max(lv,3)]),ans:type};
+  }
+  // 非和声音：ソプラノに1つ入れて「＊」をつける
+  const len=lv>=4?3:1;const seq=[...gkPre(R,minor,len),'V','I'];if(seq.length%2===0)seq.unshift('I');
+  const g=gkVoice(R,k,seq,{});if(!g)continue;const S=g.P.voices[0].notes,A=g.P.voices[1].notes;const T=g.T,key=g.key;
+  const type=pick(R,NCT_POOL[lv]);const isCT=(dia,ci)=>tones(seq[ci]).includes(mod(dia-T,7));
+  const altFor=dia=>{const deg=mod(dia-T,7);return sigAlter(mod(dia,7),key.sig)+(key.minor&&deg===6?1:0);};
+  const mk=(dia,onset,dur)=>{const a=altFor(dia);return {onset,dur,dia,alter:a,midi:midiOf(dia,a),mark:'＊'};};
+  const cands=[];
+  for(let i=0;i<seq.length-1;i++){const s=S[i],t=S[i+1],a0=A[i],a1=A[i+1];const dd=t.dia-s.dia;
+   const ok=(x,al,prev,next)=>x.midi>al.midi&&intervalOK(prev.dia,prev.midi,x.dia,x.midi)&&intervalOK(x.dia,x.midi,next.dia,next.midi);
+   if(type==='経過音'&&Math.abs(dd)===2){const x=mk(s.dia+dd/2,s.onset+4,4);if(!isCT(x.dia,i)&&ok(x,a0,s,t))cands.push({i,x,where:'first'});}
+   if(type==='刺繍音'&&dd===0&&s.midi===t.midi){for(const st of [1,-1]){const x=mk(s.dia+st,s.onset+4,4);if(!isCT(x.dia,i)&&ok(x,a0,s,t))cands.push({i,x,where:'first'});}}
+   if(type==='掛留音'&&dd===-1&&!isCT(s.dia,i+1)){const x={...s,onset:t.onset,dur:4,tied:true,mark:'＊'};if(x.midi>a1.midi&&Math.abs(x.midi-t.midi)<=2)cands.push({i,x,where:'susp'});}
+   if(type==='先取音'&&Math.abs(dd)===1&&!isCT(t.dia,i)){const x={...t,onset:s.onset+4,dur:4,mark:'＊',ann:null};if(ok(x,a0,s,t)&&x.midi>a0.midi)cands.push({i,x,where:'first'});}
+   if(type==='倚音'){for(const st of [1,-1]){const x=mk(t.dia+st,t.onset,4);if(!isCT(x.dia,i+1)&&Math.abs(x.dia-s.dia)>=2&&ok(x,a1,s,t))cands.push({i,x,where:'app'});}}
+   if(type==='逸音'){for(const st of [1,-1]){const x=mk(s.dia+st,s.onset+4,4);const lp=t.dia-x.dia;if(!isCT(x.dia,i)&&Math.abs(lp)>=2&&Math.sign(lp)!==st&&ok(x,a0,s,t))cands.push({i,x,where:'first'});}}
+  }
+  if(!cands.length)continue;const c=pick(R,cands);const i=c.i;
+  if(c.where==='first'){S[i]={...S[i],dur:4};S.splice(i+1,0,c.x);}
+  else if(c.where==='susp'){S[i]={...S[i],tie:true};const t=S[i+1];S.splice(i+1,1,c.x,{...t,onset:t.onset+4,dur:t.dur-4,ann:null});}
+  else{const t=S[i+1];S.splice(i+1,1,c.x,{...t,onset:t.onset+4,dur:t.dur-4});}
+  const j=S.findIndex(n=>n.mark);const nx=`ソプラノ：${nName(S[j-1])} → ＊${nName(S[j])} → ${nName(S[j+1])}\n${type}：${NCT_DEF[type]}`;
+  return {f:'cad',q:'＊の音の非和声音の種類は？',exp:nx,why:NCT_DEF,P:g.P,opts:fillOpts(R,type,NCT_POOL[lv],3,NCT_ALL),ans:type};
+ }
+ return gkCad(R,1);
+}
+
+/* --- 移調・音部記号・移調楽器 --- */
+const INSTR=[[],[],[{n:'B♭管クラリネット',st:-1,sm:-2},{n:'B♭管トランペット',st:-1,sm:-2}],
+ [{n:'B♭管クラリネット',st:-1,sm:-2},{n:'A管クラリネット',st:-2,sm:-3},{n:'F管ホルン',st:-4,sm:-7},{n:'E♭管アルトサクソフォーン',st:-5,sm:-9}]];
+INSTR[4]=INSTR[3].concat([{n:'イングリッシュホルン（F管）',st:-4,sm:-7},{n:'B♭管テナーサクソフォーン',st:-8,sm:-14},{n:'E♭管クラリネット',st:2,sm:3},{n:'B♭管トランペット',st:-1,sm:-2}]);INSTR[5]=INSTR[4];
+// 1つの声部の旋律を楽譜の文字データにする（小節ごとに臨時記号を管理）
+function melAbc(ns,keyAbc,sig,clef,meter,U){
+ let h=`X:1\nM:${meter}\nL:1/16\nK:${keyAbc} clef=${CLEFS[clef].abc}\n`;let bar=-1,st=new Map(),line='';const B=meter==='6/8'?6:4;
+ ns.forEach(n=>{const b=Math.floor(n.onset/U);if(b!==bar){if(bar>=0)line+=' |';bar=b;st=new Map();line+=' ';}else if(n.onset%B===0)line+=' ';
+  const sa=st.has(n.dia)?st.get(n.dia):sigAlter(mod(n.dia,7),sig);const acc=n.alter!==sa?SYM[n.alter]:'';if(acc)st.set(n.dia,n.alter);
+  line+=acc+abcPitch(n.dia)+fmtDur(n.dur);});
+ return h+line+' |]\n';}
+function gkTrans(R,lv){
+ const t=lv===1?'clef':wpick(R,['clef','tr','inst','inst2'],[lv>=4?.3:.4,.35,.15,.15]);
+ for(let att=0;att<300;att++){
+  if(t==='clef'){
+   const clef=pick(R,GK_CLEF[lv].filter(c=>lv<3||c!=='treble'));const C=CLEFS[clef];const dia=C.mid-5+Math.floor(R()*11);const a=lv===1?0:pick(R,[0,0,1,-1]);const p={L:mod(dia,7),a};
+   const asIf=c2=>({L:mod(CLEFS[c2].mid+(dia-C.mid),7),a});const wr=[asIf('treble'),asIf('bass'),asIf('alto'),asIf('tenor'),{L:mod(p.L+1,7),a},{L:mod(p.L-1,7),a},{L:mod(p.L+2,7),a}].filter(q=>!samePitch(q,p)).map(pjp);
+   return {f:'trans',q:`この音の音名は？（${C.name}）`,exp:`${C.name}は、${CLEF_REF[clef]}。\nこの音は${staffPos(dia,clef)} → ${pjp(p)}`,abc:freeAbc(clef,nAbc(dia,a)+'4'),opts:fillOpts(R,pjp(p),wr,3),ans:pjp(p),play:{notes:[midiOf(dia,a)],how:'seq'}};}
+  if(t==='inst'||t==='inst2'){
+   const ins=pick(R,INSTR[Math.max(2,lv)]);
+   if(t==='inst'){// 記譜の音→実音
+    const w={L:Math.floor(R()*7),a:lv>=4?pick(R,[0,0,1,-1]):0};const real=addInt(w,ins.st,ins.sm);if(Math.abs(real.a)>1)continue;
+    const dia=placeNear(w,CLEFS.treble.mid);const wrong=[w,addInt(w,-ins.st,-ins.sm),addInt(w,ins.st,ins.sm+1),addInt(w,ins.st,ins.sm-1)].filter(q=>Math.abs(q.a)<=1).map(pjp);
+    const il=intLabel(ins.st,ins.sm),up=ins.st>0;
+    return {f:'trans',q:`${ins.n}の楽譜にこの音が書かれている。実際に鳴る音（実音）は？`,exp:`${ins.n}は、楽譜より${il}${up?'高く':'低く'}鳴る。\n書かれた音 ${pjp(w)} の${il}${up?'上':'下'} → 実音は ${pjp(real)}`,abc:freeAbc('treble',nAbc(dia,w.a)+'4'),opts:fillOpts(R,pjp(real),wrong,3,[0,1,2,3,4,5,6].flatMap(L=>[0,1,-1].map(a=>pjp({L,a})))),ans:pjp(real)};}
+   const k=pick(R,ALLK.filter(x=>Math.abs(x.sig)<=4));const wk=keyOf(addInt(k.t,-ins.st,-ins.sm),k.minor);if(!wk||Math.abs(wk.sig)>7)continue;
+   const wr=[k,keyOf(addInt(k.t,ins.st,ins.sm),k.minor),relKey(wk,'属調'),relKey(wk,'下属調'),relKey(wk,'平行調')].filter(x=>x&&Math.abs(x.sig)<=7).map(kjp);
+   const il2=intLabel(ins.st,ins.sm),up2=ins.st>0;
+   return {f:'trans',q:`実音で${kjp(k)}の曲を、${ins.n}のために書き直すと、楽譜は何調になる？`,exp:`${ins.n}は、楽譜より${il2}${up2?'高く':'低く'}鳴る。\nだから楽譜は、実音より${il2}${up2?'低く':'高く'}書く → ${kjp(k)}の${il2}${up2?'下':'上'}は ${kjp(wk)}`,opts:fillOpts(R,kjp(wk),wr,3),ans:kjp(wk)};}
+  // 旋律の移調（4択）
+  const k=pick(R,ALLK.filter(x=>Math.abs(x.sig)<=3));const sc=keyScale(k);const clef=lv>=4?pick(R,['treble','treble','bass','alto']):'treble';
+  const RH=[[4,4,4,4],[4,4,8],[2,2,4,4,4],[8,4,4],[4,2,2,8],[6,2,4,4],[4,4,2,2,4]];const durs=[...pick(R,RH),...pick(R,RH)];
+  let d=placeNear(k.t,CLEFS[clef].mid-2),on=0;const mel=[];
+  for(let i=0;i<durs.length;i++){if(i){const st=wpick(R,[1,-1,2,-2,3,-3,0],[4,4,2,2,1,1,.5]);d+=st;}
+   const deg=mod(d-(placeNear(k.t,CLEFS[clef].mid-2)),7);const p=sc[mod(deg,7)];mel.push({onset:on,dur:durs[i],dia:d,alter:p.a,midi:midiOf(d,p.a)});on+=durs[i];}
+  if(mel.some((n,i)=>i&&!intervalOK(mel[i-1].dia,mel[i-1].midi,n.dia,n.midi)))continue;
+  const IV=lv<=2?[[1,2,'長2度']]:lv===3?[[1,2,'長2度'],[1,1,'短2度'],[2,4,'長3度'],[2,3,'短3度']]:[[1,2,'長2度'],[1,1,'短2度'],[2,4,'長3度'],[2,3,'短3度'],[3,5,'完全4度'],[4,7,'完全5度'],[5,9,'長6度'],[5,8,'短6度']].concat(lv===5?[[0,1,'増1度'],[3,6,'増4度']]:[]);
+  const [st,sm,iname]=pick(R,IV);const dir=R()<.5?1:-1;const useSig=lv<=2?true:lv===3?R()<.6:R()<.4;
+  const tr=(stp,smi,dr)=>mel.map(n=>{const dia=n.dia+dr*stp,midi=n.midi+dr*smi;return {...n,dia,midi,alter:midi-midiOf(dia,0)};});
+  const right=tr(st,sm,dir);const maxA=lv===5?2:1;if(right.some(n=>Math.abs(n.alter)>maxA))continue;
+  const nk=keyOf(addInt(k.t,dir*st,dir*sm),k.minor);if(useSig&&(!nk||Math.abs(nk.sig)>7))continue;
+  const kAbc=useSig?gkKeyObj(nk).abc:'C',kSig=useSig?nk.sig:0;const U=16;
+  const W=[tr(st,sm,-dir),tr(st,sm+(sm>1?-1:1),dir),(()=>{const r=right.map(n=>({...n}));const j=1+Math.floor(R()*(r.length-1));r[j].alter+=r[j].alter>0?-1:1;r[j].midi=midiOf(r[j].dia,r[j].alter);return r;})()];
+  const WW=['移調の向きが逆（上と下がちがう）','音程の種類がちがう（長・短などが半音ずれている）','1つの音の♯・♭がちがう'];
+  if(st>0){W.push(tr(st-1,sm,dir));WW.push('度数がちがう（音の名前が1つずれている）');}
+  const ra=melAbc(right,kAbc,kSig,clef,'4/4',U);const wm=new Map();W.forEach((w,i)=>{if(w.every(n=>Math.abs(n.alter)<=2)){const a=melAbc(w,kAbc,kSig,clef,'4/4',U);if(a!==ra&&!wm.has(a))wm.set(a,WW[i]);}});const wa=[...wm.keys()];if(wa.length<3)continue;
+  const optAbc=shuffle(R,[ra,...shuffle(R,wa).slice(0,3)]);const labels=['A','B','C','D'];
+  const why=Object.fromEntries(optAbc.map((a,i)=>[labels[i],a===ra?'正しい':wm.get(a)]));
+  const mx=(nk?`${kjp(k)}の旋律を${iname}${dir>0?'上':'下'}げると、${kjp(nk)}になる（主音 ${pjp(k.t)} → ${pjp(nk.t)}）。`:`すべての音を${iname}${dir>0?'上':'下'}にずらす。`)+`\n${useSig?`${kjp(nk)}の調号（${sigExp(nk.sig)}）をつけて書いたもの`:'調号をつけず、必要な♯・♭を1つずつ書いたもの'}が正解（${labels[optAbc.indexOf(ra)]}）。`;
+  return {f:'trans',q:`上の旋律を${iname}${dir>0?'上':'下'}に、調号を${useSig?'用いて':'用いずに'}移調したものは？`,abc:melAbc(mel,gkKeyObj(k).abc,k.sig,clef,'4/4',U),wide:true,
+   exp:mx,why,optAbc,opts:labels,ans:labels[optAbc.indexOf(ra)],play:{notes:mel.map(n=>n.midi),durs:mel.map(n=>n.dur),how:'mel'}};
+ }
+ return gkTrans(R,1);
+}
+
+/* --- リズムと時間 --- */
+function gkTime(R,lv){
+ const t=wpick(R,['sec','bars','tempo','beam'],[1,lv>=2?1:0,lv>=3?.8:0,lv>=3?1.1:0]);
+ const numOpts=(ans,cands,unit)=>{const c=uniq(cands.filter(x=>x>0&&x!==ans&&Number.isFinite(x)).map(x=>Math.round(x*10)/10));while(c.length<3)c.push(ans+(c.length+1)*(R()<.5?-1:1)*Math.max(1,Math.round(ans/8)));
+  const o=shuffle(R,[ans,...shuffle(R,c).slice(0,3)]);return {opts:o.map(x=>x+unit),ans:ans+unit};};
+ for(let att=0;att<200;att++){
+  if(t==='sec'){
+   if(lv<=2){const m=pick(R,lv===1?[['4分の4拍子',4]]:[['4分の4拍子',4],['4分の3拍子',3],['4分の2拍子',2]]);const tp=pick(R,[60,60,120,90,72,80]);const bars=pick(R,[4,6,8,12,16]);
+    const s=bars*m[1]*60/tp;if(!Number.isInteger(s))continue;
+    return {f:'time',q:`♩＝${tp}、${m[0]}で${bars}小節の曲。演奏時間は何秒？`,exp:`♩＝${tp} は「1分間（60秒）に♩が${tp}拍」。\n${m[0]}は1小節に♩${m[1]}拍 → ${m[1]}×${bars}小節＝${m[1]*bars}拍\n${m[1]*bars}拍 ÷ ${tp} × 60秒 ＝ ${s}秒`,...numOpts(s,[s*2,s/2,bars*m[1],s+m[1]*60/tp],'秒')};}
+   if(lv===3){const e=pick(R,[120,144,96,132]);const bars=pick(R,[4,8,12,16]);const s=bars*6*60/e;if(!Number.isInteger(s))continue;const rep=R()<.5;
+    const ss=rep?s*2:s;return {f:'time',exp:`♪＝${e} は「1分間（60秒）に♪が${e}個」。\n8分の6拍子は1小節に♪6つ → 6×${bars}小節＝${6*bars}個${rep?' → くり返すので2倍の'+12*bars+'個':''}\n${(rep?12:6)*bars}個 ÷ ${e} × 60秒 ＝ ${ss}秒`,q:`♪＝${e}、8分の6拍子で${bars}小節${rep?'（全体を1回くり返す）':''}の曲。演奏時間は何秒？`,...numOpts(ss,[s,ss*2,bars*2*60/e*(rep?2:1),ss/2],'秒')};}
+   const a=pick(R,[60,72,90,120]),b=pick(R,[40,48,60,80]);const b1=pick(R,[4,8]),b2=pick(R,[4,6,8]);
+   const s1=b1*4*60/a,s2=b2*2*60/b;if(!Number.isInteger(s1+s2))continue;const rep=lv===5&&R()<.6;const tot=s1*(rep?2:1)+s2;
+   return {f:'time',exp:`前半：1小節に♩4拍 → 4×${b1}＝${4*b1}拍 → ${4*b1}÷${a}×60＝${s1}秒${rep?`、2回なので${s1*2}秒`:''}\n後半：8分の6拍子は1小節に♩.が2つ → 2×${b2}＝${2*b2}個 → ${2*b2}÷${b}×60＝${s2}秒\n合計 ${tot}秒`,q:`前半：♩＝${a}、4分の4拍子で${b1}小節${rep?'（くり返し記号で2回）':''}。後半：♩.＝${b}、8分の6拍子で${b2}小節。全部で何秒？`,...numOpts(tot,[s1+s2,tot+s1,s1*(rep?2:1)+b2*6*60/b,s1*(rep?2:1)+b2*3*60/b],'秒')};}
+  if(t==='tempo'){
+   const v=pick(R,lv===3?['a','b']:['a','b','c','d']);
+   if(v==='a'){const x=pick(R,[72,90,108,120,96,84]);const ans=x*2/3;if(!Number.isInteger(ans))continue;
+    return {f:'time',exp:`♩＝${x} なら、♪（♩の半分）は1分間に${x*2}個。\n♪＝♪ なので♪の速さはそのまま。♩.は♪3つ分 → ${x*2}÷3＝${ans}`,q:`♩＝${x}の4分の4拍子から、♪＝♪（8分音符の速さは同じ）で8分の6拍子になった。♩.＝？`,...numOpts(ans,[x,x*3/2,x*2,x/3],'')};}
+   if(v==='b'){const y=pick(R,[40,48,56,60,66,72]);return {f:'time',exp:`♩.＝♩ なので、新しい♩の速さは ${y}。\n♪は♩の半分の長さ → 1分間に ${y}×2＝${y*2}個`,q:`♩.＝${y}の8分の6拍子から、♩.＝♩で4分の2拍子になった。8分音符は1分間にいくつ？`,...numOpts(y*2,[y*3,y,y*4,y*1.5],'')};}
+   if(v==='c'){const z=pick(R,[60,72,80,96]);return {f:'time',exp:`♩＝♩. なので、新しい♩.の速さは ${z}。\n♩.は♪3つ分 → 1分間に ${z}×3＝${z*3}個`,q:`♩＝${z}の4分の2拍子から、♩＝♩.で8分の6拍子になった。8分音符は1分間にいくつ？`,...numOpts(z*3,[z*2,z,z*1.5,z*4],'')};}
+   const w=pick(R,[48,54,60,66]);return {f:'time',exp:`2分音符＝付点4分音符 なので、新しい♩.の速さは ${w}。\n♩.は♪3つ分 → 1分間に ${w}×3＝${w*3}個`,q:`2分音符＝${w}の2分の2拍子から、「2分音符＝付点4分音符」で8分の6拍子になった。8分音符は1分間にいくつ？`,...numOpts(w*3,[w*2,w*4,w*6,w*1.5],'')};}
+  if(t==='bars'){const g=gkBars(R,lv);if(!g)continue;return {f:'time',exp:g.exp,q:'この楽譜を演奏すると、全部で何小節になる？',abc:g.abc,wide:true,...numOpts(g.ans,g.wrong,'小節')};}
+  if(t==='beam'){const g=gkBeam(R,lv);if(!g)continue;return g;}
+ }
+ return gkTime(R,1);
+}
+// くり返し記号・D.C.・D.S.・Coda の楽譜と、演奏する小節数
+function gkBars(R,lv){
+ const n=lv<=2?pick(R,[6,8]):pick(R,[8,10,12]);const marks=Array.from({length:n},()=>({}));let seqf;
+ const kind=lv===2?'rep':lv===3?pick(R,['rep','end','dc']):pick(R,['end','dc','ds','ds2']);
+ if(kind==='rep'){const a=pick(R,[0,0,2]),b=Math.min(n-1,a+pick(R,[2,3,4]));marks[a].start=1;marks[b].end=1;
+  seqf=()=>{const s=[];for(let i=0;i<n;i++){s.push(i);if(i===b&&!marks[b].done){marks[b].done=1;i=a-1;}}return s;};}
+ else if(kind==='end'){const a=pick(R,[0,2]),e1=Math.min(n-3,a+pick(R,[2,3])),e2=e1+1;marks[a].start=1;marks[e1].e1=1;marks[e1].end=1;marks[e2].e2=1;
+  seqf=()=>{const s=[];for(let i=0;i<n;i++){if(i===e1&&s.includes(e1)){continue;}s.push(i);if(i===e1&&s.filter(x=>x===e1).length===1)i=a-1;}return s;};}
+ else if(kind==='dc'){const f=pick(R,[2,3,4,5].filter(x=>x<n-2));marks[f].fine=1;marks[n-1].dc=1;seqf=()=>{const s=[];for(let i=0;i<n;i++)s.push(i);for(let i=0;i<=f;i++)s.push(i);return s;};}
+ else{const sg=pick(R,[1,2]),tc=sg+pick(R,[2,3]),cs=Math.min(n-2,tc+pick(R,[2,3]));if(cs<=tc+1||cs>n-2)return null;marks[sg].segno=1;marks[tc].toc=1;marks[cs-1].ds=1;marks[cs].coda=1;
+  const pre=kind==='ds2'&&sg>=2;if(pre){marks[0].start=1;marks[1].end=1;}
+  seqf=()=>{const s=[];for(let i=0;i<cs;i++){s.push(i);if(pre&&i===1&&s.filter(x=>x===1).length===1)i=-1;}for(let i=sg;i<=tc;i++)s.push(i);for(let i=cs;i<n;i++)s.push(i);return s;};}
+ const seq=seqf();const ans=seq.length;
+ const PAT=['C4','C2 D2','E2 E2','G4','C3 D','E D C2','F2 G2','E4','D2 C2'];let body='';
+ for(let i=0;i<n;i++){const m=marks[i];let pre='';
+  const pm=i?marks[i-1]:{};
+  if(m.start)pre+='|:';else if(i)pre+=(pm.fine||pm.ds)?'||':'|';if(m.e1)pre+='[1';if(m.e2)pre+='[2';
+  let deco='';if(m.segno)deco+='!segno!';if(m.coda)deco+='!coda!"^Coda"';
+  // Fine・D.C.・D.S.・to Coda は小節の終わり（小節線の手前）に書く
+  let tail='';if(m.toc)tail='"^to Coda"!coda!y';if(m.fine)tail='"^Fine"y';if(m.dc)tail='"^D.C. al Fine"y';if(m.ds)tail='"^D.S. al Coda"y';
+  const p=pick(R,PAT).split(' ');p[0]=deco+p[0];body+=pre+' '+p.join(' ')+' '+(tail?tail+' ':'');
+  if(m.end)body+=':';}
+ body+=marks[n-1].end?'|':marks[n-1].dc?'||':'|]';body=body.replace(/:\|\[2/,':|[2').replace(/:\s*\|/g,':|');
+ const abc=`X:1\nM:4/4\nL:1/4\n%%barnumbers 1\nK:C\n${body}\n`;
+ const wrong=[n,ans-1,ans+1,ans+2,n*2,seq.length-(kind==='rep'?0:1)];
+ const runs=[];seq.forEach(i=>{const r=runs[runs.length-1];if(r&&i===r[1]+1)r[1]=i;else runs.push([i,i]);});
+ const RULE={rep:'「|:」と「:|」の間をもう一度演奏する。',end:'1回目は「1.」のカッコを演奏し、2回目は「1.」を飛ばして「2.」へ進む。',dc:'D.C.（ダ・カーポ）で曲の最初に戻り、Fine（フィーネ）で終わる。',ds:'D.S.（ダル・セーニョ）でセーニョ記号の小節に戻り、to Coda から Coda の小節へ飛ぶ。',ds2:'くり返しを先に済ませてから、D.S.でセーニョ記号の小節に戻り、to Coda から Coda へ飛ぶ。'}[kind];
+ const exp=`${RULE}\n演奏する順：${runs.map(([a,b])=>a===b?`${a+1}`:`${a+1}〜${b+1}`).join(' → ')}（小節の番号）\n数えると ${runs.map(([a,b])=>b-a+1).join('＋')}＝${ans}小節`;
+ return {abc,ans,wrong,exp};
+}
+// 拍の頭がわかる書き方（4択）
+function gkBeam(R,lv){
+ const meter=lv===3?pick(R,['4/4','3/4']):lv===4?pick(R,['4/4','3/4','6/8']):pick(R,['6/8','9/8','4/4']);
+ const U={'4/4':16,'3/4':12,'6/8':12,'9/8':18}[meter],B=meter.endsWith('/8')?6:4;
+ const PCS=B===4?[[4],[2,2],[3,1],[1,1,2],[2,4,2],[2,6],[1,2,1],[6,2],[2,2,4,4,4]]:[[6],[4,2],[2,2,2],[2,4],[3,1,2],[2,6,4],[4,4,4],[2,2,4,4]];
+ for(let att=0;att<100;att++){
+  const ds=[];let tot=0;while(tot<U*2){const p=pick(R,PCS);if(tot+p.reduce((a,b)=>a+b,0)>U*2)continue;ds.push(...p);tot+=p.reduce((a,b)=>a+b,0);}
+  const on=[];let p=0;ds.forEach(d=>{on.push(p);p+=d;});
+  const cross=ds.some((d,i)=>{const s=on[i],e=s+d;for(let b=Math.floor(s/B)+1;b*B<e;b++){if(b*B>s)return !(s%B===0&&d%B===0&&!(B===4&&false));}return false;});
+  if(!cross)continue;
+  const REP=[1,2,3,4,6,8,12];
+  const split=(points)=>{const out=[];ds.forEach((d,i)=>{let s=on[i];const e=s+d;const cuts=points.filter(x=>x>s&&x<e);let prev=s;[...cuts,e].forEach(c=>{let len=c-prev;while(len>0){const r=[...REP].reverse().find(x=>x<=len);out.push({on:prev,d:r,tie:true});prev+=r;len-=r;}});out[out.length-1].tie=false;});return out;};
+  const beats=[];for(let x=B;x<U*2;x+=B)beats.push(x);
+  const bars=[U];
+  const write=(ns,breaks)=>{let s='';ns.forEach((n,i)=>{if(n.on>0&&n.on%U===0)s+=' |';if(breaks.includes(n.on)||n.on%U===0)s+=' ';s+='B'+fmtDur(n.d)+(n.tie?'-':'');});return `X:1\nM:${meter}\nL:1/16\nK:C clef=treble\n${s} |]\n`;};
+  // 正しい：拍の頭で切ってタイ、拍ごとに旗をまとめる
+  const ok=write(split([...beats,...bars]),beats);
+  // まちがい1：拍をまたいだまま
+  const w1=write(split(bars),beats);
+  // まちがい2：拍でない所で切る
+  const off=beats.map(x=>x+(B===4?2:2)).filter(x=>x<U*2);const w2=write(split([...off,...bars]),beats);
+  // まちがい3：旗のまとめ方が拍とずれる
+  const grp=(ns,br)=>{const gs=[];let cur=[];ns.forEach(n=>{if(n.d>=4||br.includes(n.on)||n.on%U===0){if(cur.length>1)gs.push(cur.join(','));cur=[];}if(n.d<4)cur.push(n.on);else{if(cur.length>1)gs.push(cur.join(','));cur=[];}});if(cur.length>1)gs.push(cur.join(','));return gs.join('|');};
+  const sp=split([...beats,...bars]);const w3=write(sp,beats.map(x=>x+2));if(grp(sp,beats)===grp(sp,beats.map(x=>x+2)))continue;
+  const opts=uniq([ok,w1,w2,w3]);if(opts.length<4)continue;
+  // 全部同じ長さか（念のため）
+  const optAbc=shuffle(R,opts);const labels=['A','B','C','D'];
+  const WHY=new Map([[ok,'正しい：拍の頭で音を分けてタイでつなぎ、連桁（音符をつなぐ横線）も拍ごとにまとめている'],[w1,'拍をまたいだ音をそのまま書いていて、拍の頭が見えない'],[w2,'拍ではない所で音を分けている'],[w3,'連桁のまとめ方が拍とずれている']]);
+  const why=Object.fromEntries(optAbc.map((a,i)=>[labels[i],WHY.get(a)]));
+  const mj=meter.replace(/^(\d)\/(\d)$/,'$2分の$1');
+  const bx=`${mj}拍子は${meter.endsWith('/8')?'♩.（付点4分音符）':'♩'}ごとに1拍。\n拍の頭が目で見えるように、拍をまたぐ音は拍の頭で分けてタイでつなぎ、連桁（音符をつなぐ横線）も拍ごとにまとめる。正解は ${labels[optAbc.indexOf(ok)]}。`;
+  return {f:'time',q:'拍の頭がいちばんわかりやすい書き方は？',exp:bx,why,optAbc,opts:labels,ans:labels[optAbc.indexOf(ok)],beam:true};
+ }
+ return null;
+}
+
+/* --- 楽語（[語, 意味, 難易度, 仲間分け]）。意味が同じ語は同じ文にして、まぎらわしい選択肢にならないようにする --- */
+const TERMS=[
+ ['allegro','速く',1,'fast'],['allegretto','やや速く',1,'fast'],['andante','歩くような速さで',1,'mid'],['moderato','中くらいの速さで',1,'mid'],['adagio','ゆるやかに',1,'slow'],
+ ['lento','ゆるやかに',1,'slow'],['largo','幅広くゆるやかに',1,'slow'],['presto','急速に',1,'fast'],['vivace','活発に速く',1,'fast'],['a tempo','もとの速さで',1,'tback'],
+ ['ritardando','だんだん遅く',1,'slower'],['rallentando','だんだん遅く',1,'slower'],['accelerando','だんだん速く',1,'faster'],['crescendo','だんだん強く',1,'cresc'],['decrescendo','だんだん弱く',1,'dim'],
+ ['diminuendo','だんだん弱く',1,'dim'],['piano','弱く',1,'soft'],['pianissimo','とても弱く',1,'soft'],['forte','強く',1,'loud'],['fortissimo','とても強く',1,'loud'],
+ ['mezzo piano','少し弱く',1,'soft'],['mezzo forte','少し強く',1,'loud'],['legato','なめらかに',1,'art'],['staccato','音を短く切って',1,'art'],['dolce','やわらかく、甘く',1,'char'],
+ ['cantabile','歌うように',1,'char'],['tempo primo','最初の速さで',1,'tback'],
+ ['andantino','アンダンテよりやや速く',2,'mid'],['larghetto','ラルゴよりやや速く',2,'slow'],['grave','重々しくゆるやかに',2,'slow'],['tenuto','音の長さを十分に保って',2,'art'],
+ ['sostenuto','音の長さを十分に保って',2,'art'],['marcato','一音一音はっきりと',2,'art'],['espressivo','表情豊かに',2,'char'],['grazioso','優雅に',2,'char'],['maestoso','荘厳に',2,'char'],
+ ['animato','生き生きと',2,'live'],['agitato','激しく、せきこんで',2,'char'],['tranquillo','静かに',2,'calm'],['calmato','静かに落ち着いて',2,'calm'],['con brio','生き生きと',2,'live'],
+ ['con moto','動きをもって',2,'live'],['poco a poco','少しずつ',2,'word'],['subito','すぐに、急に',2,'word'],['sempre','常に',2,'word'],['molto','非常に',2,'word'],
+ ['poco','少し',2,'word'],['più','もっと',2,'word'],['meno','より少なく',2,'word'],['assai','非常に',2,'word'],['non troppo','はなはだしくなく',2,'word'],
+ ['sforzando','特に強く',2,'acc'],['fortepiano','強く、すぐに弱く',2,'acc'],['morendo','だんだん弱くして消えるように',2,'die'],['smorzando','だんだん弱くして消えるように',2,'die'],
+ ['allargando','だんだん遅く、幅広く',2,'slower'],['stringendo','だんだんせきこんで速く',2,'faster'],['tempo rubato','速さを自由に伸び縮みさせて',2,'free'],['tutti','全員で',2,'ens'],
+ ['solo','ひとりで',2,'ens'],['divisi','分かれて',2,'ens'],['unisono','同じ音で',2,'ens'],['simile','同じように続けて',2,'word'],['da capo','初めに戻る',2,'struct'],
+ ['dal segno','記号（セーニョ）に戻る',2,'struct'],['fine','終わり',2,'struct'],['coda','結尾（曲の終わりの部分）',2,'struct'],['a cappella','無伴奏で',2,'ens'],['leggiero','軽く',2,'light'],
+ ['pesante','重く',2,'heavy'],['scherzando','おどけて',2,'joy'],['giocoso','楽しく',2,'joy'],['brillante','華やかに',2,'char'],['risoluto','決然と',2,'char'],['semplice','素朴に',2,'char'],
+ ['sotto voce','声をひそめて',2,'char'],['mezza voce','半分の声で、やわらかく',2,'char'],['con fuoco','熱烈に',2,'char'],['appassionato','情熱的に',2,'char'],['affettuoso','愛情をこめて',2,'char'],
+ ['amabile','愛らしく',2,'char'],['lamentoso','悲しげに',2,'sad'],['dolente','悲しげに',2,'sad'],['mesto','悲しげに',2,'sad'],['pomposo','華麗に、堂々と',2,'char'],
+ ['tempo giusto','正確な速さで',2,'tback'],["l'istesso tempo",'同じ速さで',2,'tback'],['ad libitum','自由に',2,'free'],['a piacere','自由に',2,'free'],['rinforzando','急に強く',2,'acc'],
+ ['vivo','活発に',2,'fast'],['veloce','速く',3,'fast'],
+ ['pizzicato','弦を指ではじいて',3,'tech'],['arco','弓で弾いて',3,'tech'],['con sordino','弱音器をつけて',3,'tech'],['senza sordino','弱音器をはずして',3,'tech'],['sul ponticello','駒の近くで弾いて',3,'tech'],
+ ['sul tasto','指板の上で弾いて',3,'tech'],['col legno','弓の木の部分で',3,'tech'],['tremolo','同じ音をこまかくくり返して',3,'tech'],['glissando','すべるように',3,'tech'],['arpeggio','和音を分散させて',3,'tech'],
+ ['una corda','弱音ペダルを踏んで',3,'tech'],['tre corde','弱音ペダルを離して',3,'tech'],['loco','もとの高さで',3,'tech'],['portato','音を少し区切って、のばしぎみに',3,'art'],['legatissimo','きわめてなめらかに',3,'art'],
+ ['staccatissimo','きわめて短く切って',3,'art'],['quasi','ほとんど〜のように',3,'word'],['come','〜のように',3,'word'],['alla breve','2分の2拍子で（2分音符を1拍として）',3,'word'],['alla marcia','行進曲風に',3,'style'],
+ ['alla turca','トルコ風に',3,'style'],['attacca','切れ目なく次へ続けて',3,'struct'],['tacet','休む（演奏しない）',3,'struct'],['perdendosi','だんだん弱くして消えるように',3,'die'],['calando','だんだん弱く遅く',3,'die'],
+ ['mancando','だんだん弱くして消えるように',3,'die'],['ritenuto','すぐに遅く',3,'slower'],['tardando','だんだん遅く',3,'slower'],['slentando','だんだん遅く',3,'slower'],['incalzando','せきこんで',3,'faster'],
+ ['stretto','せきこんで速く',3,'faster'],['comodo','ほどよい速さで、気楽に',3,'mid'],['deciso','決然と',3,'char'],['parlando','話すように',3,'char'],['tempo di valse','ワルツの速さで',3,'style'],
+ ['zurückhaltend','控えて、遅くして',4,'slower'],['langsam','遅く',4,'slow'],['schnell','速く',4,'fast'],['lebhaft','生き生きと',4,'live'],['mäßig','中くらいの速さで',4,'mid'],['ruhig','静かに',4,'calm'],
+ ['ausdrucksvoll','表情豊かに',4,'char'],['innig','心をこめて',4,'char'],['zart','やさしく、柔らかに',4,'char'],['kräftig','力強く',4,'heavy'],['bewegt','動きをもって',4,'live'],['breit','幅広く',4,'slow'],
+ ['nach und nach','少しずつ',4,'word'],['etwas','少し',4,'word'],['sehr','非常に',4,'word'],['immer','常に',4,'word'],['lent','遅く',4,'slow'],['vif','活発に',4,'fast'],['modéré','中くらいの速さで',4,'mid'],
+ ['cédez','遅くして',4,'slower'],['serrez','せきこんで',4,'faster'],['en dehors','浮き立たせて',4,'char'],['doux','やさしく、柔らかに',4,'char'],['très','非常に',4,'word'],['un peu','少し',4,'word'],
+ ['retenu','控えて、遅くして',4,'slower'],['animé','生き生きと',4,'live'],['au mouvement','もとの速さで',4,'tback'],['piangendo','泣くように',4,'sad'],['con anima','生気をもって',4,'live'],
+ ['con grazia','優雅に',4,'char'],['con dolore','悲しみをもって',4,'sad'],['largamente','幅広く',4,'slow'],['sforzato','特に強く',4,'acc'],['quieto','静かに',4,'calm'],['impetuoso','激しく',4,'char'],
+ ['alla polacca','ポロネーズ風に',4,'style'],['alla zingarese','ジプシー風に',4,'style'],['vigoroso','力強く',4,'heavy'],['sognando','夢見るように',4,'char'],['teneramente','優しく',4,'char'],
+ ['flebile','哀れに、悲しげに',5,'sad'],['gemendo','嘆くように',5,'sad'],['lagrimoso','涙ぐんで',5,'sad'],['smanioso','狂おしく',5,'char'],['strepitoso','騒がしく',5,'char'],['tenebroso','暗く',5,'sad'],
+ ['lugubre','痛ましく、陰うつに',5,'sad'],['ondeggiando','波打つように',5,'char'],['stentando','遅らせて、ひきずるように',5,'slower'],['slargando','だんだん遅く、幅広く',5,'slower'],['piacevole','心地よく',5,'char'],
+ ['morbido','柔らかに',5,'char'],['fastoso','華やかに、壮麗に',5,'char'],['focoso','火のように熱烈に',5,'char'],['lusingando','媚びるように',5,'char'],['narrante','物語るように',5,'char'],
+ ['volante','飛ぶように速く',5,'fast'],['velato','ベールをかけたように、ぼかして',5,'char'],['tosto','すぐに、速く',5,'word'],['giusto','正確に',5,'word']];
+const TCAT={fast:'速い速さの語',slow:'遅い速さの語',slower:'だんだん遅くする語',faster:'だんだん速くする語',die:'消えるように弱くする語',sad:'悲しい表情の語',calm:'静かな表情の語',tech:'弦楽器の弾き方の語',struct:'曲の進み方を示す語',cresc:'だんだん強くする語',dim:'だんだん弱くする語'};
+const ABBR=[['rall.','rallentando',2],['accel.','accelerando',1],['cresc.','crescendo',1],['decresc.','decrescendo',1],['dim.','diminuendo',1],['smorz.','smorzando',3],['pizz.','pizzicato',3],
+ ['ten.','tenuto',2],['stacc.','staccato',2],['leg.','legato',2],['con sord.','con sordino',3],['espr.','espressivo',3],['marc.','marcato',3],['sost.','sostenuto',3],['string.','stringendo',3],
+ ['allarg.','allargando',3],['perd.','perdendosi',4],['div.','divisi',3],['unis.','unisono',3],['trem.','tremolo',3],['gliss.','glissando',3],['fp','fortepiano',2],['mf','mezzo forte',1],
+ ['mp','mezzo piano',1],['rfz','rinforzando',3],['D.C.','da capo',2],['D.S.','dal segno',2],['V.S.','volti subito',4],['morend.','morendo',4],['cal.','calando',4],['lusing.','lusingando',5],['incalz.','incalzando',5]];
+const OPPO=[['accelerando','ritardando'],['crescendo','diminuendo'],['legato','staccato'],['forte','piano'],['con sordino','senza sordino'],['arco','pizzicato'],['una corda','tre corde'],
+ ['tutti','solo'],['più','meno'],['divisi','unisono'],['cédez','serrez'],['presto','largo'],['stringendo','allargando'],['fortissimo','pianissimo'],['schnell','langsam'],['vif','lent']];
+const SUPER=[['presto','prestissimo'],['forte','fortissimo'],['piano','pianissimo'],['legato','legatissimo'],['dolce','dolcissimo'],['largo','larghissimo'],['lento','lentissimo'],['allegro','allegrissimo'],
+ ['vivace','vivacissimo'],['staccato','staccatissimo'],['leggiero','leggierissimo'],['tranquillo','tranquillissimo'],['agitato','agitatissimo']];
+const termMean=w=>(TERMS.find(t=>t[0]===w)||[])[1];
+/* 同じ問題を「ひと回りするまで出さない」ための山札（画面側が GK_DECK に入れてくれる） */
+let GK_DECK={};
+function fresh(name,arr,idf){const d=GK_DECK[name]||(GK_DECK[name]=new Set());const f=arr.filter(o=>!d.has(idf(o)));if(f.length)return f;d.clear();return arr;}
+const BROADC=new Set(['char','word','art','tech','style','ens','struct','acc','free',undefined]);
+const MCLU=[['生き生き','活発','生気','動きをもって'],['悲し','嘆','泣','涙','哀','痛まし','陰うつ','暗く'],['静か','落ち着','穏やか'],['やわらか','柔らか','やさし','優し','甘'],['優雅','華やか','華麗','壮麗','堂々','荘厳'],
+ ['激し','熱烈','情熱','火のよう','狂おし','騒が','せきこんで'],['重','力強'],['自由'],['遅','ゆるやか','幅広'],['速','急'],['弱','消え'],['強'],['少し'],['非常','とても','きわめて'],['もとの','最初の','同じ速さ','正確な速さ'],['同じように','同じ音で']];
+const SYNG={dim:'q',die:'q',soft:'q',cresc:'l',loud:'l',acc:'l'};
+function tooClose(x,y){ // 意味が近すぎて「どちらも正解」と言えてしまう組み合わせ
+ const a=x[1],b=y[1];if(!a||!b)return true;if(a===b||a.includes(b)||b.includes(a))return true;
+ if(x[3]&&x[3]===y[3]&&!BROADC.has(x[3]))return true;if(SYNG[x[3]]&&SYNG[x[3]]===SYNG[y[3]])return true;
+ if(MCLU.some(cl=>cl.some(w=>a.includes(w))&&cl.some(w=>b.includes(w))))return true;
+ const kj=s=>s.match(/[一-鿿]/g)||[];const A=new Set(kj(a));return kj(b).some(c=>A.has(c));}
+function lev(a,b){const d=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t;}}return d[b.length];}
+function lookAlike(R,w,cands,lv){ // つづりの見た目が近い本物の語を3つ
+ const pre=(a,b)=>{let i=0;while(i<a.length&&i<b.length&&a[i]===b[i])i++;return i;};
+ const sc=uniq(cands).filter(c=>c!==w&&pre(w,c)>=1).map(c=>[c,pre(w,c)*3-lev(w,c)*.6+R()*.8]).sort((x,y)=>y[1]-x[1]);
+ const N=lv<=3?9:lv===4?6:4;if(sc.length<3)return null;return shuffle(R,sc.slice(0,N)).slice(0,3).map(x=>x[0]);}
+const termRow=w=>TERMS.find(t=>t[0]===w);
+const FAM={slower:'sp',faster:'sp',tback:'sp',fast:'sp',slow:'sp',mid:'sp',cresc:'v',dim:'v',die:'v',soft:'v',loud:'v',acc:'v',art:'p',tech:'p',ens:'p',struct:'s'};
+function gkTerm(R,lv){
+ const pool=TERMS.filter(t=>t[2]<=lv),cur=TERMS.filter(t=>t[2]>=Math.max(1,lv-1)&&t[2]<=lv);
+ const W={mean:[1,1,.6,.35,.25],rev:[.5,.5,.3,.15,.1],look:[0,0,.45,.55,.65],abm:[.3,.4,.35,.3,.25],odd:[0,0,.3,.4,.45],sup:[0,0,.25,.35,.35],oppo:[0,.25,.3,.3,.3]};
+ const ks=Object.keys(W);
+ for(let att=0;att<100;att++){
+  const t=wpick(R,ks,ks.map(k=>W[k][lv-1]));
+  if(t==='mean'||t==='rev'){const x=pick(R,fresh('term-'+t,cur,y=>y[0]));const others=shuffle(R,pool.filter(y=>y[0]!==x[0]&&!tooClose(x,y)));
+   const same=others.filter(y=>y[3]===x[3]),diff=others.filter(y=>y[3]!==x[3]);const ds=[],seen=new Set([x[1]]);
+   for(const y of [...same.slice(0,2),...diff]){if(seen.has(y[1])||ds.some(z=>tooClose(z,y)))continue;seen.add(y[1]);ds.push(y);if(ds.length===3)break;}if(ds.length<3)continue;
+   if(t==='mean')return {f:'term',q:`「${x[0]}」の意味は？`,opts:shuffle(R,[x[1],...ds.map(y=>y[1])]),ans:x[1],exp:`${x[0]}：${x[1]}`,id:x[0],deck:'term-'+t};
+   return {f:'term',q:`「${x[1]}」という意味の楽語は？`,opts:shuffle(R,[x[0],...ds.map(y=>y[0])]),ans:x[0],exp:`${x[0]}：${x[1]}`,id:x[0],deck:'term-'+t};}
+  if(t==='look'){ // 見た目がそっくりな本物の楽語から選ぶ
+   const cand=TERMS.filter(y=>y[2]<=Math.min(5,lv+1));
+   if(R()<.7){const x=pick(R,fresh('term-look',cur.filter(y=>y[0].length>=4),y=>y[0]));
+    const ds=lookAlike(R,x[0],cand.filter(y=>y[0]!==x[0]&&!tooClose(x,y)).map(y=>y[0]),lv);if(!ds)continue;
+    return {f:'term',q:`「${x[1]}」という意味の楽語は？`,opts:shuffle(R,[x[0],...ds]),ans:x[0],exp:`${x[0]}：${x[1]}（ほかは ${ds.map(w=>`${w}：${termMean(w)}`).join('、')}）`,id:x[0],deck:'term-look'};}
+   const ab=ABBR.filter(a=>a[2]<=lv&&/^[a-z]/.test(a[0])&&a[0].split('.').length===2&&termRow(a[1]));if(!ab.length)continue;
+   const a=pick(R,fresh('term-lookab',ab,o=>o[0]));const stem=a[0].replace(/\.$/,'').toLowerCase();const xr=termRow(a[1]);
+   const ds=lookAlike(R,a[1],cand.filter(y=>!y[0].toLowerCase().startsWith(stem)&&!tooClose(xr,y)).map(y=>y[0]),lv);if(!ds)continue;
+   return {f:'term',q:`「${a[0]}」を省略しないで書くと？`,opts:shuffle(R,[a[1],...ds]),ans:a[1],exp:`${a[0]} ＝ ${a[1]}：${xr[1]}`,id:a[0],deck:'term-lookab'};}
+  if(t==='abm'){ // 意味の近い本物の省略形どうしで迷わせる
+   const AB=ABBR.filter(a=>a[2]<=Math.max(lv,2)).map(a=>{const r=termRow(a[1]);return r&&{a:a[0],w:a[1],r};}).filter(Boolean);
+   const x=pick(R,fresh('term-abm',AB,o=>o.a));
+   const near=shuffle(R,AB.filter(o=>o.a!==x.a&&o.r[3]!==x.r[3]&&!tooClose(x.r,o.r))).sort((p,q)=>(FAM[q.r[3]]===FAM[x.r[3]])-(FAM[p.r[3]]===FAM[x.r[3]]));
+   const ds=[];for(const o of near){if(ds.some(z=>tooClose(z.r,o.r)||z.r[1]===o.r[1]))continue;ds.push(o);if(ds.length===3)break;}if(ds.length<3)continue;
+   const exp=[x,...ds].map(o=>`${o.a} ＝ ${o.w}：${o.r[1]}`).join('　／　');
+   if(R()<.5)return {f:'term',q:`「${x.r[1]}」の意味の省略形は？`,opts:shuffle(R,[x.a,...ds.map(o=>o.a)]),ans:x.a,exp,id:x.a,deck:'term-abm'};
+   return {f:'term',q:`「${x.a}」の意味は？`,opts:shuffle(R,[x.r[1],...ds.map(o=>o.r[1])]),ans:x.r[1],exp,id:x.a,deck:'term-abm'};}
+  if(t==='sup'){ // -issimo どうしで選ぶ（元の語の意味を知らないと解けない）
+   const SU=SUPER.map(([b,s])=>{const r=termRow(b);return r&&{b,s,r};}).filter(Boolean);
+   const x=pick(R,fresh('term-sup',SU,o=>o.s));const ds=[];
+   for(const o of shuffle(R,SU)){if(o===x||tooClose(x.r,o.r)||ds.some(z=>tooClose(z.r,o.r)))continue;ds.push(o);if(ds.length===3)break;}if(ds.length<3)continue;
+   const exp=[x,...ds].map(o=>`${o.s}：とても${o.r[1]}（${o.b}を強めた形）`).join('　／　');
+   if(R()<.5)return {f:'term',q:`「とても${x.r[1]}」という意味の楽語は？`,opts:shuffle(R,[x.s,...ds.map(o=>o.s)]),ans:x.s,exp,id:x.s,deck:'term-sup'};
+   return {f:'term',q:`「${x.s}」の意味は？`,opts:shuffle(R,['とても'+x.r[1],...ds.map(o=>'とても'+o.r[1])]),ans:'とても'+x.r[1],exp,id:x.s,deck:'term-sup'};}
+  if(t==='oppo'){const o=pick(R,OPPO);const [a,b]=R()<.5?o:[o[1],o[0]];const wr=shuffle(R,pool.filter(y=>y[0]!==a&&y[0]!==b&&termMean(y[0])!==termMean(b)&&!OPPO.some(p=>p.includes(a)&&p.includes(y[0])))).slice(0,3).map(y=>y[0]);
+   if(wr.length<3)continue;
+   return {f:'term',q:`「${a}」とほぼ反対の意味の語は？`,opts:shuffle(R,[b,...wr]),ans:b,exp:`${a}：${termMean(a)||''}　⇔　${b}：${termMean(b)||''}`};}
+  if(t==='odd'){const cats=Object.keys(TCAT).filter(c=>TERMS.filter(y=>y[3]===c&&y[2]<=Math.max(lv,3)).length>=4);const c=pick(R,cats);
+   const four=shuffle(R,TERMS.filter(y=>y[3]===c&&y[2]<=Math.max(lv,3))).slice(0,4);
+   const opp={fast:['slow'],slow:['fast'],slower:['faster','cresc'],faster:['slower','die'],die:['cresc','faster'],sad:['joy','live'],calm:['live','char'],tech:['struct','ens'],struct:['tech'],cresc:['dim','die'],dim:['cresc']}[c]||['char'];
+   const out=pick(R,TERMS.filter(y=>opp.includes(y[3])&&y[2]<=Math.max(lv,3)));if(!out)continue;
+   return {f:'term',q:'意味が他と大きく異なるものは？',opts:shuffle(R,[out[0],...four.map(y=>y[0])]),ans:out[0],exp:`${out[0]}：${out[1]}（ほかは${TCAT[c]}）`};}
+ }
+ return gkTerm(R,1);
+}
+
+/* --- 知識○×（[文, 正しいか, 説明, 難易度]） --- */
+const QUIZ=[
+ ['トランペットは金管楽器である。',1,'マウスピースで唇をふるわせる金管楽器。',1],
+ ['フルートは金属で作られていても、木管楽器に分類される。',1,'材料ではなく音の出し方で分類する。フルートは木管楽器。',1],
+ ['サクソフォーンは金属で作られているが、木管楽器に分類される。',1,'リード（1枚）で音を出すので木管楽器。',1],
+ ['ヴァイオリンの弦は5本である。',0,'ヴァイオリンの弦は4本。',1],
+ ['クラリネットはダブルリード（2枚のリード）の楽器である。',0,'クラリネットはシングルリード（1枚）。ダブルリードはオーボエ・ファゴットなど。',1],
+ ['オーボエはダブルリードの楽器である。',1,'2枚のリードを合わせて音を出す。',1],
+ ['ホルンは木管楽器である。',0,'ホルンは金管楽器。',1],
+ ['ピアノは、ハンマーで弦をたたいて音を出す。',1,'鍵盤を押すとハンマーが弦を打つ。',1],
+ ['ハープの弦は、弓でこすって演奏する。',0,'ハープは指で弦をはじく。',1],
+ ['トロンボーンは、スライドを動かして音の高さを変える。',1,'スライド管をのび縮みさせる。',1],
+ ['ピッコロは、フルートより低い音を出す。',0,'ピッコロはフルートより1オクターブ高い。',1],
+ ['ティンパニは、音の高さを変えることができない。',0,'ティンパニはペダルなどで音の高さを調節できる。',1],
+ ['オーケストラの弦楽器のうち、いちばん低い音を出すのはコントラバスである。',1,'ヴァイオリン・ヴィオラ・チェロ・コントラバスの順に低くなる。',1],
+ ['4分の3拍子は、複合拍子である。',0,'4分の3拍子は単純拍子。8分の6拍子などが複合拍子。',1],
+ ['全音符1つは、16分音符16個分の長さである。',1,'全音符＝2分音符2つ＝4分音符4つ＝8分音符8つ＝16分音符16。',1],
+ ['付点2分音符は、8分音符6つ分の長さである。',1,'2分音符（8分音符4つ）＋8分音符2つ＝6つ。',1],
+ ['メヌエットは、3拍子の舞曲である。',1,'メヌエットは3拍子。',1],
+ ['ワルツは、2拍子の舞曲である。',0,'ワルツは3拍子。',1],
+ ['アカペラ（a cappella）は、楽器の伴奏なしで歌うことである。',1,'無伴奏の合唱・歌唱のこと。',1],
+ ['弦楽四重奏は、ヴァイオリン2・ヴィオラ1・チェロ1の編成である。',1,'第1・第2ヴァイオリン、ヴィオラ、チェロ。',1],
+ ['ピッコロは、楽譜に書かれた音より1オクターブ高い音が鳴る。',1,'読みやすいように1オクターブ低く書く。',2],
+ ['コントラバスは、楽譜に書かれた音より1オクターブ低い音が鳴る。',1,'読みやすいように1オクターブ高く書く。',2],
+ ['ギターは、楽譜に書かれた音より1オクターブ低い音が鳴る。',1,'ト音記号で1オクターブ高く書く。',2],
+ ['B♭管クラリネットは、楽譜に書かれた音より長2度低い音が鳴る。',1,'楽譜の「ド」で実音の「シ♭」が鳴る。',2],
+ ['F管ホルンは、楽譜に書かれた音より完全5度高い音が鳴る。',0,'F管ホルンは完全5度「低い」音が鳴る。',2],
+ ['A管クラリネットは、楽譜に書かれた音より短3度低い音が鳴る。',1,'楽譜の「ド」で実音の「ラ」が鳴る。',2],
+ ['E♭管アルトサクソフォーンは、楽譜に書かれた音より長6度低い音が鳴る。',1,'楽譜の「ド」で実音の「ミ♭」（長6度下）が鳴る。',2],
+ ['フルートは移調楽器である。',0,'フルートは書かれた音どおりの高さ（実音）で鳴る。',2],
+ ['グロッケンシュピール（鉄琴）は、楽譜に書かれた音より2オクターブ高い音が鳴る。',1,'高すぎて読みにくいので2オクターブ低く書く。',2],
+ ['シロフォン（木琴）は、楽譜に書かれた音より1オクターブ高い音が鳴る。',1,'1オクターブ低く書く。',2],
+ ['イングリッシュホルンは金管楽器である。',0,'イングリッシュホルンはオーボエの仲間の木管楽器（F管）。',2],
+ ['ユーフォニアムは金管楽器である。',1,'マウスピースで吹く金管楽器。',2],
+ ['ヴィオラの楽譜には、主にアルト記号（ハ音記号）が使われる。',1,'高い音域ではト音記号も使う。',2],
+ ['8分の6拍子は、複合拍子である。',1,'付点4分音符を1拍とする2拍子で、複合拍子。',2],
+ ['4分の6拍子は、複合拍子である。',1,'付点2分音符を1拍とする2拍子で、複合拍子。',2],
+ ['8分の9拍子の1小節は、付点4分音符3つ分の長さである。',1,'8分音符9つ＝付点4分音符3つ。',2],
+ ['複付点4分音符は、16分音符7つ分の長さである。',1,'4分音符（4）＋8分音符（2）＋16分音符（1）＝7。',2],
+ ['8分の3拍子の曲は、4分の3拍子の曲より必ず速く演奏される。',0,'拍子の分母で速さは決まらない。速さは速度記号などで決まる。',2],
+ ['alla breve は、2分音符を1拍とする2拍子の意味である。',1,'C に縦線を引いた記号と同じ意味。',2],
+ ['8va の記号が音符の上に書かれているときは、1オクターブ高く演奏する。',1,'書かれた音より1オクターブ高く。',2],
+ ['ottava alta は、1オクターブ低く演奏する指示である。',0,'alta は「高い」。1オクターブ高く演奏する。',3],
+ ['loco は、オクターブ記号の指示をやめて、書かれた高さで演奏する指示である。',1,'「もとの場所で」という意味。',3],
+ ['トリルは、ある音とその2度上の音を速く交互にくり返す装飾音である。',1,'tr の記号で表す。',3],
+ ['ガヴォットは、3拍子の舞曲である。',0,'ガヴォットは2拍子系（4分の4拍子・2分の2拍子）の舞曲。',3],
+ ['サラバンドは、ゆるやかな3拍子の舞曲である。',1,'バロック時代の組曲に入るゆるやかな3拍子の舞曲。',3],
+ ['ポロネーズは、ポーランド起源の3拍子の舞曲である。',1,'ショパンのポロネーズが有名。',3],
+ ['マズルカは、ポーランド起源の3拍子の舞曲である。',1,'ショパンのマズルカが有名。',3],
+ ['ボレロは、スペイン起源の3拍子の舞曲である。',1,'ラヴェルの《ボレロ》もこのリズムによる。',3],
+ ['タランテラは、イタリア南部の速い舞曲である。',1,'8分の6拍子などの急速な舞曲。',3],
+ ['ジーグは、バロック時代の組曲の最後に置かれることが多い、速い舞曲である。',1,'アルマンド・クーラント・サラバンド・ジーグの順が基本。',3],
+ ['ソナタ形式は、提示部・展開部・再現部からなる。',1,'さらに序奏やコーダがつくこともある。',3],
+ ['ロンド形式は、同じ主題が何度も戻ってくる形式である。',1,'A-B-A-C-A のように主題がくり返し現れる。',3],
+ ['カノンは、ある声部の旋律を、別の声部が遅れて追いかけるようにまねる書き方である。',1,'「かえるの合唱」の輪唱もカノンの一種。',3],
+ ['オラトリオは、衣装や舞台装置を使い、演技をしながら上演される。',0,'オラトリオは演技や舞台装置を伴わない宗教的な劇音楽。',3],
+ ['レクイエムは、死者のためのミサ曲である。',1,'モーツァルト、ヴェルディ、フォーレのレクイエムなどが有名。',3],
+ ['レチタティーヴォは、語るように歌う部分である。',1,'オペラ・オラトリオなどで、話の筋を進める部分。',3],
+ ['ケッヘル番号（K.）は、ベートーヴェンの作品につけられた番号である。',0,'ケッヘル番号はモーツァルトの作品の番号。',3],
+ ['BWV は、J.S.バッハの作品の番号である。',1,'バッハ作品目録の番号。',3],
+ ['ドイチュ番号（D.）は、シューベルトの作品の番号である。',1,'ドイチュが作った目録の番号。',3],
+ ['ショパンは、ハンガリー出身の作曲家である。',0,'ショパンはポーランド出身。',3],
+ ['ピアノ五重奏は、ピアノ5台で演奏する編成である。',0,'ふつうはピアノと弦楽四重奏（またはピアノと弦楽器4つ）の5人。',3],
+ ['ベートーヴェンの交響曲第9番の終楽章には、独唱と合唱が入る。',1,'シラーの詩《歓喜に寄す》による。',3],
+ ['ピアノの88の鍵盤のいちばん低い音は、ラ（A）である。',1,'最低音はラ、最高音はド。',3],
+ ['M.M.♩＝120 は、1秒間に4分音符2つの速さである。',1,'1分間に120回＝1秒間に2回。',3],
+ ['コードネームの C7 は、長七の和音を表す。',0,'C7 は属七の和音（長三和音＋短7度）。長七の和音は Cmaj7 など。',3],
+ ['aug（オーグメント）は、増三和音を表す。',1,'例：Caug ＝ ド・ミ・ソ♯。',3],
+ ['箏（こと）は、ふつう13本の弦をもつ。',1,'十三絃が基本。十七絃などもある。',4],
+ ['三味線の弦は4本である。',0,'三味線の弦は3本。',4],
+ ['三味線は、撥（ばち）で弦をはじいて演奏する。',1,'撥や指で弾く撥弦楽器。',4],
+ ['尺八は、竹で作られた縦笛である。',1,'真竹の根元を使った縦笛。',4],
+ ['龍笛は、雅楽で使われる横笛である。',1,'雅楽の管楽器の一つ。',4],
+ ['篳篥（ひちりき）は、ダブルリードの縦笛で、雅楽で使われる。',1,'2枚のリード（蘆舌）で音を出す。',4],
+ ['笙（しょう）は、たくさんの竹管を束ねた楽器で、和音を出すことができる。',1,'17本の竹管をもち、合竹と呼ばれる和音を奏する。',4],
+ ['笙と龍笛は、音を出すしくみが同じである。',0,'笙は簧（リード）の振動、龍笛は息を歌口に当てて音を出す。',4],
+ ['楽琵琶は、雅楽の合奏（管絃）で使われる。',1,'管絃では琵琶・箏も加わる。',4],
+ ['雅楽で使われる楽箏（がくそう）は、弓でこする擦弦楽器である。',0,'箏は爪で弦をはじく撥弦楽器。',4],
+ ['胡弓は、弓でこすって演奏する日本の弦楽器である。',1,'三味線に似た形の擦弦楽器。',4],
+ ['能の囃子では、能管・小鼓・大鼓・太鼓が使われる。',1,'これを四拍子（しびょうし）という。',4],
+ ['義太夫節は、文楽（人形浄瑠璃）で語られる音楽である。',1,'太夫の語りと太棹三味線による。',4],
+ ['長唄は、三味線音楽の一つである。',1,'歌舞伎の舞踊の伴奏などで発展した。',4],
+ ['12等分平均律では、1オクターブは1200セントである。',1,'半音1つが100セント。',4],
+ ['12等分平均律では、半音は50セントである。',0,'半音は100セント。',4],
+ ['純正な長三和音の振動数の比は、4:5:6 である。',1,'根音：第3音：第5音＝4:5:6。',4],
+ ['純正な完全5度の振動数の比は、2:3 である。',1,'完全8度は1:2、完全4度は3:4。',4],
+ ['第2倍音は、基音の1オクターブ上の音である。',1,'振動数が基音の2倍。',4],
+ ['第3倍音は、基音の完全5度上の音である。',0,'第3倍音は基音の1オクターブと完全5度上（完全12度上）。',4],
+ ['12等分平均律では、短6度と増5度は同じ高さ（異名同音程）になる。',1,'どちらも半音8つ分。',4],
+ ['2オクターブは、完全15度である。',1,'1オクターブ＝完全8度、2オクターブ＝完全15度。',4],
+ ['2オクターブは、完全16度である。',0,'2オクターブは完全15度。',4],
+ ['ホーボーケン番号（Hob.）は、ハイドンの作品の番号である。',1,'ホーボーケンが作った目録の番号。',4],
+ ['C.P.E.バッハは、J.S.バッハの息子である。',1,'カール・フィリップ・エマヌエル・バッハ。',4],
+ ['J.S.バッハとヘンデルは、同じ1685年に生まれた。',1,'ドメニコ・スカルラッティも同じ年に生まれた。',4],
+ ['ワーグナーは、自分の作品を「楽劇」と呼んだ。',1,'音楽と劇を一体とする考えによる。',4],
+ ['グレゴリオ聖歌は、ふつう伴奏なしの単旋律で歌われる。',1,'ローマ・カトリック教会の単旋律の聖歌。',4],
+ ['フランス語の cor anglais は、イングリッシュホルンのことである。',1,'英語の English horn と同じ楽器。',4],
+ ['イタリア語の corno は、トロンボーンのことである。',0,'corno はホルン。トロンボーンはイタリア語でも trombone。',4],
+ ['イタリア語の tromba は、トランペットのことである。',1,'',4],
+ ['ドイツ語の Bratsche は、チェロのことである。',0,'Bratsche はヴィオラ。チェロは Violoncello。',4],
+ ['フランス語の alto は、ヴィオラのことを指すことがある。',1,'フランス語ではヴィオラを alto という。',4],
+ ['ドイツ語の Posaune は、トロンボーンのことである。',1,'',4],
+ ['ドイツ語の Pauken は、ティンパニのことである。',1,'',4],
+ ['ティンパニ（timpani）は、イタリア語 timpano の複数形である。',1,'ふつう複数の太鼓を組で使うので複数形で呼ぶ。',4],
+ ['ハープのペダルは、ピアノのダンパーペダルと同じ働きをする。',0,'ハープのペダルは、弦の音の高さを半音ずつ変える。',4],
+ ['コントラバスには、5本の弦をもつ楽器もある。',1,'低い音を出すために5弦のものもある。',4],
+ ['テノール記号を使う楽器は、トロンボーンとチェロだけである。',0,'ファゴットなどでも使う。',4],
+ ['バセットホルンは、金管楽器である。',0,'バセットホルンはクラリネットの仲間の木管楽器。',5],
+ ['ソプラノリコーダーの最低音は、実音の1点ハ（真ん中のド）である。',0,'ソプラノリコーダーは楽譜より1オクターブ高く鳴り、最低音は実音で2点ハ。',5],
+ ['12等分平均律の長3度は、純正な長3度より少し狭い。',0,'平均律の長3度（400セント）は純正（約386セント）より少し広い。',5],
+ ['ピタゴラス音律は、純正な完全5度を積み重ねて音を決める方法である。',1,'',5],
+ ['A＝440Hz の1オクターブ上のAは、880Hz である。',1,'1オクターブ上で振動数は2倍。',5],
+ ['パヴァーヌは、16世紀ころに広まった、ゆるやかな2拍子系の舞曲である。',1,'ゆるやかで荘重な行列風の舞曲。',5],
+ ['ソナタは、楽器の種類によらず、必ず2つ以上の楽章からできている。',0,'D.スカルラッティのソナタのように、1楽章のものもある。',5],
+ ['受難曲は、キリストの受難を物語として描いた音楽である。',1,'バッハの《マタイ受難曲》などが有名。',5],
+ ['ベル・カントは、イタリア・オペラなどの、美しくなめらかな歌い方を指す言葉である。',1,'「美しい歌」という意味。',5],
+ ['ハバネラは、キューバ起源の舞曲である。',1,'ビゼー《カルメン》のハバネラが有名。',5],
+ ['フーガでは、主題（主唱）が声部を変えて次々に模倣されていく。',1,'主唱に答える旋律を答唱という。',5],
+ ['通奏低音は、低音の旋律に和音をつけて伴奏するバロック時代の方法である。',1,'数字付き低音から鍵盤楽器などが和音を補う。',5]];
+function gkQuiz(R,lv){
+ const pool=QUIZ.filter(q=>q[3]<=lv),cur=pool.filter(q=>q[3]>=lv-1);const x=pick(R,fresh('quiz',cur.length?cur:pool,q=>q[0]));
+ return {f:'quiz',q:x[0],opts:['○','×'],ans:x[1]?'○':'×',exp:(x[1]?'正しい。':'まちがい。')+x[2],ox:true,id:x[0],deck:'quiz'};
+}
+
+/* --- 楽典の1問を作る --- */
+function genGaku(R,lv,field){
+ const f=field==='rand'?wpick(R,['key','int','chord','cad','trans','time','term','quiz'],[3,2,1.5,1.5,1.5,1.5,1.5,1.5]):field;
+ const g={key:gkKey,int:(R,l)=>gkInt(R,l,false),hear:(R,l)=>gkInt(R,l,true),chord:gkChord,cad:gkCad,trans:gkTrans,time:gkTime,term:gkTerm,quiz:gkQuiz}[f];
+ const it=g(R,lv);it.f=it.f||f;it.lv=lv;return it;
+}
+const GK_DESC={key:['','調号から調を答える・主和音から調を答える（調号２つまで）','属和音・下属和音、属調・下属調・平行調・同主調、ドイツ語の調名（調号４つまで）','２段階の調の関係、音度名（導音・上中音など）、音階の名前、ドイツ語の音名（調号７つまで）','本番なみ：「含まれる調をすべて」、音度を使った文章題、教会旋法・全音音階・五音音階','異名同音や旋律短音階を使った長い文章題'],
+ int:['','長・短・完全の音程（ト音記号、♯・♭も少し）','＋増・減の音程、ヘ音記号・アルト記号','＋テノール記号、12度まで。ときどき転回音程','7種類すべての音部記号、重増・重減、15度まで','難しい音部記号と増・減・重増・重減が中心'],hear:['','聞いて答える（初級）','中級','上級','藝大','神'],
+ chord:['','長三和音・短三和音（ト音記号・臨時記号なし）','＋減三和音・増三和音','＋属七・短七・長七の和音（アルト・テノール記号も）','＋減七・減五短七の和音、転回形、7種類の音部記号','増六の和音（イタリア・フランス・ドイツ）、ナポリの六、九の和音'],
+ cad:['','完全終止・半終止／経過音・刺繍音','＋偽終止','＋不完全終止・変格終止／掛留音・先取音','＋倚音・逸音、短調、長めの和音進行','短調が中心'],
+ trans:['','音部記号の音名','＋長2度の移調、B♭管の移調楽器','＋2度・3度の移調（調号なしも）、A・F・E♭管','＋いろいろな度数の移調、7種類の音部記号','＋増1度・増4度の移調'],
+ time:['','演奏時間（秒）','＋くり返し記号の小節数','＋拍の頭がわかる書き方、8分の6拍子、テンポの換算','＋D.C.・D.S.・Coda、速さが変わる曲の演奏時間','＋くり返しを含む演奏時間、8分の9拍子'],
+ term:['','中学の教科書の楽語','合唱・吹奏楽でよく見る楽語','奏法・省略形・受験の基本','本番なみ（仲間はずれ・-issimo・反対語・ドイツ語・フランス語）','辞典にしか載っていないような楽語'],
+ quiz:['','楽器の仲間分け・音符の長さ','移調楽器・拍子','舞曲・形式・作品番号・音楽史','邦楽器・音律・倍音・外国語の楽器名','細かい知識'],
+ rand:['','いろいろな分野がまざって出る（初級）','中級','上級','藝大（本番の楽典の練習）','神']};
+
+if(false&&typeof module!=='undefined')module.exports={setDeck:d=>{GK_DECK=d;},tooClose,generate,toAbc,LEVELS,METER,intervalOK,genInterval,intAbc,ILV,KEYS,rngFrom,genGaku,GK_FIELDS,TERMS,QUIZ,ALLK,kjp,kde,pjp,pde,keyScale,relKey,keyWithDeg,addInt};
 
 </script>
 <script>
@@ -1594,11 +2446,11 @@ const GRADES=[
  {v:0,name:'ダメダメ',svg:'<path d="M9 9l22 22M31 9 9 31"/>'}];
 const gradeName=v=>{const g=GRADES.find(x=>x.v===v);return g?g.name:'';};
 const SDEF={tab:'dict',o:{dict:{type:1,lv:1,key:'',meter:'',bars:0},sing:{lv:1,key:'',meter:'',bars:0},rhythm:{lv:1,meter:'',bars:0}},
- ilv:1,imode:'see',icnt:'ten',order:'rand',ctr:{},mode:'exam',reps:3,gap:15,cad:true,cntDict:false,mplays:4,mwrite:120,part:'all',theme:'auto',maxSig:2,se:1,sevol:60,lat:null,
+ glv:1,gf:'rand',gcnt:'ten',order:'rand',ctr:{},mode:'exam',reps:3,gap:15,cad:true,cntDict:false,mplays:4,mwrite:120,part:'all',theme:'auto',maxSig:2,se:1,sevol:60,lat:null,
  timbre:'piano',a4:442,vol:80,mvol:70,qlv:1,qbars:2,qmode:'ten',qbest:0};
 const S=Object.assign({},SDEF,load(SET,{}));
 ['dict','sing','rhythm'].forEach(k=>{S.o[k]=Object.assign({},SDEF.o[k],(S.o||{})[k]||{});});
-if(!['dict','quick','int','sing','rhythm'].includes(S.tab))S.tab='dict';
+if(S.tab==='int')S.tab='gaku';if(!['dict','quick','gaku','sing','rhythm'].includes(S.tab))S.tab='dict';if(!(S.glv>=1&&S.glv<=5))S.glv=1;if(!GK_FIELDS.some(f=>f[0]===S.gf))S.gf='rand';
 const saveS=()=>save(SET,S);
 let descOn=false,descAt='sLv';
 // 吹き出し（まわりの部品を動かさずに、選ぶ欄の下に重ねて出す）
@@ -1656,13 +2508,6 @@ function buildQSels(){
  $('#qBars').onchange=e=>{S.qbars=+e.target.value;saveS();qStart();};
  $('#qMode').onchange=e=>{S.qmode=e.target.value;saveS();qStart();};
 }
-function buildISels(){
- $('#iSels').innerHTML=selHTML('iLv','難易度',LVOPTS(),S.ilv)+selHTML('iMode','答え方',[['see','楽譜で'],['hear','音だけ']],S.imode)+selHTML('iCnt','問題数',[['ten','１０問'],['free','エンドレス']],S.icnt||'ten');
- $('#iMode').onchange=e=>{S.imode=e.target.value;saveS();iStart();};
- $('#iLv').onchange=e=>{S.ilv=+e.target.value;saveS();iStart();showBubble('iDesc','iLv',ILV[S.ilv].desc);};
- $('#iCnt').onchange=e=>{S.icnt=e.target.value;saveS();iStart();};
-}
-
 /* ---------- 問題番号 ---------- */
 const codeStr=()=>{const k=P.optKey?KEY_IDS.indexOf(P.optKey)+1:0;const m=P.optMeter?METER_IDS.indexOf(P.optMeter)+1:0;const b=P.optBars||0;
  const head=`${P.type}${String(P.lv).padStart(2,'0')}-${String(P.seed).padStart(4,'0')}`;return (k||m||b)?`${head}-${String(k).padStart(2,'0')}${m}${b}`:head;};
@@ -1682,9 +2527,9 @@ function showTab(){
  const t=S.tab;segSync('#tabs',t);stop();
  const prob=isProb();
  $('#qP').hidden=!prob;$('#ansP').hidden=!prob;
- $('#quickP').hidden=t!=='quick';$('#intP').hidden=t!=='int';
+ $('#quickP').hidden=t!=='quick';$('#gakP').hidden=t!=='gaku';
  $('#bar').hidden=!prob;$('#wrap').classList.toggle('nobar',!prob);
- if(t==='int'){buildISels();if(!iInit)iStart();return;}
+ if(t==='gaku'){buildGSels();if(!gInit)gStart();return;}
  if(t==='quick'){buildQSels();if(!QZ.cur&&!QZ.ready)qStart();return;}
  buildSels();newProblem(nextSeed(0));
 }
@@ -1968,7 +2813,7 @@ function playMain(){
 /* ---------- サクッと聴音 ---------- */
 const QZ={n:0,ok:0,streak:0,best:0,cur:null,answered:false};
 const QR=rngFrom((Date.now()*7)%2147483647);
-function qStart(){stop();QZ.n=0;QZ.ok=0;QZ.streak=0;QZ.best=0;QZ.cur=null;QZ.ready=true;$('#qEnd').hidden=true;$('#qGame').hidden=false;$('#qOpts').innerHTML='';$('#qMsg').textContent='';$('#qNext').hidden=true;$('#qPlayL').textContent='スタート';$('#qCount').textContent=S.qmode==='ten'?FW('0/10'):FW(0);$('#qStreak').textContent='0';}
+function qStart(){stop();QZ.n=0;QZ.ok=0;QZ.streak=0;QZ.best=0;QZ.cur=null;QZ.ready=true;$('#qEnd').hidden=true;$('#qGame').hidden=false;$('#qOpts').innerHTML='';$('#qMsg').textContent='';$('#qNext').classList.add('vh');$('#qPlayL').textContent='スタート';$('#qCount').textContent=S.qmode==='ten'?FW('0/10'):FW(0);$('#qStreak').textContent='0';}
 function qSlice(base,nb){const U=METER[base.meter].units;const notes=base.voices[0].notes.filter(n=>n.onset<nb*U).map(n=>({...n}));if(notes.length)notes[notes.length-1].tie=false;return {...base,bars:nb,voices:[{name:'旋律',notes}],staves:[{clef:'treble',voices:[0]}]};}
 const qSig=p=>p.voices[0].notes.map(n=>n.onset+':'+n.dur+':'+n.midi).join(',');
 function qRespell(P0,n,d){const k=P0.key;const dia=n.dia+d;const alt=sigAlter(mod(dia,7),k.sig)+(k.minor&&mod(dia-(n.dia-n.deg),7)===6?1:0);return {...n,dia,alter:alt,midi:midiOf(dia,alt),deg:mod((n.deg||0)+d,7)};}
@@ -2038,7 +2883,7 @@ function qNew(){
  const order=shuffle(QR,[0,1,2,3].slice(0,opts.length));
  QZ.cur={base,opts:order.map(i=>opts[i]),ans:order.indexOf(0)};QZ.answered=false;QZ.ready=false;$('#qPlayL').textContent='もう一度聞く';
  $('#qCount').textContent=S.qmode==='ten'?FW(`${QZ.n+1}/10`):FW(QZ.n+1);
- $('#qStreak').textContent=FW(QZ.streak);$('#qMsg').textContent='';$('#qMsg').className='qmsg';$('#qNext').hidden=true;
+ $('#qStreak').textContent=FW(QZ.streak);$('#qMsg').textContent='';$('#qMsg').className='qmsg';$('#qNext').classList.add('vh');
  const one=S.qbars>=3||(S.qlv>=9&&S.qbars>=2);const box=$('#qOpts');box.className='qopts'+(one?' one':'');
  box.innerHTML=QZ.cur.opts.map((_,i)=>`<button type="button" class="qopt" data-i="${i}" aria-label="${'ABCD'[i]}"><span class="tag">${'ABCD'[i]}</span><div id="qo${i}"></div></button>`).join('');
  QZ.cur.opts.forEach((p,i)=>{const el=$('#qo'+i);if(!abcOk(el))return;let {abc}=toAbc(p,{perLine:p.bars});abc=abc.replace('X:1\n','X:1\n%%stretchlast true\n');/* 4つの楽譜をどれも横いっぱいに */
@@ -2059,10 +2904,9 @@ function qAnswer(i){
  document.querySelectorAll('.qopt').forEach((b,k)=>{if(k===QZ.cur.ans)b.classList.add('right');else if(k===i)b.classList.add('wrong');});
  $('#qStreak').textContent=FW(QZ.streak);
  se(ok?'ok':'ng');
- const m=$('#qMsg');m.className='qmsg '+(ok?'ok':'ng');m.textContent=ok?'':`正解は ${'ABCD'[QZ.cur.ans]}`;
- const last=S.qmode==='ten'&&QZ.n>=10;
- if(ok&&!last){setTimeout(()=>{if(S.tab==='quick'&&QZ.answered)qNew();},1000);}
- else{$('#qNext').hidden=false;$('#qNext').textContent=last?'結果を見る':'次へ';}
+ const m=$('#qMsg');m.className='qmsg '+(ok?'ok':'ng');m.textContent=ok?'正解！':`正解は ${'ABCD'[QZ.cur.ans]}`;
+ const last=S.qmode==='ten'&&QZ.n>=10; // 自動では進まない（答えたあと楽譜を押して聞き比べられるように）
+ $('#qNext').classList.remove('vh');$('#qNext').textContent=last?'結果を見る':'次の問題';
 }
 function qFinish(){
  $('#qGame').hidden=true;$('#qEnd').hidden=false;se('fin');
@@ -2071,38 +2915,117 @@ function qFinish(){
  $('#qEndSub').textContent=`いちばん長い連続正解 ${FW(QZ.best)}問 ・ これまでの最高 ${FW(S.qbest)}問`;
 }
 
-/* ---------- 度数 ---------- */
-let IT=null,iStats={n:0,ok:0},iInit=false;const IR=rngFrom(Date.now()%2147483647);
-const iTen=()=>(S.icnt||'ten')==='ten';
-function iStart(){stop();iInit=true;IT=null;iStats={n:0,ok:0};$('#iEnd').hidden=true;$('#iGame').hidden=false;$('#iDesc').textContent=ILV[S.ilv].desc;$('#iDesc').hidden=true;
- $('#intSheet').innerHTML='<button type="button" class="qplay" id="iStartBtn" style="max-width:260px"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg><span>スタート</span></button>';
- $('#iStartBtn').onclick=()=>newInterval();
- $('#opts').innerHTML=['','','',''].map(()=>'<button type="button" disabled>　</button>').join('');$('#iPlays').classList.add('off');$('#iNext').hidden=true;$('#iSession').textContent='';}
-function iFinish(){$('#iGame').hidden=true;$('#iEnd').hidden=false;$('#iEndScore').innerHTML=`${FW(iStats.ok)}<small> / １０問</small>`;se('fin');}
-function newInterval(){$('#iDesc').hidden=true;IT=genInterval(IR,S.ilv,S.imode);IT.picked=null;$('#iNext').hidden=true;renderInterval();if(S.imode==='hear')playInterval();}
-function renderInterval(){
- const sh=$('#intSheet');const hear=S.imode==='hear';
- if(hear&&!IT.picked)sh.innerHTML='<div class="listen"><b>？</b>音をよく聞きましょう</div>';
- else{sh.innerHTML='<div id="intScore"></div>';const el=$('#intScore');if(abcOk(el)){const abc=intAbc(IT);
-  ABCJS.renderAbc(el,abc,{staffwidth:200,paddingtop:8,paddingbottom:10,paddingleft:0,paddingright:0,add_classes:true,selectionColor:'#C2352B',
-   clickListener:(e)=>{if(!e)return;if(IT.harm){previewNotes([IT.lower.midi,IT.upper.midi]);return;}const bs=abc.lastIndexOf('\n',abc.length-2)+1,sp=abc.indexOf(' ',bs);const f=IT.down?IT.upper.midi:IT.lower.midi,sc=IT.down?IT.lower.midi:IT.upper.midi;previewNotes([e.startChar<sp?f:sc]);}});
-  const svg=el.querySelector('svg');if(svg){const w=parseFloat(svg.getAttribute('width'))||220,h=parseFloat(svg.getAttribute('height'))||110;if(!svg.getAttribute('viewBox'))svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.removeAttribute('width');svg.removeAttribute('height');
-   el.style.height='';el.style.overflow='visible';const H=Math.min(124,h*1.25)*ZM(),W=Math.min(el.clientWidth||300,w*H/h);svg.style.width=W+'px';svg.style.height=(h*W/w)+'px';}}}
- $('#iPlays').classList.toggle('off',!(hear||IT.picked));
- $('#opts').innerHTML=IT.options.map(o=>`<button type="button" data-o="${o}">${o}</button>`).join('');
- if(IT.picked)document.querySelectorAll('#opts button').forEach(b=>{b.disabled=true;if(b.dataset.o===IT.answer)b.classList.add('right');else if(b.dataset.o===IT.picked)b.classList.add('wrong');});
- $('#iSession').textContent=iTen()?`${FW(iStats.n)}/１０問　正解 ${FW(iStats.ok)}`:(iStats.n?`正解 ${FW(iStats.ok)} / ${FW(iStats.n)}`:'');
+/* ---------- 楽典 ---------- */
+const GKLV=['','初級','中級','上級','藝大','神'];
+const GKF=Object.fromEntries(GK_FIELDS);
+const GKF_SHORT={key:'調と音階',int:'音程',hear:'音程（耳で）',chord:'和音',cad:'終止形・非和声音',trans:'移調・音部記号',time:'リズムと時間',term:'楽語',quiz:'知識○×'};
+const gDecks={},gRecent=[];let GT=null,gStats={n:0,ok:0,streak:0,best:0},gInit=false;const GR=rngFrom((Date.now()*7)%2147483647);
+const gTen=()=>(S.gcnt||'ten')==='ten';
+const gDescTxt=()=>(GK_DESC[S.gf]||GK_DESC.rand)[S.glv];
+function buildGSels(){
+ $('#gSels').innerHTML=selHTML('gLv','難易度',[1,2,3,4,5].map(l=>[l,GKLV[l]]),S.glv)+selHTML('gF','分野',GK_FIELDS,S.gf)+selHTML('gCnt','問題数',[['ten','１０問'],['free','エンドレス']],S.gcnt||'ten');
+ $('#gLv').onchange=e=>{S.glv=+e.target.value;saveS();gStart();showBubble('gDesc','gLv',gDescTxt());};
+ $('#gF').onchange=e=>{S.gf=e.target.value;saveS();gStart();showBubble('gDesc','gF',gDescTxt());};
+ $('#gCnt').onchange=e=>{S.gcnt=e.target.value;saveS();gStart();};
 }
-function answerInterval(o){
- if(IT.picked)return;IT.picked=o;const ok=o===IT.answer;
- iStats.n++;if(ok)iStats.ok++;
- records.push({t:Date.now(),type:'I',mode:S.imode,lv:S.ilv,s:10,ok:ok?1:0,total:1,name:IT.answer});save(STORE,records);
- se(ok?'ok':'ng');
- renderInterval();$('#iNext').hidden=false;$('#iNext').textContent=iTen()&&iStats.n>=10?'結果を見る':'次の問題';if(S.imode==='see')setTimeout(()=>playInterval(),600);
+function gStart(){stop();gInit=true;GT=null;gStats={n:0,ok:0,streak:0,best:0};$('#gEnd').hidden=true;$('#gGame').hidden=false;$('#gDesc').textContent=gDescTxt();$('#gDesc').hidden=true;
+ $('#gField').textContent='';$('#gQt').textContent=`${GKLV[S.glv]} ・ ${GKF[S.gf]}`;
+ const sh=$('#gkSheet');sh.className='sheet gk-sheet';
+ sh.innerHTML='<button type="button" class="qplay" id="gStartBtn" style="max-width:260px"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg><span>スタート</span></button>';
+ $('#gStartBtn').onclick=()=>gNew();
+ const o=$('#gOpts');o.className='opts';o.innerHTML=['','','',''].map(()=>'<button type="button" disabled>　</button>').join('');
+ $('#gPlays').classList.add('off');$('#gNext').hidden=false;$('#gNext').classList.add('vh');$('#gOk').hidden=true;$('#gRes').hidden=true;$('#gExp').hidden=true;$('#gSession').textContent='';}
+function gFinish(){$('#gGame').hidden=true;$('#gEnd').hidden=false;se('fin');
+ $('#gEndScore').innerHTML=`${FW(gStats.ok)}<small> / １０問</small>`;
+ $('#gEndSub').textContent=`${GKLV[S.glv]} ・ ${GKF[S.gf]} ・ いちばん長い連続正解 ${FW(gStats.best)}問`;}
+function gNew(){
+ stop();$('#gDesc').hidden=true;
+ // 楽語・知識○×は「ひと回りするまで同じ語を出さない」山札を、難易度ごとにこの端末に覚えておく
+ const dk=S.gdeck||(S.gdeck={});const raw=dk[S.glv]||(dk[S.glv]={});
+ const sets=gDecks[S.glv]||(gDecks[S.glv]=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,new Set(v)])));GK_DECK=sets;
+ let it=null,best=1e9;
+ for(let k=0;k<40;k++){let c=null;try{c=genGaku(GR,S.glv,S.gf);}catch(e){c=null;}if(!c)continue;
+  if(c.P&&!c.abc){let {abc}=toAbc(c.P,{perLine:c.P.bars});c.abc=abc.replace('X:1\n','X:1\n%%stretchlast true\n');c.wide=true;}
+  c.key=[c.q,c.abc||'',(c.optAbc||[]).join(),JSON.stringify(c.ans)].join('|');
+  const at=gRecent.lastIndexOf(c.key);if(at<0){it=c;break;}if(at<best){best=at;it=c;}} // 最近の30問と同じなら作り直す（どうしても重なるときは、いちばん前に出たもの）
+ if(!it){toast('問題を作れませんでした。もう一度押してください');return;}
+ {const j=gRecent.indexOf(it.key);if(j>=0)gRecent.splice(j,1);}gRecent.push(it.key);if(gRecent.length>30)gRecent.shift();
+ if(it.deck&&it.id!=null){const s=sets[it.deck]||(sets[it.deck]=new Set());s.add(it.id);raw[it.deck]=[...s];saveS();}
+ GT=it;GT.picked=null;GT.sel=new Set();
+ window.scrollTo({top:0,behavior:'smooth'});
+ gRender();
+ if(GT.f==='hear')setTimeout(()=>gPlay(),250);
 }
-function playInterval(how){
- const a=IT.lower.midi,b=IT.upper.midi;const h=how||(IT.harm?'h':'m');
- if(h==='h')previewNotes([a,b],{dur:1.8});else previewNotes(IT.down?[b,a]:[a,b],{seq:true});
+function gScore(){
+ const sh=$('#gkSheet');const it=GT;const hear=it.hideScore&&!it.picked;
+ if(!it.abc){sh.className='sheet gk-sheet none';sh.innerHTML='';return;}
+ sh.className='sheet gk-sheet'+(it.wide?' wide':'');
+ if(hear){sh.innerHTML='<div class="listen"><b>？</b>音をよく聞きましょう</div>';return;}
+ sh.innerHTML='<div id="gkScore"></div>';const el=$('#gkScore');if(!abcOk(el))return;
+ if(it.wide){const w=Math.max(260,(sh.clientWidth||320)-20);
+  ABCJS.renderAbc(el,it.abc,{responsive:'resize',staffwidth:Math.min(w,620),paddingtop:6,paddingbottom:8,paddingleft:4,paddingright:4,add_classes:true});
+  const svg=el.querySelector('svg');if(svg&&it.P){el.style.maxWidth=(it.P.bars<=2?440:640)+'px';el.style.margin='0 auto';}
+  return;}
+ ABCJS.renderAbc(el,it.abc,{staffwidth:200,paddingtop:8,paddingbottom:10,paddingleft:0,paddingright:0,add_classes:true,
+  clickListener:()=>{if(it.picked&&it.play)gPlay();}});
+ const svg=el.querySelector('svg');if(svg){const w=parseFloat(svg.getAttribute('width'))||220,h=parseFloat(svg.getAttribute('height'))||110;if(!svg.getAttribute('viewBox'))svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.removeAttribute('width');svg.removeAttribute('height');
+  el.style.height='';el.style.overflow='visible';/* 楽譜を大きくしたぶん枠も広げる（下が切れないように） */
+  const H=Math.min(124,h*1.25)*ZM(),W=Math.min(el.clientWidth||300,w*H/h);svg.style.width=W+'px';svg.style.height=(h*W/w)+'px';}
+}
+const gIsOk=(it,v)=>Array.isArray(it.ans)?it.ans.includes(v):v===it.ans;
+function gRender(){
+ const it=GT;
+ $('#gField').textContent=GKF_SHORT[it.f]||'';$('#gQt').textContent=it.q;
+ gScore();
+ const canPlay=!!(it.play||it.P);
+ $('#gPlays').hidden=!canPlay;$('#gPlays').classList.toggle('off',!(it.f==='hear'||it.picked));
+ const two=it.play&&(it.play.notes||[]).length===2&&(it.f==='int'||it.f==='hear');
+ $('#gPlayH').hidden=!two;$('#gPlayM').hidden=!two;$('#gPlay').textContent=it.f==='hear'&&!it.picked?'もう一度聞く':'音を聞く';
+ const box=$('#gOpts');
+ if(it.optAbc){
+  const one=it.f==='trans'||!!it.beam;box.className='qopts'+(one?' one':'');
+  box.innerHTML=it.optAbc.map((_,i)=>`<button type="button" class="qopt" data-o="${it.opts[i]}" aria-label="${it.opts[i]}"><span class="tag">${it.opts[i]}</span><div id="go${i}"></div></button>`).join('');
+  it.optAbc.forEach((a,i)=>{const el=$('#go'+i);if(!abcOk(el))return;const w=Math.max(150,el.clientWidth||160);
+   ABCJS.renderAbc(el,a.replace('X:1\n','X:1\n%%stretchlast true\n'),{responsive:'resize',staffwidth:Math.max(150,w-10)*(one?1:1.25),paddingtop:2,paddingbottom:6,paddingleft:2,paddingright:2});});
+ }else{
+  const L=Math.max(...it.opts.map(o=>o.length));
+  box.className='opts'+(it.ox?' ox':'')+(it.multi?' many':'')+(L>9?' long one':L>6?' long':'');
+  box.innerHTML=it.opts.map(o=>`<button type="button" data-o="${o.replace(/"/g,'&quot;')}">${o}</button>`).join('');
+ }
+ const bs=box.querySelectorAll('button');
+ if(it.picked){bs.forEach(b=>{const v=b.dataset.o;b.disabled=!it.optAbc;const chosen=it.multi?it.sel.has(v):v===it.picked;
+  if(gIsOk(it,v))b.classList.add(it.multi&&!chosen?'miss':'right');else if(chosen)b.classList.add('wrong');});}
+ else if(it.multi)bs.forEach(b=>b.classList.toggle('sel',it.sel.has(b.dataset.o)));
+ const asking=!!(it.multi&&!it.picked);$('#gOk').hidden=!asking;$('#gOk').disabled=!(it.sel.size);
+ const r=$('#gRes');r.hidden=!it.picked;
+ if(it.picked){r.className='gres '+(it.ok?'ok':'ng');const A=Array.isArray(it.ans)?it.ans.join('・'):it.ans;r.textContent=it.ok?'正解！':`正解は ${A}`;}
+ const ex=$('#gExp');ex.hidden=!(it.picked&&it.exp);ex.textContent=it.exp||'';
+ if(it.picked&&!it.ok&&!it.multi&&it.why&&it.why[it.picked]&&it.picked!==it.ans){const w=document.createElement('span');w.className='why';w.textContent=`あなたの答え（${it.picked}）：${it.why[it.picked]}`;ex.appendChild(w);}
+ $('#gNext').hidden=asking;$('#gNext').classList.toggle('vh',!it.picked);$('#gNext').textContent=gTen()&&gStats.n>=10?'結果を見る':'次の問題';
+ $('#gSession').textContent=gTen()?`${FW(gStats.n)}/１０問　正解 ${FW(gStats.ok)}`:(gStats.n?`正解 ${FW(gStats.ok)} / ${FW(gStats.n)}`:'');
+}
+function gAnswer(v){
+ const it=GT;if(!it)return;
+ if(it.picked){if(it.optAbc&&it.play)gPlay();return;}
+ if(it.multi){if(it.sel.has(v))it.sel.delete(v);else it.sel.add(v);gRender();return;}
+ it.picked=v;gDone(v===it.ans,it.ans);
+}
+function gConfirm(){const it=GT;if(!it||it.picked||!it.multi||!it.sel.size)return;
+ it.picked=[...it.sel].join('・');const ok=it.sel.size===it.ans.length&&it.ans.every(a=>it.sel.has(a));gDone(ok,it.ans.join('・'));}
+function gDone(ok,name){
+ const it=GT;it.ok=ok;gStats.n++;if(ok){gStats.ok++;gStats.streak++;gStats.best=Math.max(gStats.best,gStats.streak);}else gStats.streak=0;
+ records.push({t:Date.now(),type:'G',f:it.f,lv:S.glv,s:5,ok:ok?1:0,total:1,name:String(name).slice(0,24)});if(records.length>6000)records=records.slice(-6000);save(STORE,records);
+ se(ok?'ok':'ng');gRender();
+ if((it.f==='int'||it.f==='chord')&&it.play)setTimeout(()=>{if(GT===it)gPlay();},600);
+}
+function gPlay(how){
+ const it=GT;if(!it)return;
+ if(it.P){const q=60/76/4;play([musicStep(0,it.P.bars-1,'',{voices:it.P.voices.map((_,i)=>i),q},it.P)],{silent:true});return;}
+ const p=it.play;if(!p)return;const ns=p.notes;
+ if(p.how==='mel'){ensureAudio();loadInst(S.timbre).then(()=>{const g=outBus();let t=AC.currentTime+(warm?0.05:0.3);warm=true;const q=60/84/4;
+   ns.forEach((m,i)=>{const d=(p.durs[i]||4)*q;tone(g,m,t,d*.95,.3);t+=d;});});return;}
+ const h=how||(p.how==='chord'?'h':'m');
+ if(h==='h')previewNotes(ns,{dur:1.8});else previewNotes(p.down?[...ns].reverse():ns,{seq:true});
 }
 
 /* ---------- 記録 ---------- */
@@ -2121,7 +3044,7 @@ function renderLog(){
  const days=new Set(records.map(r=>dkey(r.t)));const today=dkey(Date.now());
  let streak=0;const d=new Date();if(!days.has(today))d.setDate(d.getDate()-1);
  while(days.has(dkey(d.getTime()))){streak++;d.setDate(d.getDate()-1);}
- const quick=r=>r.type==='I'||r.type==='Q';const probs=records.filter(r=>!quick(r));
+ const quick=r=>r.type==='G'||r.type==='Q';const probs=records.filter(r=>!quick(r));
  $('#stStreak').textContent=streak;
  $('#stToday').textContent=probs.filter(r=>dkey(r.t)===today).length;
  $('#stTodayQ').textContent=records.filter(r=>quick(r)&&dkey(r.t)===today).length;
@@ -2130,16 +3053,16 @@ function renderLog(){
  const counts=[];for(let i=13;i>=0;i--){const x=new Date();x.setDate(x.getDate()-i);const k=dkey(x.getTime());counts.push(records.filter(r=>dkey(r.t)===k).length);}
  const mx=Math.max(1,...counts);
  $('#days').innerHTML=counts.map((c,i)=>`<div class="${c?'':'zero'} ${i===13&&c?'today':''}" style="height:${c?Math.max(8,c/mx*100):3}%" title="${c}"></div>`).join('');
- const rows=[['単旋律',r=>r.type===1],['記憶聴音',r=>r.type===3],['２声',r=>r.type===2],['４声',r=>r.type===4],['譜選',r=>r.type==='Q'],['度数（見る）',r=>r.type==='I'&&r.mode==='see'],['度数（聞く）',r=>r.type==='I'&&r.mode==='hear'],['視唱',r=>r.type===5],['リズム',r=>r.type===6]];
- const grp=r=>r.s===10?Math.ceil(r.lv/2):r.lv;
+ const rows=[['単旋律',r=>r.type===1],['記憶聴音',r=>r.type===3],['２声',r=>r.type===2],['４声',r=>r.type===4],['譜選',r=>r.type==='Q'],['視唱',r=>r.type===5],['リズム',r=>r.type===6],...GK_FIELDS.slice(1).map(([k])=>['楽典・'+GKF_SHORT[k].replace(/・.*|（.*/,'')+(k==='hear'?'（耳）':''),r=>r.type==='G'&&r.f===k])];
+ const grp=r=>r.s===10?Math.ceil(r.lv/2):r.lv;/* 楽典は s:5（1〜5） */
  let h='<thead><tr><th></th>'+['初級','中級','上級','藝大','神'].map(l=>`<th>${l}</th>`).join('')+'</tr></thead><tbody>';
  rows.forEach(([nm,f])=>{h+=`<tr><th>${nm}</th>`;for(let l=1;l<=5;l++){const rs=records.filter(r=>f(r)&&grp(r)===l);const o=rs.reduce((a,r)=>a+r.ok,0),t=rs.reduce((a,r)=>a+r.total,0);
   if(!rs.length){h+='<td class="none">・</td>';continue;}const p=Math.round(o/t*100);h+=`<td class="${p>=80?'good':p>=50?'mid':'low'}">${p}%<small>${rs.length}問</small></td>`;}h+='</tr>';});
  $('#map').innerHTML=h+'</tbody>';
  const rec=records.slice(-10).reverse();
  $('#recent').innerHTML=rec.length?rec.map(r=>{const d=new Date(r.t);const tm=`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-  const ln=r.s===10?lvName(r.lv):'Lv'+r.lv;const what=r.type==='I'?`度数 ${ln}・${r.name}`:r.type==='Q'?`譜選 ${ln}・${r.bars}小節`:`${TYPE_NAME[r.type]||''} ${ln}${r.key?'・'+r.key:''}`;
-  const sc=(r.type==='I'||r.type==='Q')?(r.ok?'○':'×'):r.g!=null?gradeName(r.g):`${r.ok}/${r.total}`;
+  const ln=r.s===10?lvName(r.lv):'Lv'+r.lv;const what=r.type==='G'?`楽典 ${GKLV[r.lv]||''}・${GKF_SHORT[r.f]||''}`:r.type==='Q'?`譜選 ${ln}・${r.bars}小節`:`${TYPE_NAME[r.type]||''} ${ln}${r.key?'・'+r.key:''}`;
+  const sc=(r.type==='G'||r.type==='Q')?(r.ok?'○':'×'):r.g!=null?gradeName(r.g):`${r.ok}/${r.total}`;
   return `<li><time>${tm}</time><span>${what}</span><span class="sc">${sc}</span></li>`;}).join('')
   :'<li style="display:block"><p class="empty">まだ記録がありません。</p></li>';
 }
@@ -2162,15 +3085,19 @@ function openMenu(){
  m.hidden=false;$('#popScrim').hidden=false;$('#menuBtn').setAttribute('aria-expanded','true');
 }
 function closeMenu(){$('#menuD').hidden=true;$('#popScrim').hidden=true;$('#menuBtn').setAttribute('aria-expanded','false');}
+/* 資料（画面いっぱいに開く） */
+function openDocs(){closeMenu();stop();const d=$('#docP');d.hidden=false;d.scrollTop=0;document.documentElement.style.overflow='hidden';$('#docBack').focus();}
+function closeDocs(){$('#docP').hidden=true;document.documentElement.style.overflow='';}
 
 /* ---------- つなぐ ---------- */
 fillSelects();
 segInit('#tabs',()=>S.tab,v=>{S.tab=v;showTab();});
 segInit('#a4Seg',()=>S.a4,v=>{S.a4=v;});
-segInit('#menuSeg',()=>'set',v=>{$('#mSet').hidden=v!=='set';$('#mLog').hidden=v!=='log';$('#mHelp').hidden=v!=='help';if(v==='log')renderLog();});
+segInit('#menuSeg',()=>'set',v=>{if(v==='docs'){openDocs();return;}$('#mSet').hidden=v!=='set';$('#mLog').hidden=v!=='log';$('#mHelp').hidden=v!=='help';if(v==='log')renderLog();});
 $('#menuBtn').onclick=()=>{if($('#menuD').hidden)openMenu();else closeMenu();};
 $('#menuClose').onclick=closeMenu;$('#popScrim').onclick=closeMenu;
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#docP').hidden)closeDocs();else closeMenu();}});
+$('#docBack').onclick=closeDocs;
 $('#reps').onchange=e=>{S.reps=+e.target.value;saveS();modeUI();};
 $('#gap').onchange=e=>{S.gap=+e.target.value;saveS();modeUI();};
 $('#cad').onchange=e=>{S.cad=e.target.checked;saveS();};
@@ -2224,7 +3151,7 @@ $('#codeGo').onclick=()=>{
  if(c.type===5)S.tab='sing';else if(c.type===6)S.tab='rhythm';else{S.tab='dict';S.o.dict.type=c.type;}
  Object.assign(S.o[S.tab],{lv:c.lv,key:c.key,meter:c.meter,bars:c.bars});saveS();closeMenu();
  segSync('#tabs',S.tab);stop();
- $('#qP').hidden=false;$('#ansP').hidden=false;$('#quickP').hidden=true;$('#intP').hidden=true;$('#bar').hidden=false;$('#wrap').classList.remove('nobar');
+ $('#qP').hidden=false;$('#ansP').hidden=false;$('#quickP').hidden=true;$('#gakP').hidden=true;$('#bar').hidden=false;$('#wrap').classList.remove('nobar');
  buildSels();newProblem(c.seed,{key:c.key,meter:c.meter,bars:c.bars});toast('問題番号 '+codeStr()+' を出しました');
 };
 $('#ansBtn').onclick=()=>{ansOpen=!ansOpen;ansUI();if(ansOpen)renderAns();else cursorOff(ansCur);};
@@ -2237,15 +3164,33 @@ $('#qPlay').onclick=()=>{if(!QZ.cur)qNew();else qPlay();};
 $('#qOpts').onclick=e=>{const b=e.target.closest('.qopt');if(b)qAnswer(+b.dataset.i);};
 $('#qNext').onclick=()=>{if(S.qmode==='ten'&&QZ.n>=10)qFinish();else qNew();};
 $('#qAgain').onclick=()=>{qStart();qNew();};
-$('#opts').onclick=e=>{const b=e.target.closest('button');if(b)answerInterval(b.dataset.o);};
-$('#iNext').onclick=()=>{if(iTen()&&iStats.n>=10)iFinish();else newInterval();};
-$('#iAgain').onclick=()=>{iStart();newInterval();};
-$('#iPlay').onclick=()=>playInterval();$('#iPlayH').onclick=()=>playInterval('h');$('#iPlayM').onclick=()=>playInterval('m');
+$('#gOpts').onclick=e=>{const b=e.target.closest('button');if(b)gAnswer(b.dataset.o);};
+$('#gOk').onclick=()=>gConfirm();
+$('#gNext').onclick=()=>{if(gTen()&&gStats.n>=10)gFinish();else gNew();};
+$('#gAgain').onclick=()=>{gStart();gNew();};
+$('#gPlay').onclick=()=>gPlay();$('#gPlayH').onclick=()=>gPlay('h');$('#gPlayM').onclick=()=>gPlay('m');
+/* キーボード（Macなど）：1〜8で選ぶ、Enter・スペースで「答える」「次の問題」 */
+document.addEventListener('keydown',e=>{
+ if(e.metaKey||e.ctrlKey||e.altKey||e.isComposing)return;const tg=e.target;if(tg&&/^(INPUT|SELECT|TEXTAREA)$/.test(tg.tagName))return;if(!$('#menuD').hidden||!$('#docP').hidden)return;
+ const vis=el=>el&&!el.hidden&&!el.classList.contains('vh')&&!el.disabled&&el.offsetParent!==null;
+ const go=el=>{e.preventDefault();if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();el.click();};
+ const n=/^[1-8]$/.test(e.key)?+e.key:0;const ent=e.key==='Enter'||e.key===' ';
+ if(S.tab==='gaku'){
+  if(!$('#gEnd').hidden){if(ent)go($('#gAgain'));return;}
+  if(n){const b=document.querySelectorAll('#gOpts > button')[n-1];if(b&&!b.disabled)go(b);return;}
+  if(ent){const st=$('#gStartBtn');if(st)return go(st);if(vis($('#gOk')))return go($('#gOk'));if(vis($('#gNext')))return go($('#gNext'));}
+ }else if(S.tab==='quick'){
+  if(!$('#qEnd').hidden){if(ent)go($('#qAgain'));return;}
+  if(n){const b=document.querySelectorAll('#qOpts .qopt')[n-1];if(b)go(b);return;}
+  if(ent){if(vis($('#qNext')))return go($('#qNext'));go($('#qPlay'));}
+ }
+});
 const layoutW=()=>document.documentElement.clientWidth;
-let rz=null,lastW=layoutW();window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(Math.abs(layoutW()-lastW)<40)return;lastW=layoutW();if(!$('#menuD').hidden)closeMenu();hideBubbles();if(ansOpen&&isProb())renderAns();if((S.tab==='sing'||S.tab==='rhythm')&&P)renderRead();},250);});
+let rz=null,lastW=layoutW();window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(Math.abs(layoutW()-lastW)<40)return;lastW=layoutW();if(!$('#menuD').hidden)closeMenu();hideBubbles();if(ansOpen&&isProb())renderAns();if((S.tab==='sing'||S.tab==='rhythm')&&P)renderRead();if(S.tab==='gaku'&&GT)gRender();},250);});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&AC&&AC.state==='suspended')AC.resume();});
-{const groups=[['聴音（単旋律）',1],['聴音（２声）',2],['聴音（記憶聴音）',3],['聴音（４声）',4],['譜選','Q'],['度数','I'],['視唱',5],['リズム',6]];
- $('#lvHelp').innerHTML=groups.map(([nm,k])=>`<details><summary>${nm}</summary><ol>${LVS.map(l=>`<li><b>${lvName(l)}</b><span>${DESC[k][l]}</span></li>`).join('')}</ol></details>`).join('');}
+{const groups=[['聴音（単旋律）',1],['聴音（２声）',2],['聴音（記憶聴音）',3],['聴音（４声）',4],['譜選','Q'],['視唱',5],['リズム',6]];
+ $('#lvHelp').innerHTML=groups.map(([nm,k])=>`<details><summary>${nm}</summary><ol>${LVS.map(l=>`<li><b>${lvName(l)}</b><span>${DESC[k][l]}</span></li>`).join('')}</ol></details>`).join('')
+  +GK_FIELDS.slice(1).map(([k,nm])=>`<details><summary>楽典（${nm}）</summary><ol>${[1,2,3,4,5].map(l=>`<li><b>${GKLV[l]}</b><span>${GK_DESC[k][l]}</span></li>`).join('')}</ol></details>`).join('');}
 // 2本指で拡大しても、▶の帯が見えている範囲の下についてくる
 if(window.visualViewport){const vv=visualViewport;let raf=0;
  const follow=()=>{raf=0;const bar=$('#bar');const s=vv.scale||1;
