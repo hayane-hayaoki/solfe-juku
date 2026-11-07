@@ -3009,7 +3009,7 @@ function gScore(){
  if(hear){sh.innerHTML='<div class="listen"><b>？</b>音をよく聞きましょう</div>';return;}
  sh.innerHTML=it.wide&&it.P?`<div style="width:100%;max-width:${it.P.bars<=2?440:640}px;margin:0 auto"><div id="gkScore"></div></div>`:'<div id="gkScore"></div>';const el=$('#gkScore');if(!abcOk(el))return;
  if(it.wide){/* 和音の流れの楽譜は、外側の箱で横幅を絞る（楽譜の部品は高さを「入れ物の横幅」から決めるため、楽譜そのものを絞ると下に空白ができた） */const w=Math.max(260,(sh.clientWidth||320)-20);
-  ABCJS.renderAbc(el,it.abc,{responsive:'resize',staffwidth:Math.min(w,620),paddingtop:6,paddingbottom:8,paddingleft:4,paddingright:4,add_classes:true});
+  ABCJS.renderAbc(el,it.abc,{responsive:'resize',staffwidth:Math.min(w,it.P&&it.P.bars<=2?420:620),/* ２小節は狭く描いて、３小節と同じ大きさの音符に */paddingtop:6,paddingbottom:8,paddingleft:4,paddingright:4,add_classes:true});
   return;}
  ABCJS.renderAbc(el,it.abc,{staffwidth:200,paddingtop:8,paddingbottom:10,paddingleft:0,paddingright:0,add_classes:true,
   clickListener:()=>{if(it.picked&&it.play)gPlay();}});
