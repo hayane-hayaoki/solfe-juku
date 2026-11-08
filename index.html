@@ -366,6 +366,8 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 .top-pin{display:none}
 @media (display-mode: standalone){
  .top-pin{display:block;position:fixed;top:0;left:0;right:0;height:12px;background:var(--bg);z-index:2147483000;pointer-events:none}
+ /* iPadなど広い画面：新しいiPadは画面の上から約70点までにモヤをかけるので、中身を約40点下げてモヤの外に出す */
+ @media (min-width: 700px){ :root{padding-top:calc(env(safe-area-inset-top,0px) + 40px)} }
 }
 </style>
 </head>
