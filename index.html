@@ -361,6 +361,13 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 
 </style>
 
+<style>
+/* iPadOS・iOS 26以降：ホーム画面から開いたとき、画面のいちばん上（時刻の欄）にかかる「もや」対策。
+   いちばん上に背景と同じ色の部品をぴったり置くと、iPadはその色で時刻の欄を塗ってくれる */
+@media (display-mode: standalone){
+ html::before{content:"";position:fixed;top:0;left:0;right:0;height:max(env(safe-area-inset-top,0px),12px);background:var(--bg);z-index:2147483647;pointer-events:none}
+}
+</style>
 </head>
 <body>
 <header class="top"><div class="top-in">
