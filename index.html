@@ -83,7 +83,24 @@ h2{font-size:12px;letter-spacing:.12em;color:var(--muted);margin:0;font-weight:7
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .infoRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .infoRow .chips{flex:1;min-width:0}
-.pcode{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap}
+.pcode{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap;display:inline-flex;align-items:center;gap:5px;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:5px 9px;min-height:34px;cursor:pointer;font-family:inherit}
+.pcode svg{width:13px;height:13px;fill:var(--muted);flex:0 0 auto}
+.pcode:hover{border-color:var(--navy)}
+/* 番号を入れる画面：スマホは下から、iPad・Macは真ん中に */
+.cpad-scrim{position:fixed;inset:0;z-index:70;background:rgba(10,20,40,.45);display:flex;align-items:flex-end;justify-content:center}
+.cpad-scrim[hidden]{display:none}
+.cpad{background:var(--bg);width:100%;max-width:420px;border-radius:18px 18px 0 0;padding:14px 16px calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 30px rgba(0,0,0,.25)}
+@media (min-width:700px){.cpad-scrim{align-items:center}.cpad{border-radius:18px;padding-bottom:18px}}
+.cphead{display:flex;align-items:center;gap:10px}.cphead h2{flex:1;font-size:16px;margin:0;color:var(--ink)}
+.cpdisp{margin:14px 0 4px;text-align:center;font-family:var(--f-m);font-size:30px;letter-spacing:.08em;color:var(--ink);font-variant-numeric:tabular-nums;min-height:44px}
+.cpdisp i{font-style:normal;color:var(--line)}.cpdisp .cpopt{font-size:20px;color:var(--muted)}
+.cpinfo{text-align:center;font-size:13px;color:var(--muted);margin:0 0 12px;min-height:2.6em;line-height:1.3}
+.cpinfo.ng{color:var(--red)}.cpinfo b{color:var(--navy);font-weight:700}
+.cpkeys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cpkeys button{font-family:var(--f-m);font-size:24px;min-height:54px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;touch-action:manipulation}
+.cpkeys button:active{background:var(--soft)}
+.cpkeys .cpsub{font-family:inherit;font-size:14px;color:var(--muted)}
+.cpgo{width:100%;margin-top:10px;min-height:52px;font-size:16px}
 .pcode output{font-family:var(--f-m);font-size:12px;letter-spacing:.04em;font-variant-numeric:tabular-nums;color:var(--muted)}
 .ansrow{display:flex;gap:10px;align-items:stretch}
 #scoreBox .btnrow.fill>*{flex:1 1 40%;white-space:nowrap}
@@ -246,6 +263,18 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 .help{display:flex;flex-direction:column;gap:6px}
 .help h3{font-size:15px;margin:8px 0 0}
 .help p{margin:0;max-width:65ch;font-size:14px}
+/* 使い方：資料ページと同じく、見出しを押すと開く（＋／－） */
+.help>details.hsec{border-bottom:1px solid var(--line)}
+.help>details.hsec>summary{list-style:none;font-size:15px;font-weight:700;color:var(--ink);padding:10px 2px;min-height:40px;display:flex;align-items:center;cursor:pointer}
+.help summary::-webkit-details-marker{display:none}
+.help>details.hsec>summary::after{content:'＋';margin-left:auto;padding-left:12px;color:var(--navy);font-weight:700}
+.help>details.hsec[open]>summary::after{content:'－'}
+.hbody{display:flex;flex-direction:column;gap:6px;padding:0 2px 12px}
+.hbody h4{font-size:14px;margin:6px 0 0;color:var(--navy)}
+.hbody .lvhelp>details>summary{display:flex;align-items:center;font-size:14px}
+.hbody .lvhelp>details>summary::after{content:'＋';margin-left:auto;padding-left:12px;color:var(--navy);font-weight:700}
+.hbody .lvhelp>details[open]>summary::after{content:'－'}
+.help .credit{margin-top:10px}
 .credit{font-size:12px;color:var(--muted)}
 /* 下の再生バー */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;transform-origin:left bottom;background:var(--surface);border-top:1px solid var(--line);
@@ -344,19 +373,44 @@ td.good{background:var(--good)} td.mid{background:var(--mid)} td.low{background:
 .sllegend{margin:2px 0 6px}
 .dc h4 small{font-weight:500;color:var(--muted);font-size:12px}
 .sl{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.si{padding:7px 2px 8px;border-bottom:1px solid var(--line)}
+.si{padding:3px 2px 4px;border-bottom:1px solid var(--line);line-height:1.45}
 .si1{display:flex;align-items:baseline;gap:8px}
 .sn{flex:0 0 1.7em;text-align:right;color:var(--muted);font-size:13px;font-family:var(--f-m)}
 .st{flex:1;min-width:0;font-weight:500}
 .sv{white-space:nowrap;color:var(--navy);font-size:13px;letter-spacing:.02em}.sv i{font-style:normal;color:var(--line)}
 .sv small{color:var(--muted);margin-left:5px;font-size:12px;letter-spacing:0}
-.si2{display:flex;align-items:center;gap:10px;margin:3px 0 0 calc(1.7em + 8px);flex-wrap:wrap}
+.si2{display:flex;align-items:center;gap:10px;margin:1px 0 0 calc(1.7em + 8px);flex-wrap:wrap}
 .sc{font-size:12px;color:var(--muted);min-width:7em}
 .sy{display:inline-flex;gap:2px}.sy b{width:9px;height:9px;border-radius:2px;background:var(--soft);border:1px solid var(--line)}
 .sy b.on{background:var(--navy);border-color:var(--navy)}
 .si .run{font-size:11px;color:var(--navy);border:1px solid currentColor;border-radius:6px;padding:0 5px;white-space:nowrap}
 .si em{font-style:normal;font-size:11px;color:var(--red);border:1px solid currentColor;border-radius:6px;padding:0 5px}
 .si.old .st,.si.old .sc{opacity:.6}
+.st .tsub{font-size:11px;font-weight:400;color:var(--muted);margin-left:3px;letter-spacing:0}
+.st{white-space:nowrap;overflow:hidden;text-overflow:ellipsis} /* 曲名はいつも1行（入りきらないときは後ろの小さい字を自動で縮める） */
+.sv{font-size:12px;letter-spacing:0;display:inline-flex;align-items:baseline}.sv b,.sv i{display:inline-block;width:1.02em;text-align:center;font-weight:400;font-style:normal}.sv small{letter-spacing:0;display:inline-block;width:2.5em;text-align:right;margin-left:2px}
+.si .run.blank{display:inline-block;visibility:hidden}
+.si .run,.si em{width:102px;text-align:center;box-sizing:border-box;white-space:nowrap;font-size:11px;padding:0 4px}
+/* 課題曲の一覧：スマホは作曲者・年表・札を1行に収める */
+@media (max-width:699px){.si2{gap:7px;flex-wrap:nowrap}.si2 .sc{min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sy{gap:1px;flex:0 0 auto}.sy b{width:7px;height:7px;border-radius:1.5px}.si .run,.si em{width:92px;font-size:10.5px;padding:0 2px}.si .run,.si em{flex:0 0 auto}}
+/* 課題曲の一覧：横幅に余裕がある画面（iPad・Mac）は1曲を1行にまとめる */
+@media (min-width:700px){
+ .si{display:flex;align-items:center;gap:10px;padding:4px 2px}
+ .si1{flex:1 1 auto;min-width:0;align-items:center}
+ .si2{flex:0 0 auto;margin:0;flex-wrap:nowrap}
+ .si2 .sc{min-width:0;width:7.6em;line-height:1.3;font-size:12px}
+ .si .sy{gap:1px}.si .sy b{width:7px;height:7px;border-radius:1.5px}
+ .si .run,.si em{width:92px;font-size:10.5px;padding:0 2px}
+ .st .tsub{font-size:10.5px;margin-left:2px}
+ .si,.si1,.si2{gap:8px}
+}
+/* iPad 11インチの縦など、少しせまい画面はさらに詰める */
+@media (min-width:700px) and (max-width:899px){
+ .si2 .sc{width:6.4em}
+ .si .sy b{width:6px;height:6px}
+ .si .run,.si em{width:80px;font-size:10px}
+ .st .tsub{letter-spacing:-.03em}
+}
 
 
 </style>
@@ -404,7 +458,7 @@ html.ipad-webapp{padding-top:40px}
   <div class="tempo"><label for="tempo">速さ <span class="mono" id="tempoV"></span></label><input type="range" id="tempo" min="40" max="132" step="2"></div>
   <p class="bubble" id="lvDesc" hidden></p>
   <div class="infoRow"><div class="chips" id="chips"></div>
-   <div class="pnav2"><span class="pcode">番号 <output id="code">------</output><span id="nth"></span></span>
+   <div class="pnav2"><button type="button" class="pcode" id="codeBtn" aria-label="番号を入れて問題を出す"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="9.5" y="3" width="5" height="5" rx="1"/><rect x="16" y="3" width="5" height="5" rx="1"/><rect x="3" y="9.5" width="5" height="5" rx="1"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><rect x="16" y="9.5" width="5" height="5" rx="1"/><rect x="9.5" y="16" width="5" height="5" rx="1"/></svg>番号 <output id="code">------</output><span id="nth"></span></button>
     <button type="button" class="btn small" id="prevBtn">前の問題</button>
     <button type="button" class="btn small primary" id="nextBtn">次の問題</button></div></div>
   <div class="sheet startbox" id="startBox"><div class="sheet-label">はじめの音</div><div id="startScore"></div></div>
@@ -508,11 +562,6 @@ html.ipad-webapp{padding-top:40px}
   <div class="btnrow"><button type="button" class="btn small primary" id="latBtn">タップで測る</button><button type="button" class="btn small" id="latAuto">自動に戻す</button></div>
   <button type="button" class="tappad" id="latPad" hidden><span id="latMsg">聞こえた音に合わせてタップ</span><b id="latCnt">0 / 12</b></button>
   <hr>
-  <span class="label">番号で問題を出す</span>
-  <div class="codein" style="margin-top:0"><input id="codeIn" inputmode="numeric" maxlength="14" placeholder="例 108-4898" aria-label="問題番号"><button type="button" class="btn small" id="codeGo">この番号で出す</button></div>
-  <p class="err" id="codeErr" hidden></p>
-  <p class="hint">先生が番号を伝えると、部員みんなが同じ問題で練習できます。番号は［次の問題］ボタンの横に小さく出ています。</p>
-  <hr>
   <span class="label">記録の書き出し・読みこみ</span>
   <p class="hint">練習記録と設定をファイルに保存します。読みこむと、今の記録と設定はファイルの中身に置きかわります。</p>
   <div class="btnrow"><button type="button" class="btn small" id="bkOut">書き出す</button><button type="button" class="btn small" id="bkIn">読みこむ</button></div>
@@ -535,26 +584,54 @@ html.ipad-webapp{padding-top:40px}
   <div class="confirm" id="clearBox"></div>
  </div>
  <div class="drawer-body help" id="mHelp" hidden>
-  <h3>聴音</h3>
-  <p>上の欄で難易度・種類・出題順・演奏方式・調・拍子・小節数・声部をえらび、下の ▶ で流します。五線紙に書いて「答えを見る」で確認し、出来ばえを5段階で押します。答えの楽譜の音符を押すと、その音が鳴ります。</p>
-  <h3>記憶聴音</h3>
-  <p>主和音のあと、曲が最初から最後まで決めた回数だけ流れます。流れている間はえんぴつを置いて覚え、合図が鳴ったら書き始めます。</p>
-  <h3>譜選</h3>
-  <p>「スタート」を押すと始まります。短いメロディーを聞いて、4つの楽譜から正しいものを選びます。答えたあとに楽譜を押すと聞き比べられます。自動では次に進まないので、聞き比べてから「次の問題」を押してください。</p>
-  <h3>視唱</h3>
-  <p>「はじめの音」をもらってから楽譜を見て歌います。「メトロノームで歌う」は拍だけが流れ、今の音符が赤くなります。▶ でお手本を聞けます。</p>
-  <h3>リズム</h3>
-  <p>本番と同じく、手で拍を振りながら、音程をつけずに音名で読みます（「ド・レ・ミ」を同じ高さで、リズムどおりに）。「メトロノームで読む」で拍と赤くなる音符に合わせて読み、▶ でお手本のリズムを確かめます。</p>
-  <h3>楽典</h3>
-  <p>「スタート」を押すと始まります。分野をえらぶと、その分野だけが出ます（「ランダム」はいろいろな分野がまざって出ます）。答えは押すだけ。「すべて選びなさい」の問題は、当てはまるものを全部押してから「答える」を押します。和音や音程の問題は、答えたあと「音を聞く」で音を確かめられます。「音程（耳で）」は楽譜なしで音だけ聞いて答えます。答えたあとには、なぜその答えになるのかの解説が出ます。</p>
-  <h3>キーボードで操作する（Macなど）</h3>
-  <p>譜選と楽典では、数字の 1〜8 キーで選択肢を押せます（左上から順に 1・2・3…）。Enter キーかスペースキーで「スタート」「答える」「次の問題」を押せます。</p>
-  <h3>難易度の一覧</h3>
-  <p>難易度を変えると、「前の段階から何が変わったか」が吹き出しで出ます（吹き出しを押すか ▶ を押すと消えます）。全部をまとめて見るときはここを開いてください。</p>
-  <div class="lvhelp" id="lvHelp"></div>
-  <h3>音が出ないとき</h3>
-  <p>iPhone・iPadはマナーモードを切って、音量を上げてください。はじめて「ピアノ」などの音色を使うときは、準備に数秒かかります。</p>
+  <details class="hsec"><summary>聴音</summary><div class="hbody">
+   <p>上の欄で難易度・種類・出題順・演奏方式・調・拍子・小節数・声部をえらび、下の ▶ で流します。五線紙に書いて「答えを見る」で確認し、出来ばえを5段階で押します。答えの楽譜の音符を押すと、その音が鳴ります。</p>
+   <p><b>記憶聴音</b>：主和音のあと、曲が最初から最後まで決めた回数だけ流れます。流れている間はえんぴつを置いて覚え、合図が鳴ったら書き始めます。</p>
+   <h4>難易度のちがい</h4><div class="lvhelp" id="lvH1"></div>
+  </div></details>
+  <details class="hsec"><summary>譜選</summary><div class="hbody">
+   <p>「スタート」を押すと始まります。短いメロディーを聞いて、4つの楽譜から正しいものを選びます。答えたあとに楽譜を押すと聞き比べられます。自動では次に進まないので、聞き比べてから「次の問題」を押してください。</p>
+   <h4>難易度のちがい</h4><div class="lvhelp" id="lvH2"></div>
+  </div></details>
+  <details class="hsec"><summary>視唱</summary><div class="hbody">
+   <p>「はじめの音」をもらってから楽譜を見て歌います。「メトロノームで歌う」は拍だけが流れ、今の音符が赤くなります。▶ でお手本を聞けます。</p>
+   <h4>難易度のちがい</h4><div class="lvhelp" id="lvH3"></div>
+  </div></details>
+  <details class="hsec"><summary>リズム</summary><div class="hbody">
+   <p>本番と同じく、手で拍を振りながら、音程をつけずに音名で読みます（「ド・レ・ミ」を同じ高さで、リズムどおりに）。音は本番と同じく、ド・レ・ミの3つだけです。「メトロノームで読む」で拍と赤くなる音符に合わせて読み、▶ でお手本のリズムを確かめます。</p>
+   <h4>難易度のちがい</h4><div class="lvhelp" id="lvH4"></div>
+  </div></details>
+  <details class="hsec"><summary>楽典</summary><div class="hbody">
+   <p>「スタート」を押すと始まります。分野をえらぶと、その分野だけが出ます（「ランダム」はいろいろな分野がまざって出ます）。答えは押すだけ。「すべて選びなさい」の問題は、当てはまるものを全部押してから「答える」を押します。音程や和音の問題は、答えたあと［同時に］［順番に］で音を確かめられます。「音程（耳で）」は楽譜なしで音だけ聞いて答えます。答えたあとには、なぜその答えになるのかの解説が出ます。</p>
+   <h4>難易度のちがい</h4><div class="lvhelp" id="lvH5"></div>
+  </div></details>
+  <details class="hsec"><summary>番号で問題を出す</summary><div class="hbody">
+   <p>聴音・視唱・リズムでは、［次の問題］の横に問題の番号が出ています。先生が番号を伝えると、部員みんなが同じ問題で練習できます。</p>
+   <p>番号を押すと、数字を入れる画面が開きます。「-」は入れなくてかまいません。7けた（例 108-4898）を入れて「この番号で出す」を押すと、その問題が出ます。調・拍子・小節数を決めて出した問題も、番号は7けたなので、伝えられた側は何も決めずに番号を入れるだけで同じ問題になります。Macなどでは、キーボードの数字と Enter でも入れられます。</p>
+  </div></details>
+  <details class="hsec"><summary>キーボードで操作する（Macなど）</summary><div class="hbody">
+   <p>譜選と楽典では、数字の 1〜8 キーで選択肢を押せます（左上から順に 1・2・3…）。Enter キーかスペースキーで「スタート」「答える」「次の問題」を押せます。番号を入れる画面では、数字キー・Backspace・Enter・Esc が使えます。</p>
+  </div></details>
+  <details class="hsec"><summary>音が出ないとき</summary><div class="hbody">
+   <p>iPhone・iPadはマナーモードを切って、音量を上げてください。はじめて「ピアノ」などの音色を使うときは、準備に数秒かかります。</p>
+  </div></details>
   <p class="credit">ピアノ・オルガン・弦楽器・合唱の音：FluidR3_GM（Frank Wen 制作、CC BY 3.0）。楽譜の表示：abcjs。</p>
+ </div>
+</div>
+
+<!-- 番号を入れる画面（番号の表示を押すと開く） -->
+<div class="cpad-scrim" id="codeP" hidden>
+ <div class="cpad" role="dialog" aria-modal="true" aria-labelledby="cpH">
+  <div class="cphead"><h2 id="cpH">番号で問題を出す</h2><button type="button" class="btn small" id="cpClose">閉じる</button></div>
+  <div class="cpdisp" id="cpDisp" aria-live="polite"></div>
+  <p class="cpinfo" id="cpInfo"></p>
+  <div class="cpkeys" id="cpKeys">
+   <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button>
+   <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button>
+   <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button>
+   <button type="button" data-k="C" class="cpsub">全部消す</button><button type="button" data-k="0">0</button><button type="button" data-k="B" class="cpsub" aria-label="1文字消す">⌫</button>
+  </div>
+  <button type="button" class="btn primary cpgo" id="cpGo" disabled>この番号で出す</button>
  </div>
 </div>
 
@@ -582,13 +659,13 @@ html.ipad-webapp{padding-top:40px}
    <li>試験の日に、大学が８曲の中から４曲（日本２・外国２）を指定。その中から自分で２曲（日本１・外国１）を選び、<b>暗譜</b>で歌う。</li>
    <li>２曲合わせて<b>４分以内</b>。どの調で歌ってもよい。外国曲は原語で。</li>
    <li>途中で切られることがあるが、評価に不利にはならない。</li>
-   <li>長く続いている曲（★★★）は、来年以降も残る可能性が高い曲です。高１・高２のうちから練習するなら、★の多い順に、自分の声に合う曲を選ぶのが安心です。</li>
+   <li>長く続いている曲（★★★★★・★★★★）は、来年以降も残る可能性が高い曲です。高１・高２のうちから練習するなら、★の多い順に、自分の声に合う曲を選ぶのが安心です。</li>
   </ul>
   <div class="slctl">
    <div class="seg slseg" id="slShow"><button type="button" data-v="now" aria-pressed="true">今年の曲だけ</button><button type="button" data-v="all" aria-pressed="false">過去の曲も全部</button></div>
    <div class="seg slseg" id="slSort"><button type="button" data-v="no" aria-pressed="true">番号順</button><button type="button" data-v="star" aria-pressed="false">★の多い順</button><button type="button" data-v="run" aria-pressed="false">連続順</button><button type="button" data-v="comp" aria-pressed="false">作曲者順</button></div>
   </div>
-  <p class="hint sllegend">★の数は、2012〜2027年度の16年間で課題曲に入っていた年数です（★★★＝16年すべて、★★＝10〜15年、★＝9年以下）。マスは左が2012年度、右が2027年度で、紺のマスが課題曲だった年です。「連続○年」は、今年まで途切れずに続いている年数です（★が少なくても、連続中の曲は今の課題曲として定着しつつある曲です）。</p>
+  <p class="hint sllegend">★の数は、2012〜2027年度の16年間で課題曲に入っていた年数です（★５つ＝16年すべて、★４つ＝11〜15年、★３つ＝6〜10年、★２つ＝3〜5年、★１つ＝1〜2年。だいたい5年ごとに星1つ）。マスは左が2012年度、右が2027年度で、紺のマスが課題曲だった年です。「連続○年」は、今年まで途切れずに続いている年数です（★が少なくても、連続中の曲は今の課題曲として定着しつつある曲です）。</p>
   <h4>Ａ．日本歌曲 <small id="slJn"></small></h4>
   <div class="sl" id="slJ"></div>
   <h4>Ｂ．外国曲・イタリア <small id="slIn"></small></h4>
@@ -961,9 +1038,12 @@ function genMelody(R,slots,key,L,T){
 
 // 連続5度・8度か（前の2音と今の2音で、同じ完全音程のまま動いたら×）
 function parBad(sp,bp,sc,bc){const ip=mod(sp-bp,12),ic=mod(sc-bc,12);return (ip===0||ip===7)&&ip===ic&&!(sp===sc&&bp===bc);}
+// 同時に鳴っている上の声と下の声で、同じ音名なのに♯・♭がちがう（例：ド♯とド）ものがあるか
+function crossClash(a,b){const A=a.filter(x=>!x.rest),B=b.filter(x=>!x.rest);
+ for(const n of B)for(const m of A){if(m.onset<n.onset+n.dur-1e-3&&m.onset+m.dur>n.onset+1e-3&&mod(m.dia-n.dia,7)===0&&mod(m.midi-n.midi,12)!==0)return true;}return false;}
 function genBass(R,segs,mel0,key,L,meter){
  let Tb=14+key.tl;if(midiOf(Tb,sigAlter(key.tl,key.sig))<41)Tb+=7;
- const alt=(dia,nm)=>sigAlter(mod(dia,7),key.sig)+(nm?chordAlt(nm,mod(dia-Tb,7),key.minor):0);
+ const alt=(dia,nm)=>sigAlter(mod(dia,7),key.sig)+(nm?chordAlt(nm,mod(dia-Tb,7),key.minor):0)+(nm&&key.minor&&mod(dia-Tb,7)===6&&CH[nm]&&CH[nm].r===4&&!CH[nm].bass?1:0); // 短調の属和音の第3音（導音）は半音上げる
  const mel=mel0.filter(x=>!x.rest);const U=METER[meter].units;const lastBar=Math.floor(segs[segs.length-1].onset/U+1e-9);
  // 休符のところは、その前に鳴っていた上の声と比べる
  const sopAt=t=>{let r=mel[0];for(const x of mel){if(x.onset<=t+1e-6)r=x;else break;}return r;};
@@ -1172,11 +1252,12 @@ function barsOpts(type,lv){
  return lv<=2?[4]:lv<=4?[5]:lv<=6?[5,6]:lv<=8?[4,5,6]:[6];
 }
 // 「ランダム」のときの小節数（過去問：視唱は８小節が7回中6回、リズムは６小節が7回中4回）
+// 初級〜中級の単旋律・２声・４声は、ランダムだと９割が４小節・１割が８小節（どの選び方でも番号が7けたになるように）
 function barsPick(R,type,lv,bl){
  if(bl.length===1)return bl[0];
  let w=bl.map(()=>1);
  if(type===5&&lv===7)w=bl.map(b=>b===8?.8:.2);
- if(type===5&&lv===8)w=bl.map(b=>b===8?1:0);
+ if(type===5&&lv===8)w=bl.map(b=>b===8?.9:.1);
  if(type===6&&lv>=7&&lv<=8)w=bl.map(b=>b===6?.45:b===5?.3:.25); // 公式の例題（2023年度から同じ）は４小節
  return wpick(R,bl,w);
 }
@@ -1258,6 +1339,7 @@ function genReadRhythm(R,LV,seed,opts){
  const okM=metersFor(6,LV);const meter=opts.meter&&okM.includes(opts.meter)?opts.meter:pick(R,okM);
  const M=METER[meter],U=M.units,B=meter==='6/8'?6:4;
  const bl=barsOpts(6,LV);const n=bl.includes(opts.bars)?opts.bars:barsPick(R,6,LV,bl);
+ if(opts.peek)return {keyId:'',meter,bars:n};
  const [pool,pw]=patPool(B===6?RP6L:RP4L,LV);const [pool2,pw2]=B===4?patPool(RP8L,LV):[[],[]];
  if(LV>=7&&LV<=8){pool.push(B===6?'q 2':'q');pw.push(LV===7?.3:.7);}
  const pickPat=()=>wpick(R,pool,pw);let rbest=null;
@@ -1280,9 +1362,12 @@ function genReadRhythm(R,LV,seed,opts){
   if(notes[notes.length-1].rest)continue;
   const restRatio=notes.filter(x=>x.rest).length/notes.length;if(restRatio>.3)continue;
   if(LV===7&&notes.filter(x=>x.tup&&x.tup.first&&x.tup.p===5).length>1)continue;
-  // 音の高さ（音名で読むので、順次進行が中心）
-  let dia=35;
-  notes.forEach(nt=>{if(nt.rest)return;const st=wpick(R,[0,1,-1,2,-2,3,-3],[1,4,4,2,2,.6,.6]);dia=Math.max(30,Math.min(39,dia+st));nt.dia=dia;nt.alter=0;nt.midi=midiOf(dia,0);});
+  // 音の高さ：本番（2020〜2026年の7年分）はすべて ド・レ・ミ（ド5〜ミ5）だけ。ドで始まり、だいたいドで終わる
+  const RW={35:[1,3,1.2],36:[3,1,2],37:[1.2,3,.8]};let dia=35,firstN=true;
+  const sounding=notes.filter(x=>!x.rest),lastN=sounding[sounding.length-1];
+  notes.forEach(nt=>{if(nt.rest)return;
+   if(firstN){dia=35;firstN=false;}else if(nt===lastN&&R()<.85)dia=35;else dia=wpick(R,[35,36,37],RW[dia]);
+   nt.dia=dia;nt.alter=0;nt.midi=midiOf(dia,0);});
   // タイ（拍をまたいでのばす）
   if(LV>=5)for(let i=0;i<notes.length-1;i++){const a=notes[i],b=notes[i+1];if(a.rest||b.rest||a.tup||b.tup||a.tied)continue;
    const end=a.onset+a.dur;if(Math.abs(end%B)<1e-6&&R()<.2){a.tie=true;b.tied=true;b.dia=a.dia;b.midi=a.midi;}}
@@ -1453,6 +1538,7 @@ function genKami(type,lv,seed,opts,R){
  if(type===3&&!opts.meter)meter=R()<.62?'6/8':pick(R,mts.filter(m=>m!=='6/8')); // 記憶聴音：6/8拍子を約55%（6/8は作り直しで落ちやすいので少し多めにくじを引く）
  const M=METER[meter],U=M.units,B=meter==='6/8'?6:4,bpb=meter==='6/8'?2:U/4;
  const bl=barsOpts(type,lv);const n=bl.includes(opts.bars)?opts.bars:(opts.bars||barsPick(R,type,lv,bl));
+ if(opts.peek)return {keyId:kid,meter,bars:n};
  const o=kamiParams(type,lv,key);o.B=B;
  const pool=type===5?lvPool(meter==='6/8'?SNG6:SNG4,lv):type===3?lvPool(meter==='6/8'?MEM6:MEM4,lv):lvPool(meter==='6/8'?K6:K4,lv);
  const minAcc=Math.round((type===5?(lv>=10?9:6):type===3?(lv>=10?10:8):(lv>=10?18:12))*(type===3?1:Math.min(1,n/8)));
@@ -1540,17 +1626,31 @@ function diffScore(P){const U=METER[P.meter].units;const ns=P.voices[0].notes;co
  const sh=nn.filter(n=>n.dur<2||n.tup).length;return (nn.length+2*sh+1.5*countAcc(ns,P.key,U)+ns.filter(n=>n.tie).length)/P.count;}
 // レベルごとの下限（これより易しい問題は作り直す）。藝大は過去問の点（藝大１≒8〜11、藝大２≒13〜14）に合わせた
 const FLOOR={1:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,16,24],2:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,16,24],3:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,11,15],5:[0,0,2.8,3.2,3.6,4.8,6.5,8,11,13,18]};
+// 調・拍子・小節数を決めたときも、番号はいつも7けた：「ランダムでもその条件になる番号」をさがす
+// （見つからない組み合わせのときは null → 今までどおり11けた）
+function findSeed(type,lv,start,dir,want,lo){
+ const ok=pk=>pk&&(!want.key||pk.keyId===want.key)&&(!want.meter||pk.meter===want.meter)&&(!want.bars||pk.bars===want.bars);
+ const span=10000-lo;let hit=0;
+ for(let i=0;i<span;i++){if(i>=3000&&!hit)return null; // 3000回さがしても条件に合う形が出ないなら、ランダムでは出ない組み合わせ
+const s=lo+(((start-lo+dir*i)%span)+span)%span;
+  if(!ok(generate(type,lv,s,{peek:true})))continue;hit++;
+  const P=generate(type,lv,s,{});if(!P)continue;
+  if(ok({keyId:P.keyId,meter:P.meter,bars:P.type===4?P.bars:P.count}))return {seed:s,P};}
+ return null;
+}
 function generate(type,lv,seed,opts={}){
  if(typeof opts==='string')opts={key:opts};
  const L0=LEVELS[lv];
  const kIdx=opts.key?KEY_IDS.indexOf(opts.key)+1:0,mIdx=opts.meter?METER_IDS.indexOf(opts.meter)+1:0;
  const R=rngFrom(seed*7919+type*104729+lv*1299709+kIdx*31337+mIdx*7717+(opts.bars||0)*911+APP_VER*65537+7);
  if(type===6)return genReadRhythm(R,lv,seed,opts);
+ if(lv>=9&&type!==4&&opts.peek)return genKami(type,lv,seed,opts,R);
  if(lv>=9&&type!==4){let best=null,bs=-1;for(let k=0;k<12;k++){const P=genKami(type,lv,seed,opts,R);if(!P)continue;const sc=diffScore(P);if(sc>=FLOOR[type][lv])return P;if(sc>bs){bs=sc;best=P;}}return best;}
  const autoId=pick(R,L0.keys);const kid=opts.key&&KEYS[opts.key]?opts.key:autoId;const key=KEYS[kid];
  const bl=barsOpts(type,lv);
  if(type===4){
-  const bars=bl.includes(opts.bars)?opts.bars:(opts.bars||bl[0]);const N=bars*2-1;const meter='2/2';
+  const bars=bl.includes(opts.bars)?opts.bars:(opts.bars||(bl.length===2&&bl[0]===4?(R()<.1?8:4):bl[0]));const N=bars*2-1;const meter='2/2';
+  if(opts.peek)return {keyId:kid,meter,bars};
   const ch=genChorale(R,L0,key,N);if(!ch)return null;
   return {type,lv,seed,key,keyId:kid,meter,bars,count:ch.seq.length,unit:'和音',chords:ch.seq,
    voices:[{name:'ソプラノ',notes:ch.voices[0]},{name:'アルト',notes:ch.voices[1]},{name:'テノール',notes:ch.voices[2]},{name:'バス',notes:ch.voices[3]}],
@@ -1572,7 +1672,8 @@ function generate(type,lv,seed,opts={}){
  const mts=metersFor(type,lv);let meter=opts.meter&&mts.includes(opts.meter)?opts.meter:pick(R,mts);
  if(type===3&&!opts.meter&&lv>=3)meter=R()<.55?'6/8':pick(R,mts.filter(m=>m!=='6/8')); // 記憶聴音：6/8拍子を約55%
  const M=METER[meter];
- const n=bl.includes(opts.bars)?opts.bars:opts.bars?opts.bars:(bl.length===2&&bl[0]===4?4:barsPick(R,type,lv,bl));const ph=n>=6?n/2:0;
+ const n=bl.includes(opts.bars)?opts.bars:opts.bars?opts.bars:(bl.length===2&&bl[0]===4?(R()<.1?8:4):barsPick(R,type,lv,bl));const ph=n>=6?n/2:0;
+ if(opts.peek)return {keyId:kid,meter,bars:n};
  const minAcc=(type===4||type===6)?0:Math.round((L0.minAcc||0)*(n<8&&type!==3?n/8:1));
  let T=28+key.tl;if(midiOf(T,sigAlter(key.tl,key.sig))>66)T-=7;
  let best=null,bestAcc=-1;
@@ -1650,6 +1751,7 @@ function generate(type,lv,seed,opts={}){
   if(type!==2)res={...base,voices:[{name:'旋律',notes:mel}],staves:[{clef:'treble',voices:[0]}]};
   else{
    const bass=genBass(R,segs,mel,key,L,meter);if(!bass)continue;
+   if(crossClash(mel,bass))continue; // 上と下で同じ音名の♯と♮がぶつかるものは作り直す
    // 上の声が休符で終わるときは、下の声も合わせて短くする
    {const lm=mel.filter(x=>!x.rest).slice(-1)[0],end=lm.onset+lm.dur,fb=bass[bass.length-1],barEnd=n*M.units;
     if(end<barEnd-1e-6&&fb.onset<end){const op=(meter==='6/8'?[12,6,4,2]:[16,12,8,6,4,2]).filter(d=>fb.onset+d<=end+1e-6&&d<=fb.dur&&(meter!=='6/8'||(fb.onset%6)+d<=6||d%6===0));
@@ -1924,7 +2026,7 @@ function gkKey(R,lv){
  const de=lv>=4&&R()<.4;const nm=k=>de?kde(k):kjp(k);
  const same=(k,arr)=>arr.filter(x=>x&&x.minor===k.minor);
  const distr=k=>[relKey(k,'平行調'),relKey(k,'同主調'),relKey(k,'属調'),relKey(k,'下属調'),relKey(relKey(k,'属調'),'平行調'),relKey(relKey(k,'下属調'),'平行調'),relKey(relKey(k,'属調'),'属調')].filter(okK).map(nm);
- const W={sig:[.5,.15,0,0,0],chord:[.5,.3,.2,.15,.1],rel:[0,.35,.25,.1,.15],deg:[0,0,.2,.3,.35],all:[0,0,0,.2,.2],scale:[0,0,.2,.2,.2],de:[0,.2,.15,.05,0]};
+ const W={sig:[.5,.15,0,0,0],chord:[.5,.3,.2,.06,.04],rel:[0,.35,.25,.1,.15],deg:[0,0,.2,.35,.4],all:[0,0,0,.25,.22],scale:[0,0,.2,.2,.2],de:[0,.2,.15,.02,0]}; // 藝大・神は簡単な形（主和音から調・ドイツ語の調名）を減らす
  const types=Object.keys(W),t=wpick(R,types,types.map(x=>W[x][lv-1]));
  for(let att=0;att<200;att++){
   if(t==='sig'){const k=rk(lv===1&&R()<.6?0:null);const clef=pick(R,clefs);
@@ -1969,7 +2071,7 @@ function gkKey(R,lv){
    const SC={'長音階':[MAJ_S,[0,1,2,3,4,5,6]],'自然短音階':[NAT_S,[0,1,2,3,4,5,6]],'和声短音階':[HARM_S,[0,1,2,3,4,5,6]],'旋律短音階':[MEL_S,[0,1,2,3,4,5,6]],
     '全音音階':[[0,2,4,6,8,10],[0,1,2,3,4,5]],'五音音階':[[0,2,4,7,9],[0,1,2,4,5]],'ドリア旋法':[[0,2,3,5,7,9,10],[0,1,2,3,4,5,6]],'フリギア旋法':[[0,1,3,5,7,8,10],[0,1,2,3,4,5,6]],
     'リディア旋法':[[0,2,4,6,7,9,11],[0,1,2,3,4,5,6]],'ミクソリディア旋法':[[0,2,4,5,7,9,10],[0,1,2,3,4,5,6]]};
-   const pool=Object.keys(SC).slice(0,lv===3?4:10);const name=pick(R,pool);const [ss,ls]=SC[name];
+   const pool=Object.keys(SC).slice(0,lv===3?4:10);const name=lv>=4?wpick(R,pool,pool.map(n=>n==='長音階'||n==='自然短音階'?.2:1)):pick(R,pool);const [ss,ls]=SC[name];
    const t0={L:Math.floor(R()*7),a:lv>=4?pick(R,[0,0,1,-1]):pick(R,[0,0,0,1,-1])};const ps=ss.map((s,i)=>addInt(t0,ls[i],s));ps.push(t0);
    if(ps.some(p=>Math.abs(p.a)>1))continue;
    const clef=pick(R,clefs);let d=placeNear(t0,CLEFS[clef].mid-3);const ds=ls.map(l=>d+l);ds.push(d+7);
@@ -2010,7 +2112,7 @@ const CH_POOL=[[],['長三和音','短三和音'],['長三和音','短三和音'
 function gkChord(R,lv){
  const pool=CH_POOL[lv];
  for(let att=0;att<300;att++){
-  const name=lv===5?wpick(R,pool,pool.map(n=>/増六|ナポリ|九/.test(n)?2:1)):pick(R,pool);const clef=pick(R,GK_CLEF[lv]);
+  const name=lv===5?wpick(R,pool,pool.map(n=>/増六|ナポリ|九/.test(n)?2:1)):lv===4?wpick(R,pool,pool.map(n=>n==='長三和音'||n==='短三和音'?.3:1)):pick(R,pool);const clef=pick(R,GK_CLEF[lv]);
   let ps,keyTxt='';
   if(name==='ナポリの六の和音'){const k=pick(R,ALLK.filter(k=>k.minor&&Math.abs(k.sig)<=4));const r=addInt(k.t,1,1);ps=[addInt(r,2,4),addInt(r,4,7),r];keyTxt=`（${kjp(k)}）`;}
   else{const [ls,ss]=CHT[name];const root={L:Math.floor(R()*7),a:lv===1?0:pick(R,[0,0,0,1,-1])};ps=ls.map((l,i)=>addInt(root,l,ss[i]));
@@ -2100,10 +2202,10 @@ function melAbc(ns,keyAbc,sig,clef,meter,U){
   line+=acc+abcPitch(n.dia)+fmtDur(n.dur);});
  return h+line+' |]\n';}
 function gkTrans(R,lv){
- const t=lv===1?'clef':wpick(R,['clef','tr','inst','inst2'],[lv>=4?.3:.4,.35,.15,.15]);
+ const t=lv===1?'clef':wpick(R,['clef','tr','inst','inst2'],[lv>=4?.2:.4,.35,.15,.15]);
  for(let att=0;att<300;att++){
   if(t==='clef'){
-   const clef=pick(R,GK_CLEF[lv].filter(c=>lv<3||c!=='treble'));const C=CLEFS[clef];const dia=C.mid-5+Math.floor(R()*11);const a=lv===1?0:pick(R,[0,0,1,-1]);const p={L:mod(dia,7),a};
+   const clef=pick(R,GK_CLEF[lv].filter(c=>lv<3||c!=='treble').filter(c=>lv<4||c!=='bass'));/* 藝大・神はハ音記号などだけ */const C=CLEFS[clef];const dia=C.mid-5+Math.floor(R()*11);const a=lv===1?0:pick(R,[0,0,1,-1]);const p={L:mod(dia,7),a};
    const asIf=c2=>({L:mod(CLEFS[c2].mid+(dia-C.mid),7),a});const wr=[asIf('treble'),asIf('bass'),asIf('alto'),asIf('tenor'),{L:mod(p.L+1,7),a},{L:mod(p.L-1,7),a},{L:mod(p.L+2,7),a}].filter(q=>!samePitch(q,p)).map(pjp);
    return {f:'trans',q:`この音の音名は？（${C.name}）`,exp:`${C.name}は、${CLEF_REF[clef]}。\nこの音は${staffPos(dia,clef)} → ${pjp(p)}`,abc:freeAbc(clef,nAbc(dia,a)+'4'),opts:fillOpts(R,pjp(p),wr,3),ans:pjp(p),play:{notes:[midiOf(dia,a)],how:'seq'}};}
   if(t==='inst'||t==='inst2'){
@@ -2306,7 +2408,7 @@ function lookAlike(R,w,cands,lv){ // つづりの見た目が近い本物の語�
 const termRow=w=>TERMS.find(t=>t[0]===w);
 const FAM={slower:'sp',faster:'sp',tback:'sp',fast:'sp',slow:'sp',mid:'sp',cresc:'v',dim:'v',die:'v',soft:'v',loud:'v',acc:'v',art:'p',tech:'p',ens:'p',struct:'s'};
 function gkTerm(R,lv){
- const pool=TERMS.filter(t=>t[2]<=lv),cur=TERMS.filter(t=>t[2]>=Math.max(1,lv-1)&&t[2]<=lv);
+ const pool=TERMS.filter(t=>t[2]<=lv),cur=TERMS.filter(t=>t[2]>=(lv>=4&&R()<.8?lv:Math.max(1,lv-1))&&t[2]<=lv); // 藝大・神は8割をそのレベルの語から
  const W={mean:[1,1,.6,.35,.25],rev:[.5,.5,.3,.15,.1],look:[0,0,.45,.55,.65],abm:[.3,.4,.35,.3,.25],odd:[0,0,.3,.4,.45],sup:[0,0,.25,.35,.35],oppo:[0,.25,.3,.3,.3]};
  const ks=Object.keys(W);
  for(let att=0;att<100;att++){
@@ -2472,7 +2574,7 @@ const QUIZ=[
  ['フーガでは、主題（主唱）が声部を変えて次々に模倣されていく。',1,'主唱に答える旋律を答唱という。',5],
  ['通奏低音は、低音の旋律に和音をつけて伴奏するバロック時代の方法である。',1,'数字付き低音から鍵盤楽器などが和音を補う。',5]];
 function gkQuiz(R,lv){
- const pool=QUIZ.filter(q=>q[3]<=lv),cur=pool.filter(q=>q[3]>=lv-1);const x=pick(R,fresh('quiz',cur.length?cur:pool,q=>q[0]));
+ const pool=QUIZ.filter(q=>q[3]<=lv),cur=pool.filter(q=>q[3]>=(lv>=4&&R()<.8?lv:lv-1));const x=pick(R,fresh('quiz',cur.length?cur:pool,q=>q[0]));
  return {f:'quiz',q:x[0],opts:['○','×'],ans:x[1]?'○':'×',exp:(x[1]?'正しい。':'まちがい。')+x[2],ox:true,id:x[0],deck:'quiz'};
 }
 
@@ -2600,7 +2702,9 @@ function showTab(){
  if(t==='quick'){buildQSels();if(!QZ.cur&&!QZ.ready)qStart();return;}
  buildSels();newProblem(nextSeed(0));
 }
+let seedDir=1;
 function nextSeed(step){
+ seedDir=step<0?-1:1;
  if(S.order==='rand')return Math.floor(Math.random()*10000);
  const k=ctrKey();let n=(S.ctr[k]||0)+step;if(n<1)n=1;if(n>9999)n=1;S.ctr[k]=n;saveS();return n;
 }
@@ -2609,9 +2713,17 @@ function setTempo(v){tempo=v;$('#tempo').value=v;$('#tempoV').textContent=tempoL
 function newProblem(seed,ov){
  stop();
  const o=O();const type=curType(),lv=o.lv;
- const bl=barsOpts(type,lv),defB=bl.length===1?bl[0]:(bl.length===2&&bl[0]===4)?4:0;
+ const bl=barsOpts(type,lv),defB=bl.length===1?bl[0]:0;
  const opts=ov||{key:S.tab==='rhythm'?'':o.key,meter:o.meter,bars:o.bars===defB?0:o.bars};
- P=generate(type,lv,seed,{key:opts.key||undefined,meter:opts.meter||undefined,bars:opts.bars||undefined});
+ P=null;
+ // 調・拍子・小節数を決めたときも、番号は7けた（その条件に「ランダムでも」なる番号をさがす）。前に配った11けたの番号（ov）はそのまま
+ if(!ov&&(opts.key||opts.meter||opts.bars)){
+  const lo=S.order==='seq'?1:0;const f=findSeed(type,lv,Math.max(lo,seed),seedDir,{key:opts.key||'',meter:opts.meter||'',bars:opts.bars||0},lo);
+  if(f){P=f.P;opts.key='';opts.meter='';opts.bars=0;if(S.order==='seq'){S.ctr[ctrKey()]=f.seed;saveS();}}
+ }
+ if(!P)P=generate(type,lv,seed,{key:opts.key||undefined,meter:opts.meter||undefined,bars:opts.bars||undefined});
+ // 番号から出したとき：４小節／８小節しか選べない難易度は、小節数の欄を出た曲に合わせる
+ if(P&&ov&&bl.length===2&&bl[0]===4&&!opts.bars){o.bars=P.count;const sb=$('#sBars');if(sb)sb.value=String(P.count);}
  if(!P){toast('この組み合わせでは問題を作れませんでした。条件を変えてください');return;}
  P.optKey=type===6?'':(opts.key||'');P.optMeter=opts.meter||'';P.optBars=opts.bars||0;
  recIdx=null;ansOpen=false;
@@ -3045,8 +3157,9 @@ function gRender(){
  gScore();
  const canPlay=!!(it.play||it.P);
  $('#gPlays').hidden=!canPlay;$('#gPlays').classList.toggle('off',!(it.f==='hear'||it.picked));
- const two=it.play&&(it.play.notes||[]).length===2&&(it.f==='int'||it.f==='hear');
- $('#gPlayH').hidden=!two;$('#gPlayM').hidden=!two;$('#gPlay').textContent=it.f==='hear'&&!it.picked?'もう一度聞く':'音を聞く';
+ // 音程・和音は［同時に］［順番に］の2つ（音程（耳で）は答える前だけ［もう一度聞く］）。ほかは［音を聞く］1つ
+ const two=!it.P&&it.play&&(it.play.notes||[]).length>=2&&(it.f==='int'||it.f==='hear'||it.f==='chord')&&!(it.f==='hear'&&!it.picked);
+ $('#gPlayH').hidden=!two;$('#gPlayM').hidden=!two;$('#gPlay').hidden=two;$('#gPlay').textContent=it.f==='hear'&&!it.picked?'もう一度聞く':'音を聞く';
  const box=$('#gOpts');
  if(it.optAbc){
   const one=it.f==='trans'||!!it.beam;box.className='qopts'+(one?' one':'');
@@ -3082,7 +3195,6 @@ function gDone(ok,name){
  const it=GT;it.ok=ok;gStats.n++;if(ok){gStats.ok++;gStats.streak++;gStats.best=Math.max(gStats.best,gStats.streak);}else gStats.streak=0;
  records.push({t:Date.now(),type:'G',f:it.f,lv:S.glv,s:5,ok:ok?1:0,total:1,name:String(name).slice(0,24)});if(records.length>6000)records=records.slice(-6000);save(STORE,records);
  se(ok?'ok':'ng');gRender();
- if((it.f==='int'||it.f==='chord')&&it.play)setTimeout(()=>{if(GT===it)gPlay();},600);
 }
 function gPlay(how){
  const it=GT;if(!it)return;
@@ -3161,14 +3273,22 @@ function slRender(){
   if(SL.show==='now')L=L.filter(x=>x.no);
   const cur=(a,b)=>(a.no?0:1)-(b.no?0:1)||(a.no&&b.no?a.no-b.no:b.last-a.last||b.n-a.n);
   L.sort(SL.sort==='star'?(a,b)=>b.n-a.n||cur(a,b):SL.sort==='run'?(a,b)=>b.run-a.run||b.n-a.n||cur(a,b):SL.sort==='comp'?(a,b)=>a.r.localeCompare(b.r,'ja')||cur(a,b):cur);
-  $(id).innerHTML=L.map(x=>{const st=x.n===16?3:x.n>=10?2:1;
-   return `<div class="si${x.no?'':' old'}"><div class="si1"><span class="sn">${x.no||'－'}</span><span class="st">${x.t}</span><span class="sv">${'★'.repeat(st)}<i>${'☆'.repeat(3-st)}</i><small>${x.n}年</small></span></div>`+
-    `<div class="si2"><span class="sc">${x.c}</span><span class="sy" aria-label="${x.n}年">${[...x.m].map((v,i)=>`<b class="${v==='1'?'on':''}" title="${Y0+i}年度"></b>`).join('')}</span>${x.no?(x.n===16?'':x.run===1?`<span class="run">${x.n===1?'今年が初登場':'今年復活'}</span>`:`<span class="run">連続${x.run}年</span>`):`<em>今年はなし（最後は${x.last}年度）</em>`}</div></div>`;}).join('');
+  // 曲名：最初の「「」「（」「［」から後ろ（組曲名・出典・注意書き）は小さく
+  const ttl=t=>{const i=t.search(/[「（［(]/);return i>0?`${t.slice(0,i)}<small class="tsub">${t.slice(i)}</small>`:t;};
+  $(id).innerHTML=L.map(x=>{const st=x.n>=16?5:x.n>=11?4:x.n>=6?3:x.n>=3?2:1; // 五つ星：16年／11〜15年／6〜10年／3〜5年／1〜2年
+   return `<div class="si${x.no?'':' old'}"><div class="si1"><span class="sn">${x.no||'－'}</span><span class="st">${ttl(x.t)}</span><span class="sv">${'<b>★</b>'.repeat(st)}${'<i>☆</i>'.repeat(5-st)}<small>${x.n}年</small></span></div>`+
+    `<div class="si2"><span class="sc">${x.c}</span><span class="sy" aria-label="${x.n}年">${[...x.m].map((v,i)=>`<b class="${v==='1'?'on':''}" title="${Y0+i}年度"></b>`).join('')}</span>${x.no?(x.n===16?'<span class="run blank"></span>':x.run===1?`<span class="run">${x.n===1?'今年が初登場':'今年復活'}</span>`:`<span class="run">連続${x.run}年</span>`):`<em title="今年はなし">最後は${x.last}年度</em>`}</div></div>`;}).join('');
   $(id==='#slJ'?'#slJn':'#slIn').textContent=`（${L.length}曲）`;
  }
 }
-for(const[id,key]of[['#slShow','show'],['#slSort','sort']])$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;SL[key]=b.dataset.v;$(id).querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));slRender();});
+for(const[id,key]of[['#slShow','show'],['#slSort','sort']])$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;SL[key]=b.dataset.v;$(id).querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));slRender();fitTitles();});
 slRender();
+// 曲名が1行に入りきらないときは、後ろの小さい字（出典・注意書き）をさらに縮める
+function fitTitles(){document.querySelectorAll('#docP .st').forEach(st=>{const sb=st.querySelector('.tsub');if(!sb||!st.clientWidth)return;
+ sb.style.fontSize='';sb.style.letterSpacing='';let f=parseFloat(getComputedStyle(sb).fontSize),ls=0;
+ while(st.scrollWidth>st.clientWidth+.5&&f>8){if(ls>-.06){ls-=.02;}else f-=.5;sb.style.fontSize=f+'px';sb.style.letterSpacing=ls+'em';}});}
+$('#docP').addEventListener('toggle',()=>requestAnimationFrame(fitTitles),true);
+window.addEventListener('resize',()=>requestAnimationFrame(fitTitles));
 /* 資料（画面いっぱいに開く） */
 function openDocs(){closeMenu();stop();const d=$('#docP');d.hidden=false;d.scrollTop=0;document.documentElement.style.overflow='hidden';$('#docBack').focus();}
 function closeDocs(){$('#docP').hidden=true;document.documentElement.style.overflow='';}
@@ -3244,16 +3364,57 @@ $('#retryBtn').onclick=()=>{
  $('#bkNo').onclick=()=>{bkData=null;$('#bkAsk').hidden=true;};
  $('#bkYes').onclick=()=>{if(!bkData)return;try{localStorage.setItem(STORE,JSON.stringify(bkData.rec));localStorage.setItem(SET,JSON.stringify(bkData.set));}catch(er){$('#bkMsg').textContent='読みこめませんでした。';return;}
   location.reload();};}
-$('#codeGo').onclick=()=>{
- const c=parseCode($('#codeIn').value);
- if(!c){$('#codeErr').textContent='番号が読み取れませんでした。「108-4898」のように入れてください。';$('#codeErr').hidden=false;return;}
- $('#codeErr').hidden=true;
+/* ---------- 番号を入れる画面（番号の表示を押すと開く） ---------- */
+function goCode(c){
  if(c.type===5)S.tab='sing';else if(c.type===6)S.tab='rhythm';else{S.tab='dict';S.o.dict.type=c.type;}
  Object.assign(S.o[S.tab],{lv:c.lv,key:c.key,meter:c.meter,bars:c.bars});saveS();closeMenu();
  segSync('#tabs',S.tab);stop();
  $('#qP').hidden=false;$('#ansP').hidden=false;$('#quickP').hidden=true;$('#gakP').hidden=true;$('#bar').hidden=false;$('#wrap').classList.remove('nobar');
  buildSels();newProblem(c.seed,{key:c.key,meter:c.meter,bars:c.bars});toast('問題番号 '+codeStr()+' を出しました');
-};
+}
+let cpD='';
+function cpRender(){
+ const d=cpD,ph=(i)=>d[i]!=null?d[i]:'<i>・</i>';
+ let h=ph(0)+ph(1)+ph(2)+'-'+ph(3)+ph(4)+ph(5)+ph(6);
+ if(d.length>7)h+=`<span class="cpopt">-${[7,8,9,10].map(ph).join('')}</span>`;
+ $('#cpDisp').innerHTML=h;
+ const info=$('#cpInfo');info.classList.remove('ng');let ok=false,msg='';
+ const ty=+d[0],lv=d.length>=3?+d.slice(1,3):0;
+ if(!d.length)msg='配られた番号を押してください';
+ else if(!(ty>=1&&ty<=6)){msg='最初の数字は 1〜6 です';info.classList.add('ng');}
+ else if(d.length>=3&&!(lv>=1&&lv<=10)){msg='2・3けためは 01〜10（難易度）です';info.classList.add('ng');}
+ else{
+  msg=`<b>${TYPE_NAME[ty]}</b>`+(lv?`・<b>${lvName(lv)}</b>`:'');
+  if(d.length===7||d.length===11){const c=parseCode(d);
+   if(c){ok=true;if(d.length===11){const o=[c.key&&KEYS[c.key]?KEYS[c.key].name:'',c.meter?c.meter+'拍子':'',c.bars?FW(c.bars)+'小節':''].filter(Boolean);if(o.length)msg+='<br>'+o.join('・');}else msg+='<br>このまま出せます';}
+   else{msg='この番号の問題はありません';info.classList.add('ng');}}
+  else if(d.length>7)msg+='<br>あと'+(11-d.length)+'けた（または消して7けたに）';
+  else msg+='<br>あと'+(7-d.length)+'けた';
+ }
+ info.innerHTML=msg;$('#cpGo').disabled=!ok;
+}
+function cpKey(k){
+ if(k==='B')cpD=cpD.slice(0,-1);else if(k==='C')cpD='';
+ else if(/^\d$/.test(k)&&cpD.length<11)cpD+=k;
+ cpRender();
+}
+function openCode(){stop();cpD='';cpRender();$('#codeP').hidden=false;$('#cpGo').focus({preventScroll:true});}
+function closeCode(){$('#codeP').hidden=true;}
+function cpSubmit(){const c=parseCode(cpD);if(!c||(cpD.length!==7&&cpD.length!==11))return;closeCode();goCode(c);}
+$('#codeBtn').onclick=openCode;
+$('#cpClose').onclick=closeCode;
+$('#codeP').addEventListener('click',e=>{if(e.target===$('#codeP'))closeCode();});
+$('#cpKeys').onclick=e=>{const b=e.target.closest('button');if(b)cpKey(b.dataset.k);};
+$('#cpGo').onclick=cpSubmit;
+// Macなどのキーボード：数字・Backspace・Enter・Esc。貼りつけもできる
+document.addEventListener('keydown',e=>{if($('#codeP').hidden)return;
+ if(e.metaKey||e.ctrlKey||e.altKey)return;e.stopImmediatePropagation();
+ if(/^\d$/.test(e.key)){e.preventDefault();cpKey(e.key);}
+ else if(e.key==='Backspace'||e.key==='Delete'){e.preventDefault();cpKey('B');}
+ else if(e.key==='Enter'){e.preventDefault();cpSubmit();}
+ else if(e.key==='Escape'){e.preventDefault();closeCode();}
+},true);
+document.addEventListener('paste',e=>{if($('#codeP').hidden)return;const t=(e.clipboardData&&e.clipboardData.getData('text'))||'';const d=t.replace(/\D/g,'').slice(0,11);if(d){e.preventDefault();cpD=d;cpRender();}});
 $('#ansBtn').onclick=()=>{ansOpen=!ansOpen;ansUI();if(ansOpen)renderAns();else cursorOff(ansCur);};
 $('#grades').onclick=e=>{const b=e.target.closest('button');if(b)grade(+b.dataset.g);};
 $('#barChips').onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.b;play([musicStep(i,i,`${i+1}小節目`,P.type===3?{voices:[0]}:{})]);};
@@ -3288,9 +3449,13 @@ document.addEventListener('keydown',e=>{
 const layoutW=()=>document.documentElement.clientWidth;
 let rz=null,lastW=layoutW();window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(Math.abs(layoutW()-lastW)<40)return;lastW=layoutW();if(!$('#menuD').hidden)closeMenu();hideBubbles();if(ansOpen&&isProb())renderAns();if((S.tab==='sing'||S.tab==='rhythm')&&P)renderRead();if(S.tab==='gaku'&&GT)gRender();},250);});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&AC&&AC.state==='suspended')AC.resume();});
-{const groups=[['聴音（単旋律）',1],['聴音（２声）',2],['聴音（記憶聴音）',3],['聴音（４声）',4],['譜選','Q'],['視唱',5],['リズム',6]];
- $('#lvHelp').innerHTML=groups.map(([nm,k])=>`<details><summary>${nm}</summary><ol>${LVS.map(l=>`<li><b>${lvName(l)}</b><span>${DESC[k][l]}</span></li>`).join('')}</ol></details>`).join('')
-  +GK_FIELDS.slice(1).map(([k,nm])=>`<details><summary>楽典（${nm}）</summary><ol>${[1,2,3,4,5].map(l=>`<li><b>${GKLV[l]}</b><span>${GK_DESC[k][l]}</span></li>`).join('')}</ol></details>`).join('');}
+{// 使い方：各タブの中に難易度のちがい（聴音・楽典は種類・分野ごとに開く）
+ const OL=(rows)=>`<ol>${rows.map(([l,t])=>`<li><b>${l}</b><span>${t}</span></li>`).join('')}</ol>`;
+ const lvRows=k=>LVS.map(l=>[lvName(l),DESC[k][l]]);
+ const sub=(nm,body)=>`<details><summary>${nm}</summary>${body}</details>`;
+ $('#lvH1').innerHTML=[['単旋律',1],['２声',2],['記憶聴音',3],['４声',4]].map(([nm,k])=>sub(nm,OL(lvRows(k)))).join('');
+ $('#lvH2').innerHTML=OL(lvRows('Q'));$('#lvH3').innerHTML=OL(lvRows(5));$('#lvH4').innerHTML=OL(lvRows(6));
+ $('#lvH5').innerHTML=GK_FIELDS.slice(1).map(([k,nm])=>sub(nm,OL([1,2,3,4,5].map(l=>[GKLV[l],GK_DESC[k][l]])))).join('');}
 // 2本指で拡大しても、▶の帯が見えている範囲の下についてくる
 if(window.visualViewport){const vv=visualViewport;let raf=0;
  const follow=()=>{raf=0;const bar=$('#bar');const s=vv.scale||1;
